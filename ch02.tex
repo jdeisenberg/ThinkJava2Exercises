@@ -1,0 +1,97 @@
+\chapter{Variables and Operators}
+\label{variables}
+
+\begin{exercise}
+\label{ex:age}
+Use Java to find your approximate age in days.
+
+\begin{enumerate}
+
+\item Create a new program name {\it AgeInDays.java}.
+Copy or type in something like the Hello World program and make sure you can compile and run it.
+
+\item Write a program that creates variables named \java{years} and \java{days} which represent your age in years and your age in days. Both of these are integers.
+
+\item Set the \java{years} to your current age in years.
+
+\item Calculate the \java{days} as \java{years} times 365.
+
+\item Print the age in years and days, properly labeled. Here is what the output might look like:
+
+\begin{stdout}
+I am 25 years old.
+That is about 9125 days.
+\end{stdout}
+\end{enumerate}
+
+\end{exercise}
+
+
+\begin{exercise}
+\label{ex:dewpoint}
+The point of this exercise is to use Java's arithmetic operators to calculate the {\it dew point}---the temperature at which water begins to condense out of the air. The dew point formula is more complicated than the one in the preceding exercise.
+
+\begin{enumerate}
+
+\item Create a new program name {\it DewPoint.java}.
+Copy or type in something like the Hello World program and make sure you can compile and run it.
+
+\item Write a program that creates variables named \java{temperature} and \java{relHumidity} which represent the temperature in degrees Celsius and the relative humidity as a percentage from 0 to 100. These will be \java{double} values. Assign values to those variables that represent a temperature of 17$^\circ$C and a relative humidity of 30\%.
+
+\item Display the value of each variable on a line by itself.
+This is an intermediate step that is useful for checking that everything is working so far.
+Compile and run your program before moving on.
+
+\item Calculate the dew point temperature using this approximate formula:
+
+\begin{equation*}
+dewPoint = temperature - {{100 - relHumidity} \over 5}
+\end{equation*}
+
+and display the value of the result. The \java{dewPoint} variable will also be a \java{double}.
+
+\item Display the result of the calculation, properly labeled. Here is what the output might look like. Your output does not have to match
+this exactly, but it must reflect the same information.
+
+\begin{stdout}
+For air temperature of 17.0 degrees Celsius
+and relative humidity of 25.0%
+The dew point is 2.0 degrees Celsius.
+\end{stdout}
+\end{enumerate}
+
+\end{exercise}
+
+\begin{exercise}
+\label{ex:heatindex}
+This exercise uses a fairly large formula to calculate the {\it heat index}, a measurement of how hot it feels when the relative humidity is factored in with the temperature. The purpose of this exercise is to get you comfortable with doing complex calculations in Java.
+
+\begin{enumerate}
+\item Create a new program named {\it HeatIndex.java}.
+
+\item Create variables named \java{t} and \java{rh}, where \java{t} stands for the temperature and \java{rh} stands for the relative humidity. Set the temperature to 30 degrees Celsius and the relative humidity to 75\%.
+
+\item Ordinarily we would use longer variable names like \java{temperature} and \java{relHumidity} as in Exercise~\ref{ex:dewpoint}, but the length of the formula makes it easier to type when using short names. Write a comment in your Java program that says that you are using \java{t} to stand for the temperature in degrees Celsius and \java{rh} for relative humidity.
+
+\item Calculate the heat index using this formula:
+\begin{equation*}
+\begin{array}{l}
+heatIndex = -8.78469475556 + 1.61139411\cdot t + 2.338548839\cdot rh - \\
+ \qquad {0.14611605}\cdot t \cdot rh - {0.012308094}\cdot t\cdot t - \\
+ \qquad {0.0164248278}\cdot rh\cdot rh + 0.002211732\cdot t\cdot t\cdot rh + \\
+ \qquad 0.00072546\cdot t\cdot rh\cdot rh {-} {0.000003582} \cdot t\cdot t\cdot rh\cdot rh
+\end{array}
+\end{equation*}
+
+Don't put this entire equation on one line in Java. Instead, split it into several lines as shown here, or use temporary variables to hold the parts of the formula.
+
+\item Display the result of the calculation. Here is what the output might look like.
+
+\begin{stdout}
+For air temperature of 30.0 degrees Celsius
+and relative humidity of 75.0%
+The heat index is 36.299647994439965 degrees Celsius.
+\end{stdout}
+
+\end{enumerate}
+\end{exercise}

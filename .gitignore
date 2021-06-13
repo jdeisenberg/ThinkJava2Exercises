@@ -1,0 +1,32 @@
+# Java examples
+*.class
+checkstyle*.jar
+
+# LaTeX output
+*.aux
+*.cut
+*.idx
+*.ilg
+*.ind
+*.log
+*.out
+*.synctex.gz
+*.toc
+
+# PDF builds
+onechap.pdf
+thinkjava2ex.pdf
+
+# HTML builds
+heveahtml/*
+trinkethtml/*
+
+# plasTeX builds
+thinkjava2ex/*
+thinkjava2ex.expand
+thinkjava2ex.plastex
+thinkjava2ex.paux
+
+# Python scripts
+*.pyc
+__pycache__

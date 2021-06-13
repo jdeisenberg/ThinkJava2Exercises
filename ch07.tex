@@ -1,0 +1,62 @@
+\chapter{Arrays and References}
+
+
+\begin{exercise}
+Write the following methods, each of which takes an array of \java{double} values as a parameter:
+
+\begin{itemize}
+\item The \java{mean} method returns the arithmetic mean (average) of the array elements.
+
+\item The \java{stdev} method returns the standard deviation of the array elements, using this formula
+\begin{equation*}
+s = \sqrt {{n \sum{x_i} ^2 - \left(\sum{x_i}\right)^2} \over {n (n - 1)}}
+\end{equation*}
+
+where $n$ is the number of items in the array, $\sum{x_i} ^2$ is the sum of the squares of the individual items, and $\left(\sum{x_i}\right)^2$ is the square of the total of all the items in the array.
+
+\item The \java{standardize} returns a new array of the values converted to {\em standard scores}. First, calculate the mean $m$ and standard deviation $s$ of the entries in the original array. Each entry in the result array will be \java{(arr[i] - m) / s}. This method must call the \java{mean} and \java{stdev} methods.
+
+Write a \java{main} method to test the \java{standardize} method. For example, an array with values
+\java{\{47.0, 11.0, 10.0, 66.0, 8.5\}} will generate these standard scores: \java{\{0.700, -0.662, -0.700, 1.418, -0.756\}} (to three decimal places). 
+
+\end{itemize}
+\end{exercise}
+
+\begin{exercise}
+Unlike the string reversal method shown in {\em Think Java}, where a program built a new string that had its characters in the reverse order of the original, in this exercise you will write a \java{void} method named \java{reverseInPlace} that takes an array of integers as its parameter and reverses the order of the items in the array--in place. In other words, you won't create a new array; you will change the order of the items within the array itself.
+
+Write a \java{main} method that will test the method by reversing and displaying:
+
+\begin{enumerate}
+\item An empty array with no elements
+\item An array with one element
+\item An array with an even number of elements (more than two elements)
+\item An array with an odd number of elements (more than three elements)
+\end{enumerate}
+
+To make your job easier, you might want to create a ``helper method'' named \java{reverseAndDisplay} that prints the array, calls \java{reverseInPlace} and prints the array (which should now be reversed).
+\end{exercise}
+
+\begin{exercise}
+You can use an array of three \java{double} values to represent a {\em vector} in three-dimensional space. The first element represents the vector's $x$-component, the second its $y$ component, and the third its $z$ component, written as $(x, y, z)$. Write a program that has these methods, each of which takes two three-element arrays as parameters:
+\begin{itemize}
+\item \java{add}: Returns a vector (an array of length three) representing the sum of the parameters. The sum of $(x_1, y_1, z_1)$ and $(x_2, y_2, z_2)$ is the vector $(x_1 + x_2, y_1 + y_2, z_1 + z_2)$
+\item \java{dotProduct}: Returns the {\em dot product} of the parameter vectors. The dot product of  $(x_1, y_1, z_1)$ and $(x_2, y_2, z_2)$ is calculated as $x_1\cdot x_2 + y_1\cdot y_2 + z_1\cdot z_2$ 
+\item \java{distance}: Returns the distance between the vectors $(x_1, y_1, z_1)$ and $(x_2, y_2, z_2)$ using the formula $\sqrt{(x_1 - x_2)^2 + (y_1 - y_2)^2 + (z_1 - z_2)^2}$
+\end{itemize}
+
+The \java{main} method will ask the user to enter two vectors and then display the sum, dot product, and distance between the vectors. To avoid repetitious code, you might want to write a \java{getVector} method that has a prompt and a \java{Scanner} as its parameters. This method will prompt the user for the three vector components and return an array of three \java{double} values.
+
+Here is an example of what the program might look like:
+
+\begin{stdout}
+Enter components of the first vector,
+separated by spaces: 2 1.5 4.1
+Enter components of the second vector,
+separated by spaces: 7 3.5 1.2
+Sum of vectors: (9.000, 5.000, 5.300)
+Distance between vectors: 6.116
+Dot product of vectors: 24.170
+\end{stdout}
+
+\end{exercise}

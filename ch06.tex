@@ -1,0 +1,75 @@
+\chapter{Loops and Strings}
+
+\begin{exercise}
+When you go to the store, the clerk doesn't know in advance how many items you want to buy. Instead, they keep totaling the items until they see one of those plastic dividers to indicate that your order is complete.
+
+\index{sentinel value}
+\index{value!sentinel}
+Write a program that repeatedly asks the user for the price of an item until they enter a zero for the price. This is the digital equivalent of the plastic divider. Its technical name is a {\em sentintel value}. As the user enters prices, keep track of the total number of items and sum of the prices.  After encountering the sentinel value, your program will print the number of items purchased, the subtotal, the tax (at a rate of 6.5\%), and the grand total. Here is what the program might look like. Note that it does not allow (or count) negative prices. {\em Hint}: Use a \java{while} loop.
+
+\begin{stdout}
+Enter price, or 0 when finished: $3.50    
+Enter price, or 0 when finished: $-2
+Prices can not be negative.
+Enter price, or 0 when finished: $5.99
+Enter price, or 0 when finished: $4.83
+Enter price, or 0 when finished: $0
+
+Number of items: 3
+Subtotal:  $   14.32
+Tax:       $    0.93
+Total:     $   15.25
+\end{stdout}
+\end{exercise}
+
+
+\begin{exercise}
+Write a program that repeatedly asks the user to enter a sentence (until they press only ENTER). For each sentence, tell how many vowels, consonants, digits, and ``other'' characters are in the sentence.  For this exercise, presume that the letter ``y'' is a vowel. Continue asking for sentences the user presses only the ENTER key for input. When that happens, the \java{String} that you read will equal the empty string \java{""}. You can test this condition to end the loop.
+
+Sample output:
+
+\begin{stdout}
+Input a sentence (just ENTER to quit): 4 score & 7 years ago.
+Vowels:   7  Consonants:  6
+Digits:   2  Others:      7
+
+Input a sentence (just ENTER to quit): 2*x=17
+Vowels:   0  Consonants:  1
+Digits:   3  Others:      2
+
+Input a sentence (just ENTER to quit): The Quick Brown Fox
+Vowels:   5  Consonants: 11
+Digits:   0  Others:      3
+
+Input a sentence (just ENTER to quit):
+\end{stdout}
+
+{\em Hint}: Make \java{String} variables with contents such as \java{"aeiouy"}, \java{"bcdfghjklmnpqrstvwxz"}, etc. and use \java{indexOf} to determine whether a character belongs to that group of characters.
+
+\end{exercise}
+
+\begin{exercise}
+Write a method called \java{switchOrder}, which takes a \java{String} parameter with a person's name in the form \java{"first middle last"} and returns the name in the form \java{"last, first middle"}.  Your code should work for people with only a single name, people with no middle name, and people with several middle names.
+Use a \java{while} loop with the \java{indexOf} and \java{substring} methods to do this exercise. (You could do it more easily with the \java{lastIndexOf} method, but we want you to get practice using loops.)
+
+Write a \java{main} method that uses a \java{while} loop to repeatedly ask the user for a name and then calls the \java{switchOrder} method and prints the result. Repeat until the user presses just ENTER. Here is some sample output:
+
+\begin{stdout}
+Input a name (just ENTER to quit): Grace Murray Hopper
+Hopper, Grace Murray
+
+Input a name (just ENTER to quit): Donald Knuth   
+Knuth, Donald
+
+Input a name (just ENTER to quit): Prince
+Prince
+
+Input a name (just ENTER to quit): C. Anthony Richard Hoare
+Hoare, C. Anthony Richard
+
+Input a name (just ENTER to quit): 
+\end{stdout}
+
+\end{exercise}
+
+
