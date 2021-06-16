@@ -1,6 +1,22 @@
 \chapter{Loops and Strings}
 
 \begin{exercise}
+Write a program that asks the user for a starting amount of money, an annual interest rate as a percent, and a number of years. Use this information to print a table that shows the balance with accumulated compound interest. Use a \java{for} loop. Here is what your output might look like:
+
+\begin{stdout}
+Enter starting amount: $100
+Enter annual percent interest: 5.3
+Enter number of years: 4
+Year  Balance
+0     $100.00
+1     $105.30
+2     $110.88
+3     $116.76
+4     $122.95
+\end{stdout}
+
+\end{exercise}
+\begin{exercise}
 When you go to the store, the clerk doesn't know in advance how many items you want to buy. Instead, they keep totaling the items until they see one of those plastic dividers to indicate that your order is complete.
 
 \index{sentinel value}
@@ -72,4 +88,52 @@ Input a name (just ENTER to quit):
 
 \end{exercise}
 
+\begin{exercise}
+Write a program named{\it PhoneWord.java} that prompts the user for a ``phone word,'' an alphabetic mnemonic for a phone number. Then, print out the phone number corresponding to that sequence.
 
+Here is how your program must translate letters to numbers:
+
+\begin{tabular}{|l|l|}
+\hline
+ABC & 2 \\ \hline
+DEF & 3 \\ \hline
+GHI & 4 \\ \hline
+JKL & 5 \\ \hline
+MNO & 6 \\ \hline
+PQRS & 7 \\ \hline
+TUV & 8  \\ \hline
+WXYZ & 9  \\ \hline
+\end{tabular}
+
+Keep digits as digits (see the second example output). Don't forget about zero!
+
+You must accept letters in either upper or lower case. If the phone word translates to more than seven digits, keep only the first seven. If the phone word translates to fewer than seven digits, print an error message. Ignore any characters other than a letter or digit.
+
+Here is an example of several runs of the program:
+
+\begin{stdout}
+Enter a phone word: warbler
+The number is 9272537.
+
+Enter a phone word: GOOD4U2
+The number is 4663482.
+
+Enter a phone word: OMG
+Your phone word is not long enough for a phone number.
+
+Enter a phone word: GREAT DEALS
+The number is 4732833.
+
+Enter a phone word: got-food?
+The number is 4683663.
+
+\end{stdout}
+
+{\em Hint}: Do {\em not} check the input string to see if its length is greater than or equal to seven. The string 
+\java{"C-A-T-S!"} is eight characters long, but there are only four letters, so it will not translate to a valid phone word.
+
+Instead, convert all the letters in the string to digits, no matter how many or how few, and {\em then} check the length of the result to see if it is seven characters or more.
+
+Extra challenge: Print the phone number with a hyphen; for example: 473-2833.
+
+\end{exercise}
