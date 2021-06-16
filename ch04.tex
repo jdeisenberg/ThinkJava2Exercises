@@ -1,6 +1,42 @@
 \chapter{Methods and Testing}
 
 \begin{exercise}
+Presume you are selling a product that has a particular cost to build (say, \$7.50) and a price that you charge the customer (say, \$10.00). There are two ways to calculate your profit: profit off the bottom, which uses this formula:
+
+\begin{equation*}
+bottom = 100 \cdot {(sellingPrice - costToBuild) \over costToBuild}
+\end{equation*}
+
+You can also have profit off the top, which uses this formula:
+
+\begin{equation*}
+top = 100 \cdot {(sellingPrice - costToBuild) \over sellingPrice}
+\end{equation*}
+
+In our example, the profit off the bottom is 33$1\over 3$\% and the profit off the top is 25\%.
+
+Write methods named \java{profitOffTop} and \java{profitOffBottom}, both of which take the cost to build and selling price as \java{double} parameters and return the percentage as a \java{double}.
+
+Your \java{main} method will ask the user for the cost to build and selling price. It will then calculate both profits and display them, properly labeled, with one digit to the right of the decimal point.
+Here is what the output might look like:
+
+\begin{stdout}
+Enter cost to build: $7.50
+Enter selling price: $10
+The profit off the bottom is 33.3%.
+The profit off the top is 25.0%
+\end{stdout}
+
+{\it Hint}: to output a percent sign using \java{printf}, use two percent signs in a row. For example:
+
+\begin{code}
+double result = 0.12 * 37.0;
+System.out.printf("12%% of 37 is %.1f\n", result);
+\end{code}
+
+\end{exercise}
+
+\begin{exercise}
 To determine the focal length of a camera lens, you use this formula:
 
 \begin{equation*}
