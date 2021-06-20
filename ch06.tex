@@ -1,5 +1,163 @@
 \chapter{Loops and Strings}
 
+\section{The \java{do}-\java{while} Loop}
+The following section is \copyright Alan Downey and Chris Mayfield, and is material that was originally in {\it Think Java}, but later removed. I think it's an important topic, so I am including it, slightly modified, here.
+
+\index{pretest loop}
+
+The \java{while} and \java{for} statements are {\bf pretest loops}; that is, they test the condition first and at the beginning of each pass through the loop.
+
+\index{posttest loop}
+\index{do-while}
+
+Java also provides a {\bf posttest loop}: the \java{do}-\java{while} statement.
+This type of loop is useful when you need to run the body of the loop at least once.
+
+%NOTE: can we find an example that's better using do-while than using while-break?
+
+For example, you can use a \java{do}-\java{while} loop to keep reading input until it's valid:
+
+\begin{code}
+Scanner in = new Scanner(System.in);
+boolean okay;
+do {
+    System.out.print("Enter a number: ");
+    if (in.hasNextDouble()) {
+        okay = true;
+    } else {
+        okay = false;
+        String word = in.next();
+        System.err.println(word + " is not a number");
+    }
+} while (!okay);
+double x = in.nextDouble();
+\end{code}
+
+Although this code looks complicated, it is essentially only three steps:
+
+\begin{enumerate}
+\item Display a prompt.
+\item Check the input; if invalid, display an error and start over.
+\item Read the input.
+\end{enumerate}
+
+\index{System.err}
+
+The code uses a flag variable, \java{okay}, to indicate whether we need to repeat the loop body.
+If \java{hasNextDouble()} returns \java{false}, we consume the invalid input by calling \java{next()}.
+We then display an error message via \java{System.err}.
+The loop terminates when \java{hasNextDouble()} return \java{true}.
+
+Again, the important difference between \java{while} and \java{do}-\java{while} is this: In a \java{while} loop, the test happens {\em before} the loop body is executed. If the condition evaluates to \java{false}, the loop body doesn't get executed.
+
+In a \java{do}-\java{while} loop, the loop body is always executed at least once, and only then is the condition evaluated. This turns out to be a good choice for validating input, because you must get the user's input before you can determine whether it's valid or not.
+
+\section{Pre vs. Post Increment and Decrement}
+
+The book discusses the increment \java{++} and decrement \java{--} operators, which increase or decrease a variable's value by one.
+
+You can put these operators before or after a variable name. For example, in this code fragment:
+
+\begin{code}
+int n = 47;
+n++; // n post-increment to 48
+++n; // n pre-increment to 49
+n--; // n post-decrement to 48
+--n; // n pre-decrement to 47
+\end{code}
+
+When a variable is all by itself, there is no difference between the operator before or after the variable. However, you may see people using these operators inside an expression, and then there is a very big difference.
+
+Consider this code fragment:
+
+\begin{code}
+int n = 47;
+int result = n++;
+System.out.println("result is now " + n);
+\end{code}
+
+Because this is a post-increment, Java access the value of \java{n} and assigns it to \java{result}, and {\em then} adds one to \java{n}. It's as if we wrote it this way:
+
+\begin{code}
+int n = 47;
+int result = n;
+n = n + 1; // increment after assignment
+System.out.println("result is now " + result);
+\end{code}
+
+If we place the \java{++} {\em before} the variable (a pre-increment):
+
+\begin{code}
+int n = 47;
+int result = ++n;
+System.out.println("result is now " + result);
+\end{code}
+
+Java will increment \java{n} {\em before} it assigns the value to \java{result}; it's as if we had written:
+
+\begin{code}
+int n = 47;
+n = n + 1; // increment before assignment
+int result = n;
+System.out.println("result is now " + result);
+\end{code}
+
+While the following is not something you should do in your programs, you may see other people coding this way, and you'll need to understand it:
+
+\begin{code}
+int a = 7;
+int b = 11;
+int c = a++ * --b;
+\end{code}
+
+Here's the trick. First, find all the pre-increments and pre-decrements and evaluate them before the expression:
+
+\begin{code}
+int a = 7;
+int b = 11;
+b = b - 1; // do the pre-decrement
+int c = a++ * b;
+\end{code}
+
+Then, find all the post-increments and post-decrements and evaluate them after the expression:
+
+\begin{code}
+int a = 7;
+int b = 11;
+b = b - 1;
+int c = a * b;
+a = a + 1;
+\end{code}
+
+Now there are no more increment and decrement operators, and you have just ``plain Java expressions,'' with the result being \java{c} being assigned \java{66}.
+
+\section{Compound Assignment}
+The book mentions that you can increment a variable by two in this way:
+
+\begin{code}
+int n = 12;
+n += 2; // same as n = n + 2;
+\end{code}
+
+I read this expression as ``\java{n} plus and becomes two.''
+
+In fact, in any expression where the variable on the left side of the assignment operator is the same as the first variable on the right hand side, you can use this shortcut:
+
+\begin{tabular}{|l|l|}
+\hline
+{\bf This:} & {\bf is the same as:} \\ \hline
+\java{n += 2;} & \java{n = n + 2;} \\ \hline
+\java{n -= 3;} & \java{n = n - 3;} \\ \hline
+\java{n *= 4;} & \java{n = n * 4;} \\ \hline
+\java{n /= 5;} & \java{n = n / 5;} \\ \hline
+\java{n \%= 6;} & \java{n = n \% 6;} \\ \hline
+\end{tabular}
+
+You can use compound assignment in more complex expressions:
+\java{n += m * 5;} is equivalent to \java{n = n + (m * 5);} However, you can {\em not} use it if the left-hand variable is part of a parenthesized expression. \java{n = (n + 7) * 3;} cannot be simplifed using compound assignment.
+
+\section{Exercises}
+
 \begin{exercise}
 Write a program that asks the user for a starting amount of money, an annual interest rate as a percent, and a number of years. Use this information to print a table that shows the balance with accumulated compound interest. Use a \java{for} loop. Here is what your output might look like:
 

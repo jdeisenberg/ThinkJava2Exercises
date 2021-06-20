@@ -1,6 +1,49 @@
 \chapter{Variables and Operators}
 \label{variables}
+\section{The Assignment Operator}
+In Java, this symbol: \java{=} is called the {\em assignment operator}, and it is {\bf not} the same as the equal sign in algebra.
+Here's how the assignment operator works:
 
+\begin{code}
+int n;
+n = 7 * 8 + 9;
+\end{code}
+
+\begin{enumerate}
+\item Look at the right-hand side of the assignment operator first: \java{7 * 8 + 9}
+\item Evaluate the right-hand side completely. The right hand side works out to 65.
+\item Put that result into the variable on the left hand side of the assignment operator.
+\end{enumerate}
+
+Whenever you see the assignment operator, don't read it with the ``e-word.'' Instead, when you see a statement like this:
+\java{years = 23;}, read it as one of the following:
+
+\begin{itemize}
+\item \java{years} becomes 23
+\item \java{years} gets the value 23
+\item \java{years} is assigned 23
+\item \java{years} is set to 23
+\end{itemize}
+
+To bring home the fact that Java's assignment operator \java{=} doesn't work like the same symbol in algebra, consider this code:
+
+\begin{code}
+int years = 23;
+years = years + 1;
+\end{code}
+
+The first assignment takes the 23 and assigns it to the integer variable \java{years}.
+
+The second assignment statement is absurd in algebra, but makes perfect sense in Java, following the rules for the assignment operator:
+
+\begin{itemize}
+\item Look at the right hand side and work it out completely. Right now, \java{years} contains 23, and 23 + 1 works out to 24.
+\item Now take that result and put it into the variable on the left hand side. This replaces the value of variable \java{years} with the new value of 24.
+\end{itemize}
+
+You can read these statements as:  ``integer years becomes 23'' and ``years is assigned years + 1.''
+
+\section{Exercises}
 \begin{exercise}
 \label{ex:age}
 Use Java to find your approximate age in days.

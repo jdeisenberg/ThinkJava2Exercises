@@ -1,7 +1,7 @@
 \chapter{Arrays and References}
 
-
 \begin{exercise}
+\label{ex:standardize}
 Write the following methods, each of which takes an array of \java{double} values as a parameter:
 
 \begin{itemize}
@@ -23,6 +23,8 @@ Write a \java{main} method to test the \java{standardize} method. For example, a
 \end{exercise}
 
 \begin{exercise}
+\label{ex:stringReversal}
+
 Unlike the string reversal method shown in {\em Think Java}, where a program built a new string that had its characters in the reverse order of the original, in this exercise you will write a \java{void} method named \java{reverseInPlace} that takes an array of integers as its parameter and reverses the order of the items in the array--in place. In other words, you won't create a new array; you will change the order of the items within the array itself.
 
 Write a \java{main} method that will test the method by reversing and displaying:
@@ -38,6 +40,8 @@ To make your job easier, you might want to create a ``helper method'' named \jav
 \end{exercise}
 
 \begin{exercise}
+\label{ex:vectors}
+
 You can use an array of three \java{double} values to represent a {\em vector} in three-dimensional space. The first element represents the vector's $x$-component, the second its $y$ component, and the third its $z$ component, written as $(x, y, z)$. Write a program that has these methods, each of which takes two three-element arrays as parameters:
 \begin{itemize}
 \item \java{add}: Returns a vector (an array of length three) representing the sum of the parameters. The sum of $(x_1, y_1, z_1)$ and $(x_2, y_2, z_2)$ is the vector $(x_1 + x_2, y_1 + y_2, z_1 + z_2)$
@@ -60,3 +64,27 @@ Dot product of vectors: 24.170
 \end{stdout}
 
 \end{exercise}
+
+\begin{exercise}
+In this exercise, you will find the correlation between the elements in two arrays of equal length.
+Your program will ask the user for the number of entries in each array, read them in, and see how good a linear relationship they have to each other by calculating the {\em correlation coefficient}. This is a number that ranges from 1.0 (the two arrays are perfectly related to each other) to -1.0 (the arrays are perfectly inversely correlated to one another---as an example, think of the heights of the two ends of a seesaw in motion). A correlation of zero means the values in the two arrays have no linear relationship.
+
+Write a method named \java{correlation} that takes two arrays of double and returns the correlation coefficient $r$ according to this formula:
+
+\begin{equation*}
+r = {{\sum x_iy_i - \left(\sum x_i \sum y_i \over n\right)} \over {(n - 1) s_x s_y}}
+\end{equation*}
+
+where $s_x$ and $s_y$ are the standard deviations of the two arrays. You can use the \java{stdev} method that you wrote in Exercise~\ref{ex:standardize} for those calculations.
+
+Here is an example of what the output might look like. The data are people's height in centimeters for the first array and their weight in kilograms for the second array.
+
+\begin{stdout}
+Enter number of elements in each array: 5
+Enter the 5 elements in the first array: 178 176 160 180 186
+Enter the 5 elements in the second array: 84.2 77.3 60 65.5 82.1
+The correlation coefficient is 0.710.
+\end{stdout}
+
+\end{exercise}
+
