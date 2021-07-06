@@ -111,12 +111,6 @@ catch (ArrayIndexOutOfBoundsException ex) {
 
 The variable in parentheses after \java{catch} is local to the \java{catch} block. This means you can use the same variable name in all the \java{catch} blocks, and, by convention, most programmers name it \java{ex}. (We will put it to use later in the chapter.)
 
-The \java{ArraryIndexOutOfBoundsException} comes from the \java{java.util} package, which means you must import it at the beginning of your program:
-
-\begin{code}
-import java.util.ArrayIndexOutOfBoundsException;
-\end{code}
-
 When an exception occurs, Java goes through the \java{catch} blocks in the order that they appear in your program and finds the first one that applies. In the preceding example, we could have put the \java{catch} blocks in any order. However, the order does become important once we examine the hierarchy of exceptions.
 
 \section{The Hierarchy of Exceptions}
