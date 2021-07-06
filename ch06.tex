@@ -4,10 +4,12 @@
 The following section is \copyright Alan Downey and Chris Mayfield, and is material that was originally in {\it Think Java}, but later removed. I think it's an important topic, so I am including it, slightly modified, here.
 
 \index{pretest loop}
+\index{loop!pretest}
 
 The \java{while} and \java{for} statements are {\bf pretest loops}; that is, they test the condition first and at the beginning of each pass through the loop.
 
 \index{posttest loop}
+\index{loop!posttest}
 \index{do-while}
 
 Java also provides a {\bf posttest loop}: the \java{do}-\java{while} statement.
@@ -53,6 +55,9 @@ Again, the important difference between \java{while} and \java{do}-\java{while} 
 In a \java{do}-\java{while} loop, the loop body is always executed at least once, and only then is the condition evaluated. This turns out to be a good choice for validating input, because you must get the user's input before you can determine whether it's valid or not.
 
 \section{Pre vs. Post Increment and Decrement}
+
+\index{increment!pre vs. post}
+\index{decrement!pre vs. post}
 
 The book discusses the increment \java{++} and decrement \java{--} operators, which increase or decrease a variable's value by one.
 
@@ -132,6 +137,8 @@ a = a + 1;
 Now there are no more increment and decrement operators, and you have just ``plain Java expressions,'' with the result being \java{c} being assigned \java{66}.
 
 \section{Compound Assignment}
+\index{compound assignment}
+\index{assignment!compound}
 The book mentions that you can increment a variable by two in this way:
 
 \begin{code}
