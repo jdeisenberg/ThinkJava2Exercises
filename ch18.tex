@@ -1,0 +1,192 @@
+\chapter{Exceptions and Files}
+
+\section{Exceptions}
+
+Consider this program:
+
+\begin{code}
+import java.util.Scanner;
+
+public class ErrorProne {
+
+    public static void main(String[] args) {
+        int[] data = {10, 66, 47, 11};
+        
+        Scanner input = new Scanner(System.in);
+        
+        System.out.print("Enter index 0-3: ");
+        int index = input.nextInt();
+        
+        System.out.print("Enter number to divide by: ");
+        int divisor = input.nextInt();
+        
+        int result = data[index] / divisor;
+        System.out.printf("quotient of %d and %d is %d\n",
+            data[index], divisor, result);
+    }
+}
+\end{code}
+
+If you enter a non-number the program crashes:
+
+\begin{stdout}
+Enter index 0-3: two
+Exception in thread "main" java.util.InputMismatchException
+	at java.base/java.util.Scanner.throwFor(Scanner.java:939)
+	at java.base/java.util.Scanner.next(Scanner.java:1594)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2258)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2212)
+	at ErrorProne.main(ErrorProne.java:11)
+\end{stdout}
+
+The lines beginning with {\tt at} are a {\em stack trace}. They show the chain of method calls in reverse chronological order with the file name and line number. You'll want to look for the one that is in your program. In this case, the error was in {\tt ErrorProne.java:11}, where the {\tt 11} is the line number in the source file with the \java{nextInt} call.
+
+If you enter an index outside the array bounds, the program crashes (the output has been reformatted to fit on the line length of this page):
+
+\begin{stdout}
+Enter index 0-3: 5
+Enter number to divide by: 0
+Exception in thread "main"
+  java.lang.ArrayIndexOutOfBoundsException:
+  Index 5 out of bounds for length 4
+	at ErrorProne.main(ErrorProne.java:21)
+
+\end{stdout}
+
+And if you enter a zero as the divisor, you get yet another error:
+
+\begin{stdout}
+Enter index 0-3: 2
+Enter number to divide by: 0
+Exception in thread "main"
+  java.lang.ArithmeticException: / by zero
+    at ErrorProne.main(ErrorProne.java:21)
+\end{stdout}
+
+All of these errors are called {\em exceptions}---exceptional conditions after which the program cannot continue to run. In Java, we say that the program {\em throws} an exception when it fails.
+
+You already know how to handle these problems: you can use an \java{if} statement with \java{Scanner}'s \java{hasNextInt} method to make sure that the user enters an integer. You can use \java{if} statements to check that the index number is between 0 and the array's length, and that the divisor is non-zero.
+
+In addition to using an \java{if} statement to avoid errors, Java has another general mechanism for catching exceptions before they stop your program:  \java{try} and \java{catch}.
+
+Let's enclose the code that could have an error in a \java{try} block:
+
+\begin{code}
+try {
+    System.out.print("Enter index 0-3: ");
+    int index = input.nextInt();
+    
+    System.out.print("Enter number to divide by: ");
+    int divisor = input.nextInt();
+    
+    int result = data[index] / divisor;
+    System.out.printf("quotient of %d and %d is %d\n",
+        data[index], divisor, result);
+}
+\end{code}
+
+The \java{try} block is followed by a \java{catch} block that specifies the exception we want to handle
+and how to handle it.  Let's start with the division by zero, which generated a \java{java.lang.ArithmeticException}:
+
+\begin{code}
+catch (ArithmeticException ex) {
+    System.out.println("Number to divide by cannot be zero.");
+}
+\end{code}
+
+If you recompile and run the program and enter {\tt 2} and {\tt 0} as your numbers, you'll get the error message in the \java{catch} block. Notice that the \java{printf} statement after the division doesn't occur---when an exception is thrown, execution imediately jumps to the \java{catch}.
+
+If you enter {\tt five} or {\tt 5} for the first input, you'll still get the \java{NumberFormatException} or \java{ArrayIndexOutOfBoundsException}.
+ 
+You may follow a \java{try} block with as many \java{catch} blocks as you want. Let's add two more \java{catch} blocks to handle these other two errors:
+
+\begin{code}
+catch (NumberFormatException ex) {
+    System.out.println("You must enter digits for numbers.");
+}
+catch (ArrayIndexOutOfBoundsException ex) {
+    System.out.printf("Index must be in range 0-%d\n", data.length);
+}
+\end{code}
+
+The variable in parentheses after \java{catch} is local to the \java{catch} block. This means you can use the same variable name in all the \java{catch} blocks, and, by convention, most programmers name it \java{ex}. (We will put it to use later in the chapter.)
+
+The \java{ArraryIndexOutOfBoundsException} comes from the \java{java.util} package, which means you must import it at the beginning of your program:
+
+\begin{code}
+import java.util.ArrayIndexOutOfBoundsException;
+\end{code}
+
+When an exception occurs, Java goes through the \java{catch} blocks in the order that they appear in your program and finds the first one that applies. In the preceding example, we could have put the \java{catch} blocks in any order. However, the order does become important once we examine the hierarchy of exceptions.
+
+\section{The Hierarchy of Exceptions}
+
+All exceptions descend from the \java{Exception} class\footnotemark. This list shows many of the most common exceptions you will encounter when learning Java; each category contains many other classes:
+
+\footnotetext{\java{Exception} is a child of the \java{Throwable} class. Another child of \java{Throwable} is \java{Error}, which is used for serious, system-level problems. You will very rarely encounter one of these.}
+
+\begin{itemize}
+    \item \java{Exception}
+        \begin {itemize}
+            \item \java{IOException}
+                \begin{itemize}
+                    \item \java{FileNotFoundException}
+                \end{itemize}
+            \item \java{RunTimeException}
+            \begin {itemize}
+                \item \java{ArithmeticException}
+                \item \java{IllegalArgumentException}
+                    \begin{itemize}
+                        \item \java{IllegalFormatException}
+                        \item \java{InvalidParameterException}
+                        \item \java{NumberFormatException}
+                    \end{itemize}
+                \item \java{IndexOutOfBoundsException}
+                    \begin{itemize}
+                        \item \java{ArrayIndexOutOfBoundsException}
+                        \item \java{StringIndexOutOfBoundsException}
+                    \end{itemize}
+                \item \java{NullPointerException}
+              \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+If you put a \java{catch} for a parent class {\em before} a \java{catch} for a child class, the parent class will catch the error.
+Thus, in this code fragment:
+
+\begin{code}
+try {
+    int n = 12 / 0;
+}
+catch (Exception ex) {
+    System.out.println("Something unexpected occurred.");
+}
+catch (ArithmeticException ex) {
+    System.out.println("You can't divide by zero.");
+}
+\end{code}
+
+You will see the ``Something unexpected'' error.  For this reason, always \java{catch} the more specific (child) exception classes before you \java{catch} the more general (parent) exception classes.
+
+\section{Using the Exception Variable}
+
+Let's say you \java{catch} the most generic \java{Exception} possible, or one that could have many possible causes, such as \java{FileNotFoundException}. How can you give the user more information than just ``something unexpected occurred''? You can use the variable that you declared in the \java{catch} clause. Here are some methods that you can use\footnotemark:
+
+\footnotetext{These methods are from the \java{Throwable} class, which is the parent of all Java exceptions.}
+
+\begin{description}
+  \item[\java{getMessage()}] \hfill \\ Returns a detailed message string
+  \item[\java{toString()}] \hfill \\ Returns a short description
+  \item[\java{printStackTrace()}] \hfill \\ This \java{void} method prints the exception and its stack trace to the standard error stream, which is your terminal window
+\end{description}
+
+For example, you could \java{catch} {\em only} \java{Exception} and use one of these methods to tell users what went wrong:
+
+\begin{code}
+catch (Exception ex) {
+    System.out.println("An error occurred:");
+    System.out.println(ex.toString());
+}
+\end{code}
+
+If you look at the code for this chapter 
