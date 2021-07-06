@@ -160,7 +160,7 @@ catch (ArithmeticException ex) {
 }
 \end{code}
 
-You will see the ``Something unexpected'' error.  For this reason, always \java{catch} the more specific (child) exception classes before you \java{catch} the more general (parent) exception classes.
+You will see the ``Something unexpected occurred.'' message.  For this reason, always \java{catch} the more specific (child) exception classes before you \java{catch} the more general (parent) exception classes.
 
 \section{Using the Exception Variable}
 
@@ -169,9 +169,9 @@ Let's say you \java{catch} the most generic \java{Exception} possible, or one th
 \footnotetext{These methods are from the \java{Throwable} class, which is the parent of all Java exceptions.}
 
 \begin{description}
-  \item[\java{getMessage()}] \hfill \\ Returns a detailed message string
-  \item[\java{toString()}] \hfill \\ Returns a short description
-  \item[\java{printStackTrace()}] \hfill \\ This \java{void} method prints the exception and its stack trace to the standard error stream, which is your terminal window
+  \item[{\tt getMessage()}] \hfill \\ Returns a detailed message string
+  \item[{\tt toString()}] \hfill \\ Returns a short description
+  \item[{\tt printStackTrace()}] \hfill \\ This \java{void} method prints the exception and its stack trace to the standard error stream, which is your terminal window
 \end{description}
 
 For example, you could \java{catch} {\em only} \java{Exception} and use one of these methods to tell users what went wrong:
