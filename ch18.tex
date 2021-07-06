@@ -189,4 +189,36 @@ catch (Exception ex) {
 }
 \end{code}
 
-If you look at the code for this chapter 
+You can see this in action in file {\it ErrorProneGeneralException.java} in the code repository. As you can see, the error messages are not as satisfactory as those you would write yourself when handling the specific exceptions.
+
+
+\section{The \java{finally} clause}
+
+Sometimes programs need to take an action whether the code in the \java{try} block succeeded or not. (For example, if you have allocated resources and want to ``clean up'' before exiting the program.) This is the role of the \java{finally} clause. It is executed whether the \java{try} block succeeded or an exception was caught by a \java{catch} block. In fact, it is executed even when there is a \java{return} or \java{break} in a block:
+
+\begin{code}
+public class FinallyTest {
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        
+        try {
+            int result = 17 / 5;
+            System.out.printf("quotient of 17 and 5 is %d\n",
+               result);
+            return; // exits the main() method
+        }
+        catch (ArithmeticException ex) {
+            System.out.println("You can't divide by zero.");
+        }
+        finally {
+            System.out.println("In the finally clause.");
+        }
+        System.out.println("Does not print if return succeeds");
+    }
+}
+\end{code}
+
+This program will print {\tt In the finally clause.} even though the \java{return} prevents the last \java{println} from happening.
+
+\section{Checked and Unchecked Exceptions}
