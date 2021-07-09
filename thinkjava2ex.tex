@@ -251,6 +251,17 @@ Permission is granted to copy, distribute, and/or modify this work under the ter
 
 \input{ch18.tex}
 
+\appendix
+%\addtocontents{toc}{\protect\newpage}
+
+%~ \part{Appendixes}
+
+%BEGIN LATEX
+\renewcommand{\chaptermark}[1]{\markboth{Appendix \thechapter ~~ #1}{}}
+%END LATEX
+
+\input{appa.tex}
+
 \backmatter
 
 \printindex

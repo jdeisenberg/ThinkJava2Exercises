@@ -39,7 +39,7 @@ Exception in thread "main" java.util.InputMismatchException
 	at ErrorProne.main(ErrorProne.java:11)
 \end{stdout}
 
-The lines beginning with {\tt at} are a {\em stack trace}. They show the chain of method calls in reverse chronological order with the file name and line number. You'll want to look for the one that is in your program. In this case, the error was in {\tt ErrorProne.java:11}, where the {\tt 11} is the line number in the source file with the \java{nextInt} call.
+The lines beginning with \texttt{at} are a {\em stack trace}. They show the chain of method calls in reverse chronological order with the file name and line number. You'll want to look for the one that is in your program. In this case, the error was in \texttt{ErrorProne.java:11}, where the \texttt{11} is the line number in the source file with the \java{nextInt} call.
 
 If you enter an index outside the array bounds, the program crashes (the output has been reformatted to fit on the line length of this page):
 
@@ -94,9 +94,9 @@ catch (ArithmeticException ex) {
 }
 \end{code}
 
-If you recompile and run the program and enter {\tt 2} and {\tt 0} as your numbers, you'll get the error message in the \java{catch} block. Notice that the \java{printf} statement after the division doesn't occur---when an exception is thrown, execution imediately jumps to the \java{catch}.
+If you recompile and run the program and enter \texttt{2} and \texttt{0} as your numbers, you'll get the error message in the \java{catch} block. Notice that the \java{printf} statement after the division doesn't occur---when an exception is thrown, execution imediately jumps to the \java{catch}.
 
-If you enter {\tt five} or {\tt 5} for the first input, you'll still get the \java{NumberFormatException} or \java{ArrayIndexOutOfBoundsException}.
+If you enter \texttt{five} or \texttt{5} for the first input, you'll still get the \java{NumberFormatException} or \java{ArrayIndexOutOfBoundsException}.
  
 You may follow a \java{try} block with as many \java{catch} blocks as you want. Let's add two more \java{catch} blocks to handle these other two errors:
 
@@ -113,7 +113,7 @@ The variable in parentheses after \java{catch} is local to the \java{catch} bloc
 
 When an exception occurs, Java goes through the \java{catch} blocks in the order that they appear in your program and finds the first one that applies. In the preceding example, we could have put the \java{catch} blocks in any order. However, the order does become important once we examine the hierarchy of exceptions.
 
-\section{The Hierarchy of Exceptions}
+\subsection{The Hierarchy of Exceptions}
 
 All exceptions descend from the \java{Exception} class\footnotemark. This list shows many of the most common exceptions you will encounter when learning Java; each category contains many other classes:
 
@@ -162,16 +162,16 @@ catch (ArithmeticException ex) {
 
 You will see the ``Something unexpected occurred.'' message.  For this reason, always \java{catch} the more specific (child) exception classes before you \java{catch} the more general (parent) exception classes.
 
-\section{Using the Exception Variable}
+\subsection{Using the Exception Variable}
 
 Let's say you \java{catch} the most generic \java{Exception} possible, or one that could have many possible causes, such as \java{FileNotFoundException}. How can you give the user more information than just ``something unexpected occurred''? You can use the variable that you declared in the \java{catch} clause. Here are some methods that you can use\footnotemark:
 
 \footnotetext{These methods are from the \java{Throwable} class, which is the parent of all Java exceptions.}
 
 \begin{description}
-  \item[{\tt getMessage()}] \hfill \\ Returns a detailed message string
-  \item[{\tt toString()}] \hfill \\ Returns a short description
-  \item[{\tt printStackTrace()}] \hfill \\ This \java{void} method prints the exception and its stack trace to the standard error stream, which is your terminal window
+  \item[\texttt{getMessage()}] \hfill \\ Returns a detailed message string
+  \item[\texttt{toString()}] \hfill \\ Returns a short description
+  \item[\texttt{printStackTrace()}] \hfill \\ This \java{void} method prints the exception and its stack trace to the standard error stream, which is your terminal window
 \end{description}
 
 For example, you could \java{catch} {\em only} \java{Exception} and use one of these methods to tell users what went wrong:
@@ -186,7 +186,7 @@ catch (Exception ex) {
 You can see this in action in file {\it ErrorProneGeneralException.java} in the code repository. As you can see, the error messages are not as satisfactory as those you would write yourself when handling the specific exceptions.
 
 
-\section{The \java{finally} clause}
+\subsection{The \java{finally} clause}
 
 Sometimes programs need to take an action whether the code in the \java{try} block succeeded or not. (For example, if you have allocated resources and want to ``clean up'' before exiting the program.) This is the role of the \java{finally} clause. It is executed whether the \java{try} block succeeded or an exception was caught by a \java{catch} block. In fact, it is executed even when there is a \java{return} or \java{break} in a block:
 
@@ -213,9 +213,9 @@ public class FinallyTest {
 }
 \end{code}
 
-This program will print {\tt In the finally clause.} even though the \java{return} prevents the last \java{println} from happening.
+This program will print \texttt{In the finally clause.} even though the \java{return} prevents the last \java{println} from happening.
 
-\section{Checked and Unchecked Exceptions}
+\subsection{Checked and Unchecked Exceptions}
 \index{unchecked exceptions}
 \index{exceptions!unchecked}
 
@@ -230,4 +230,50 @@ So, why are we talking about \java{try} and \java{catch} at all? Because there a
 
 \section{Files}
 
+Up to this point, you've entered all the data for a program from the keyboard, using a \java{Scanner} with \java{System.in}.  What if someone sends you a file of several months' worth of weather data from Munich, Germany, in a file named {\em klima.txt}. You can find this file in the {\em code/ch018} folder in the repository.
+
+\begin{stdout}
+MESS_DATUM;TMK;TXK;TNK
+20200106;0.8;6.0;-2.5
+20200107;2.4;4.6;-2.1
+20200108;3.6;7.2;-1.3
+20200109;7.7;14.5;3.6
+...
+20210704;17.9;22.9;14.7
+20210705;18.5;22.4;13.9
+20210706;21.8;31.5;15.4
+20210707;18.2;20.5;16.7
+20210708;16.9;20.1;14.7
+\end{stdout}
+
+The columns stand for date, average daily temperature, high temperature, and low temperature (temperatures are in $^\circ$C).
+If you want to find the maximum temperature and minimum temperature across the whole time period, you certainly don't want to have to type all the numbers again at the keyboard. Instead, you want Java to be able to read the file from your disk.
+
+\subsection{The \java{File} Object}
+In order to access a file, you must use its path name to create a \java{File} object. The resulting object doesn't give you access to the file contents; rather, it gives you access to information about the file.
+
+\subsection{Path Names}
+\index{absolute path name}
+\index{path name!absolute}
+A {\em path name} describes the names used to get to a file in a directory hierarchy. On Windows systems, a path name might look like this:
+
+\texttt{C:\textbackslash home\textbackslash kim\textbackslash example.txt}
+
+This is an {\em absolute path name}---it describes how to get to a file from the very top of a disk's file system: Start at the \texttt{C:} drive, which contains the \texttt{home} directory, which contains the \texttt{kim} directory, which contains the file you want: \texttt{example.txt}.
+
+A similar absolute path name on a Mac OS or Linux system would be:
+
+\texttt{/home/kim/example.txt}
+
+When you specify a path name in Java, you may use either slashes \texttt{/} or backslashes \texttt{\textbackslash}, no matter what operating system you use.
+
+\index{relative path name}
+\index{path name!relative}
+While an absolute path name tells you how to get to a file from the very top of the file system, a {\em relative path name} tells you how to get to a file from the current directory where your compiled program resides. If your program is in (using the Mac OS/Linux convention) \texttt{/home/kim}, it can access the file by giving only its name: \texttt{example.txt}. For the examples in this chapter, we'll presume that the data files are in the same directory as the Java source and compiled {\em .class} files so that we can use the simpler relative paths.
+
+For more information about absolute and relative path names, see Appendix~{\ref pathnames}. 
+
+
+% https://www1.ncdc.noaa.gov/pub/data/cdo/samples/NORMAL_DLY_sample_ascii.dat
+% https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/daily/kl/recent/tageswerte_KL_03379_akt.zip
 
