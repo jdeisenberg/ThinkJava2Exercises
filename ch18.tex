@@ -38,7 +38,7 @@ Exception in thread "main" java.util.InputMismatchException
 	at java.base/java.util.Scanner.nextInt(Scanner.java:2212)
 	at ErrorProne.main(ErrorProne.java:11)
 \end{stdout}
-
+\index{stack trace}
 The lines beginning with \texttt{at} are a {\em stack trace}. They show the chain of method calls in reverse chronological order with the file name and line number. You'll want to look for the one that is in your program. In this case, the error was in \texttt{ErrorProne.java:11}, where the \texttt{11} is the line number in the source file with the \java{nextInt} call.
 
 If you enter an index outside the array bounds, the program crashes (the output has been reformatted to fit on the line length of this page):
@@ -66,7 +66,8 @@ Exception in thread "main"
 All of these errors are called {\em exceptions}---exceptional conditions after which the program cannot continue to run. In Java, we say that the program {\em throws} an exception when it fails.
 
 You already know how to handle these problems: you can use an \java{if} statement with \java{Scanner}'s \java{hasNextInt} method to make sure that the user enters an integer. You can use \java{if} statements to check that the index number is between 0 and the array's length, and that the divisor is non-zero.
-
+\index{\java{try}}
+\index{\java{catch}}
 In addition to using an \java{if} statement to avoid errors, Java has another general mechanism for catching exceptions before they stop your program:  \java{try} and \java{catch}.
 
 Let's enclose the code that could have an error in a \java{try} block:
@@ -114,7 +115,7 @@ The variable in parentheses after \java{catch} is local to the \java{catch} bloc
 When an exception occurs, Java goes through the \java{catch} blocks in the order that they appear in your program and finds the first one that applies. In the preceding example, we could have put the \java{catch} blocks in any order. However, the order does become important once we examine the hierarchy of exceptions.
 
 \subsection{The Hierarchy of Exceptions}
-
+\index{exceptions!hierarchy}
 All exceptions descend from the \java{Exception} class\footnotemark. This list shows many of the most common exceptions you will encounter when learning Java; each category contains many other classes:
 
 \footnotetext{\java{Exception} is a child of the \java{Throwable} class. Another child of \java{Throwable} is \java{Error}, which is used for serious, system-level problems. You will very rarely encounter one of these.}
@@ -163,7 +164,7 @@ catch (ArithmeticException ex) {
 You will see the ``Something unexpected occurred.'' message.  For this reason, always \java{catch} the more specific (child) exception classes before you \java{catch} the more general (parent) exception classes.
 
 \subsection{Using the Exception Variable}
-
+\index{exception variable}
 Let's say you \java{catch} the most generic \java{Exception} possible, or one that could have many possible causes, such as \java{FileNotFoundException}. How can you give the user more information than just ``something unexpected occurred''? You can use the variable that you declared in the \java{catch} clause. Here are some methods that you can use\footnotemark:
 
 \footnotetext{These methods are from the \java{Throwable} class, which is the parent of all Java exceptions.}
@@ -185,9 +186,8 @@ catch (Exception ex) {
 
 You can see this in action in file {\it ErrorProneGeneralException.java} in the code repository. As you can see, the error messages are not as satisfactory as those you would write yourself when handling the specific exceptions.
 
-
 \subsection{The \java{finally} clause}
-
+\index{\java{finally}}
 Sometimes programs need to take an action whether the code in the \java{try} block succeeded or not. (For example, if you have allocated resources and want to ``clean up'' before exiting the program.) This is the role of the \java{finally} clause. It is executed whether the \java{try} block succeeded or an exception was caught by a \java{catch} block. In fact, it is executed even when there is a \java{return} or \java{break} in a block:
 
 \begin{code}
@@ -230,7 +230,9 @@ So, why are we talking about \java{try} and \java{catch} at all? Because there a
 
 \section{Files}
 
-Up to this point, you've entered all the data for a program from the keyboard, using a \java{Scanner} with \java{System.in}.  What if someone sends you a file of several months' worth of weather data from Munich, Germany, in a file named {\em klima.txt}. You can find this file in the {\em code/ch018} folder in the repository.
+Up to this point, you've entered all the data for a program from the keyboard, using a \java{Scanner} with \java{System.in}.  What if someone sends you a file of several months' worth of weather data from Munich, Germany, in a file named {\em klima.txt}. You can find this file in the {\em code/ch018} folder in the repository\footnotemark.
+
+\footnotetext{The file is an edited version of the data at \url{https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/daily/kl/recent/tageswerte_KL_03379_akt.zip}}
 
 \begin{stdout}
 MESS_DATUM;TMK;TXK;TNK
@@ -250,30 +252,218 @@ The columns stand for date, average daily temperature, high temperature, and low
 If you want to find the maximum temperature and minimum temperature across the whole time period, you certainly don't want to have to type all the numbers again at the keyboard. Instead, you want Java to be able to read the file from your disk.
 
 \subsection{The \java{File} Object}
-In order to access a file, you must use its path name to create a \java{File} object. The resulting object doesn't give you access to the file contents; rather, it gives you access to information about the file.
+In order to access a file, you must use its path name to create a \java{File} object. A path name describes how to get to a file in the file system. For this chapter, we’ll presume that your data files are in the same directory as the {\em .class} file for your program. That way, the path name is the same as the file name. (For more details about path names, see Appendix~\ref{pathnames}.)
 
-\subsection{Path Names}
-\index{absolute path name}
-\index{path name!absolute}
-A {\em path name} describes the names used to get to a file in a directory hierarchy. On Windows systems, a path name might look like this:
+The resulting object doesn't give you access to the file contents; rather, it gives you access to information about the file.
 
-\texttt{C:\textbackslash home\textbackslash kim\textbackslash example.txt}
+Here's the start of a program that lets you enter a path name and find out about that file:
 
-This is an {\em absolute path name}---it describes how to get to a file from the very top of a disk's file system: Start at the \texttt{C:} drive, which contains the \texttt{home} directory, which contains the \texttt{kim} directory, which contains the file you want: \texttt{example.txt}.
+\begin{code}
+import java.util.Scanner;
+import java.io.File; // this is a new import
 
-A similar absolute path name on a Mac OS or Linux system would be:
+public class FileInfo {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter a path name: ");
+        String pathName = input.nextInt();
+        
+        File f = new File(pathName);
+\end{code}
 
-\texttt{/home/kim/example.txt}
+The variable \java{f} is what, in other programming languages, is called a {\em file handle} or {\em file descriptor}. The code continues by calling some of the more useful methods in the \java{File} class:
 
-When you specify a path name in Java, you may use either slashes \texttt{/} or backslashes \texttt{\textbackslash}, no matter what operating system you use.
+\begin{code}
+        System.out.println("File exists: " + f.exists());
+        System.out.println("File size:   " + f.length());
+        System.out.println("Readble:     " + f.canRead());
+        System.out.println("Writeable:   " + f.canWrite());
+        System.out.println("Executable:  " + f.canExecute());
+        System.out.println("Directory:   " + f.isDirectory());
+        System.out.println("Normal file: " + f.isFile());
+        System.out.println("Hidden file: " + f.isHidden());
+    }
+}
+\end{code}
 
-\index{relative path name}
-\index{path name!relative}
-While an absolute path name tells you how to get to a file from the very top of the file system, a {\em relative path name} tells you how to get to a file from the current directory where your compiled program resides. If your program is in (using the Mac OS/Linux convention) \texttt{/home/kim}, it can access the file by giving only its name: \texttt{example.txt}. For the examples in this chapter, we'll presume that the data files are in the same directory as the Java source and compiled {\em .class} files so that we can use the simpler relative paths.
+A couple of notes: the \java{length} method returns the file size in bytes. It is possible for a file to be neither a directory nor a ``normal file''---the \texttt{/dev/zero} path on Linux refers to a {\em virtual file} that is neither.
 
-For more information about absolute and relative path names, see Appendix~{\ref pathnames}. 
+The \java{File} class also has methods that let you delete files, rename them, and create directories. For details, see \url{https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/io/File.html}.
+
+\subsection{Reading Files}
+
+Let's write a program that opens the {\em klima.txt} file and finds the maximum and minimum daily temperature across the time period described in the file.
+
+In order to read the contents of a file, you must open a \java{Scanner} based on the \java{File} object. But if you try code like this:
+
+\begin{code}
+import java.util.Scanner;
+import java.io.File;
+
+public class LineCount {
+
+    public static void main(String[] args) {        
+        File f = new File("klima.txt");
+        
+        Scanner input = new Scanner(f);
+    }
+}
+\end{code}
+
+The compiler will complain (message reformatted to fit page width):
+
+\begin{stdout}
+Klima.java:9: error: unreported exception
+FileNotFoundException; must be caught or declared to be thrown
+        Scanner input = new Scanner(f);
+                        ^
+1 error
+\end{stdout}
+
+The \java{FileNotFoundException} is a {\em checked exception}, and the compiler insists that you either catch it or throw it to the caller\footnotemark.
+
+\footnotetext{You already know how to \java{catch} an exception. For details on specifying that a method throws an exception, see \url{https://docs.oracle.com/javase/tutorial/essential/exceptions/declaring.html}}
+
+This will require you to import \java{java.io.FileNotFoundException} and set up a \java{try}-\java{catch} block. 
+
+\begin{code}
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+
+public class Klima {
+
+    public static void main(String[] args) {        
+        File f = new File("klima.txt");
+        try {
+            Scanner input = new Scanner(f);
+            // code goes here
+            input.close();
+        }
+        catch (FileNotFoundException ex) {
+            System.out.println("Can't find file klima.txt");
+        }
+    }
+}
+\end{code}
+
+Now we are set to read the file's contents. Rather than write the whole program right now, let's start by reading the file one line at a time, printing them out to the screen, and counting the number of lines. Here's the code that goes inside the \java{try} block. The \java{hasNextLine} method returns \java{false} when it hits the end of the file:
+
+\begin{code}
+            while (input.hasNextLine()) {
+                String oneLine = input.nextLine();
+                System.out.println(oneLine);
+                lineCount++;
+            }
+            System.out.println("# of lines: " + lineCount);
+            input.close();
+\end{code}
+
+Now, that we know that we can sucessfully open and read the file, we can modify the code to accomplish the task we want to do: finding the minimum and maximum temperatures.
+
+The program will read lines one at a time and then extract the data from each line. Because \java{Scanner}'s \java{next} and \java{nextDouble} methods use whitespace to separate items, we can't use them ``as-is'' here, where data items are separated by semicolons. We could solve this problem by using the \java{useDelimiter} method to change the separator to a semicolon, but that would deprive us of the opportunity to learn about a new \java{String} method and practice more with exceptions.
+
+Let's replace the line-counting code with this code for finding the maximum and minimum temperatures:
+
+\begin{code}
+double max = -1000.0;
+double min = 1000.0;
+String[] items = oneLine.split(";");
+if (items.length == 4) {
+    dayMax = Double.parseDouble(items[2]);
+    dayMin = Double.parseDouble(items[3]);
+    if (dayMax > max) {
+        max = dayMax;
+    }
+    if (dayMin < min) {
+        min = dayMin;
+    }
+}
+\end{code}
+
+The new \java{String} method is \java{split}. Given a delimiter, this method splits the given \java{String} into an array of strings wherever it finds the delimiter that you give it as an argument. For example, after this code executes:
+
+\begin{code}
+String s = "sister-in-law";
+String[] parts = s.split("-");
+\end{code}
+
+The \java{parts} array will be \java{\{"sister", "in", "law"\}}.
+
+Similarly, the program uses \java{oneLine.split(";")} to separate the items on each line. If there aren't four items on a line, it's incomplete, and the program does nothing (effectively skipping over the line).
+
+We now have a problem: the first line doesn't have any numbers on it, and trying to use \java{parseDouble} on the titles will throw a \java{NumberFormatException}. To solve this problem (which could also occur if the file we were given had bad data in it), we use another \java{try}-\java{catch}:
+
+\begin{code}
+try {
+    double dayMax = Double.parseDouble(items[2]);
+    double dayMin = Double.parseDouble(items[3]);
+}
+catch (NumberFormatException ex) {
+    System.out.println("Ignoring non-numeric data "
+        + ex.getMessage());
+}
+\end{code}
 
 
-% https://www1.ncdc.noaa.gov/pub/data/cdo/samples/NORMAL_DLY_sample_ascii.dat
-% https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/daily/kl/recent/tageswerte_KL_03379_akt.zip
+\subsection{Writing Files}
 
+There are many Java classes for reading files. In this book, we've been using \java{Scanner} to read input because it contains many methods to make getting input simple.
+
+In a similar way, there are many Java classes for writing files. We'll discuss only one of them: \java{PrintWriter}. To use this class, you must:
+
+\begin{code}
+import java.io.PrintWriter;
+\end{code}
+
+Just as you created a \java{File} object and created a \java{Scanner} with that \java{File} object as a parameter, you can write to a disk file by creating a \java{File} object with the path you want and then use that object as a parameter to the \java{PrintWriter} constructor. And, just as the compiler required you to enclose the code in a \java{try}-\java{catch} block, you must do the same when opening a \java{PrintWriter}
+
+\begin{code}
+File f = new File("output.txt");
+try {
+    PrintWriter output = new PrintWriter(f);
+    // code to write to file goes here
+}
+catch (FileNotFoundException ex) {
+    System.out.println("Unable to open output file.");
+}
+\end{code}
+
+Just like \java{System.out}, the \java{PrintWriter} object \java{output} we have created has \java{print}, \java{println}, and \java{printf} methods. Instead of writing to your screen, they write data to the file you specified.
+
+\subsection {Writing Files - Two Important Notes}
+
+\begin{enumerate}
+\item When you open a \java{PrintWriter} to a \java{File} that does not exist, it will be created for you. If you open a \java{PrintWriter} to a \java{File} that {\em does} exist, {\bf the existing file will be deleted and re-created}. Any information that was in the file will be gone, even if you never write anything to the \java{PrintWriter}.
+
+This means that it is always useful to use the \java{exists} method to check if a file already exists and, when possible, give the user the option to overwrite the old file or exit the program.
+
+\item When you do a \java{println} to a \java{PrintWriter}, the data is not written to disk immediately. Instead, it is kept in a {\em buffer}, and is written only when the buffer is full. If you exit the program with the buffer partially filled, there is a chance that it might not be written to disk. {\em Always} call the \java{close} method on your output files to make sure that the buffer is written to disk.
+
+If you run this program:
+
+\begin{code}
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+
+public class PartialWrite {
+
+    public static void main(String[] args) {        
+        File f = new File("write_test.txt");
+        try {
+            PrintWriter output = new PrintWriter(f);
+            output.println("Example of writing to a file.");
+            // output.close(); // uncomment this line 
+        }
+        catch (FileNotFoundException ex) {
+            System.out.println("Can't open file write_test.txt");
+        }
+    }
+}
+\end{code}
+
+without closing the file, the resulting {\em write\_test.txt} file will be empty.
+If you uncomment the \java{output.close();} line and run the program again, the file will contain the output.
+ 
+\end{enumerate}
