@@ -2,7 +2,8 @@
 \label{pathnames}
 
 \section{Absolute Paths}
-
+\index{absolute path}
+\index{path!absolute}
 Imagine your file hierarchy as a map, where folders represents streets and files represent houses, as in Figure~\ref{fig.files}.
 
 \begin{figure}[!ht]
@@ -22,6 +23,8 @@ The absolute pathname to get to Frank's house is ``Start at Main Street, go to C
 On Windows, if all these files were on the \texttt{C:} drive, the absolute path would be \texttt{C:\textbackslash main\textbackslash cedar\textbackslash frank}.
 
 \section{Relative Paths}
+\index{relative path}
+\index{path!relative}
 
 Now let's say you were on Crestview Drive in front of Maria's house and someone asked you how to get to Vinh's house. You wouldn't answer, ``Start at Main Street, then go to Oak Street, then go to Crestview Drive...'' You wouldn't do that because you're already on the correct street. You would just say ``Vinh's house is next door.'' That is a {\em relative pathname}---starting from where you are right now, how do you get to the destination? When specifying a Java path, if you are in directory \texttt{/main/oak/crestview}, the relative filename for file \texttt{vinh} is just that: \texttt{vinh}, because it is in your current directory.
 
