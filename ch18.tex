@@ -416,7 +416,7 @@ In a similar way, there are many Java classes for writing files. We'll discuss o
 import java.io.PrintWriter;
 \end{code}
 
-Just as you created a \java{File} object and created a \java{Scanner} with that \java{File} object as a parameter, you can write to a disk file by creating a \java{File} object with the path you want and then use that object as a parameter to the \java{PrintWriter} constructor. And, just as the compiler required you to enclose the code in a \java{try}-\java{catch} block, you must do the same when opening a \java{PrintWriter}
+Just as you created a \java{Scanner} by using a \java{File} object as a parameter to the constructor, you can write to a disk file by creating a \java{File} object with the path you want and then use that object as a parameter to the \java{PrintWriter} constructor. And, just as the compiler required you to enclose the code in a \java{try}-\java{catch} block, you must do the same when opening a \java{PrintWriter}
 
 \begin{code}
 File f = new File("output.txt");
