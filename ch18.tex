@@ -65,7 +65,8 @@ Exception in thread "main"
 
 All of these errors are called {\em exceptions}---exceptional conditions after which the program cannot continue to run. In Java, we say that the program {\em throws} an exception when it fails.
 
-You already know how to handle these problems: you can use an \java{if} statement with \java{Scanner}'s \java{hasNextInt} method to make sure that the user enters an integer. You can use \java{if} statements to check that the index number is between 0 and the array's length, and that the divisor is non-zero.
+You already know how to handle these problems before they crash your program: you can use an \java{if} statement with \java{Scanner}'s \java{hasNextInt} method to make sure that the user enters an integer. You can use \java{if} statements to check that the index number is between 0 and the array's length, and that the divisor is non-zero.
+
 \index{\java{try}}
 \index{\java{catch}}
 In addition to using an \java{if} statement to avoid errors, Java has another general mechanism for catching exceptions before they stop your program:  \java{try} and \java{catch}.
@@ -114,7 +115,7 @@ The variable in parentheses after \java{catch} is local to the \java{catch} bloc
 
 When an exception occurs, Java goes through the \java{catch} blocks in the order that they appear in your program and finds the first one that applies. In the preceding example, we could have put the \java{catch} blocks in any order. However, the order does become important once we examine the hierarchy of exceptions.
 
-\subsection{The Hierarchy of Exceptions}
+\section{The Hierarchy of Exceptions}
 \index{exceptions!hierarchy}
 All exceptions descend from the \java{Exception} class\footnotemark. This list shows many of the most common exceptions you will encounter when learning Java; each category contains many other classes:
 
@@ -163,7 +164,7 @@ catch (ArithmeticException ex) {
 
 You will see the ``Something unexpected occurred.'' message.  For this reason, always \java{catch} the more specific (child) exception classes before you \java{catch} the more general (parent) exception classes.
 
-\subsection{Using the Exception Variable}
+\section{Using the Exception Variable}
 \index{exception variable}
 Let's say you \java{catch} the most generic \java{Exception} possible, or one that could have many possible causes, such as \java{FileNotFoundException}. How can you give the user more information than just ``something unexpected occurred''? You can use the variable that you declared in the \java{catch} clause. Here are some methods that you can use\footnotemark:
 
@@ -186,7 +187,7 @@ catch (Exception ex) {
 
 You can see this in action in file {\it ErrorProneGeneralException.java} in the code repository. As you can see, the error messages are not as satisfactory as those you would write yourself when handling the specific exceptions.
 
-\subsection{The \java{finally} clause}
+\section{The \java{finally} clause}
 \index{\java{finally}}
 Sometimes programs need to take an action whether the code in the \java{try} block succeeded or not. (For example, if you have allocated resources and want to ``clean up'' before exiting the program.) This is the role of the \java{finally} clause. It is executed whether the \java{try} block succeeded or an exception was caught by a \java{catch} block. In fact, it is executed even when there is a \java{return} or \java{break} in a block:
 
@@ -215,7 +216,65 @@ public class FinallyTest {
 
 This program will print \texttt{In the finally clause.} even though the \java{return} prevents the last \java{println} from happening.
 
-\subsection{Checked and Unchecked Exceptions}
+\section{Throwing Exceptions}
+Before proceeding, let's ask a philosophical question: why do these exceptions even exist? Why doesn't the JVM simply do something reasonable when it encounters one of these situations?  That's the whole problem---what does ``reasonable'' mean? For dividing by zero, some programs might want to return a zero as a default answer. Other programs might want to print an error message and end the program. Still others might want to detect the attempt to divide by zero and ask for new input.
+
+Because the definition of ``reasonable'' is different for every program and every programmer, it makes sense for these exceptions that happen in many different circumstances to throw the problem back to the programmer and say, ``you handle this.'' 
+
+If you are writing a library of Java methods for other people to use, you won't be able to anticipate all of your users' needs either. Your methods will also need to \java{throw} an \java{Exception} so that the people who use your methods can handle errors as they see fit.
+
+For example, let's say you have a Java library with a method that calculates the average of an array of \java{double} values. If somebody hands you an empty array, that's an illegal argument, and you can write your code to \java{throw} an \java{IllegalArgumentException}:
+
+\begin{code}
+ 1  public class ArrayStats {
+ 2    public static double average(double[] data) 
+ 3     throws IllegalArgumentException {
+ 4      int n = data.length;
+ 5      if (n > 0) {
+ 6        double sum = 0.0;
+ 7        for (double value: data) {
+ 8          sum += value;
+ 9        }
+10        return sum / n;
+11      } else {
+12        throw new IllegalArgumentException("Empty array");
+13      }
+14    }
+15  }
+\end{code}
+
+In line 3, specify that this method \java{throws} an \java{IllegalArgumentException}.
+
+In line 12, when the length of the array is zero, use the keyword \java{throw} and create a \java{new} \java{IllegalArgumentException}. The argument to the constructor is the value that will be returned when someone calls
+the exception's \java{getMessage} method.
+
+Here's an example that calls the code (without \java{try} and \java{catch}) and the resulting error, formatted to fit the page:
+
+\begin{code}
+public class TestArrayStats {
+    public static void main(String[] args) {
+        double[] items = new double[0];
+        double result = ArrayStats.average(items);
+        System.out.println("Average is " + result);
+    }
+}
+
+Exception in thread "main"
+  java.lang.IllegalArgumentException: Empty array
+        at ArrayStats.average(ArrayStats.java:12)
+        at TestArrayStats.main(TestArrayStats.java:5)
+\end{code}
+
+If your method can throw more than one exception, you list them separated by commas in the \java{throws} clause:
+
+\begin{code}
+public static void example() throws IllegalArgumentException,
+  ArithmeticException, NumberFormatException {
+    // ...code
+}
+\end{code}
+
+\section{Checked and Unchecked Exceptions}
 \index{unchecked exceptions}
 \index{exceptions!unchecked}
 
@@ -226,7 +285,7 @@ For many operations that could throw an unchecked exception, you are better off 
 \index{checked exceptions}
 \index{exceptions!checked}
 
-So, why are we talking about \java{try} and \java{catch} at all? Because there are some exceptions that can't easily be handled by an \java{if}-\java{else}. These exceptions are called {\em checked exceptions}. The Java compiler requires you to enclose operations that might throw these exceptions in a \java{try} block and provide a \java{catch} block to handle them. Foremost of these exceptions is the \java{IOException}, generated by I/O (Input/Output) operations. When you are working with files in Java, you will need to check this exception. This leads us to the next major topic in this chapter:
+So, why are we talking about \java{try} and \java{catch} at all? Because there are some exceptions that can't easily be handled by an \java{if}-\java{else}. These exceptions are called {\em checked exceptions}. The Java compiler requires you to enclose operations that might throw these exceptions in a \java{try} block and provide a \java{catch} block to handle them. You are also required to list them in a \java{throws} clause if you are throwing those exceptions yourself. Foremost of these checked exceptions is the \java{IOException}, generated by I/O (Input/Output) operations. When you are working with files in Java, you will need to check this exception. This leads us to the next major topic in this chapter:
 
 \section{Files}
 
@@ -467,3 +526,38 @@ without closing the file, the resulting {\em write\_test.txt} file will be empty
 If you uncomment the \java{output.close();} line and run the program again, the file will contain the output.
  
 \end{enumerate}
+
+\section{\java{try} with Resources}
+
+Because it is important to close files, Java has a syntax for associating \java{File}s with input and output classes as part of the \java{try} syntax. When using this syntax, the Java Virtual Machine will automatically close the input and output when the \java{try} block exits. Here is an example that uses \java{try} with resources to open  a \java{PrintWriter}:
+
+\begin{code}
+File outFile = new File("output_path.txt");
+try (PrintWriter outWriter = new PrintWriter(outFile)) {
+    outWriter.println("Example of try with resources.");
+}
+catch (FileNotFoundException ex) {
+    System.out.println("Error: " + ex.getMessage);
+}
+\end{code}
+
+The declaration of \java{outWriter} is now in parentheses after \java{try} rather than after the block's opening brace.
+We no longer need to call \java{outWriter.close()}---the JVM will automatically do the call when it exits the \java{try}-\java{catch} block.
+
+You can declare as many input and output classes as you want inside the parentheses:
+
+\begin{code}
+File inFile = new File("input_path.txt");
+File outFile = new File("output_path.txt");
+try (
+    Scanner inScan = new Scanner(inFile);
+    PrintWriter outWriter = new PrintWriter(outFile);
+) {
+    // code...
+}
+catch (Exception ex) {
+    // error handling...
+}
+\end{code}
+
+The \java{File} declarations cannot go inside the parentheses; the compiler won't let you do that.
