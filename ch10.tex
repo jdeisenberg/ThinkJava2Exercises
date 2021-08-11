@@ -1,2 +1,66 @@
 \chapter{Mutable Objects}
 
+\begin{exercise}
+The \java{java.awt} package contains a sub-package and class for representing a geometric line segment: \java{java.awt.geom.Line2D.Double} with these attributes, all of type \java{double}:
+
+\begin{itemize}
+\item \java{x1} and \java{y1}, representing the {\em x} and {\em y} coordinates of one endpoint of the line segment
+\item \java{x2} and \java{y2}, representing the {\em x} and {\em y} coordinates of the other endpoint of the line segment
+\end{itemize}
+
+In order to distinguish it from the \java{Double} wrapper class that you saw in Chapter 9, do both of these \java{import}s:
+
+\begin{code}
+import java.awt.geom.Line2D;
+import java.awt.geom.Line2D.Double;
+\end{code}
+
+You can then create a new line with code like this:
+
+\begin{code}
+Line2D.Double segment = new Line2D.Double(3.7, 4.5, 8.2, 1.6);
+\end{code}
+
+Write the following methods:
+
+\begin{description}
+\item[\texttt{length(Line2D.Double segment)}] \hfill \\ returns the length of the line segment as a \java{double}. {\em Hint}: use the Pythagorean theorem
+\item[\texttt{stringOf(Line2D.Double segment)}] \hfill \\ returns a \java{String} representing the line segment. For example, if the segment has endpoints (1.2, 3.4) and (7.8, 9.5), the return value would be \java{"(1.2, 3.4) - (7.8, 9.5)"}
+
+\end{description}
+
+Write the following \java{void} methods which alter the fields of their parameters. They do not return a new value: 
+
+\begin{description}
+  \item[\texttt{flip(Line2D.Double segment)}] \hfill \\ switches the \java{y1} and \java{y2} coordinates of the given line segment. For example, if the segment had endpoints (1.2, 3.4) and (7.8, 9.5), after the call the segment would have endpoints (1.2, 9.5) and (7.8, 3.4)
+  \item[\texttt{reflectXAxis(Line2D.Double segment)}] \hfill \\ Reflects the line segment across the {\em x}-axis by making the {\em y} coordinates the negative of their current values. For example, the segment (1.2, 3.4) to (7.8, 9.5) would become (1.2, -3.4) to (7.8, -9.5)
+  \item[\texttt{reflectYAxis(Line2D.Double segment)}] \hfill \\ Reflects the line segment across the {\em y}-axis by making the {\em x} coordinates the negative of their current values. For example, the segment (1.2, 3.4) to (7.8, 9.5) would become (-1.2, 3.4) to (-7.8, 9.5)
+\end{description}
+
+Now, write a \java{main} method that prompts the user for the coordinates of a line segment's endpoints and then prints, properly labeled, the segment length and the result of calling the preceding three methods. Here is what the output might look like:
+
+\begin{stdout}
+Enter x and y coordinates for start point of line: 1.2 3.4
+Enter x and y coordinates for end point of line: 5.6 7.8
+Length of line segment (1.2, 3.4) - (5.6, 7.8) is 6.22
+Flipped segment: (1.2, 7.8) - (5.6, 3.4)
+Reflected along x-axis: (1.2, -3.4) - (5.6, -7.8)
+Reflected along y-axis: (-1.2, 3.4) - (-5.6, 7.8)
+\end{stdout}
+
+\end{exercise}
+
+\begin{exercise}
+As you may have noticed in the preceding exercise, being able to change an object's mutable fields meant that you had to keep re-creating the original line segment before calling each of the flip/reflect methods.
+
+In this exercise, you'll rewrite those methods to return a brand new \java{Line2D.Double} segment, leaving the original object untouched:
+
+\begin{description}
+  \item[\texttt{flip(Line2D.Double segment)}] \hfill \\ returns a new \java{Line2D.Double} with the \java{y1} and \java{y2} coordinates of the given line segment reversed. For example, if the segment had endpoints (1.2, 3.4) and (7.8, 9.5), the method would return a new line segment with endpoints (1.2, 9.5) and (7.8, 3.4)
+  \item[\texttt{reflectXAxis(Line2D.Double segment)}] \hfill \\ returns a new \java{Line2D.Double} that is the result of reflecting the line segment across the {\em x}-axis. It does this by returning a new line segment whose {\em y} coordinates are the negative of the original segment's values. For example, when given the segment (1.2, 3.4) to (7.8, 9.5), the return value would be a new segment (1.2, -3.4) to (7.8, -9.5)
+  \item[\texttt{reflectYAxis(Line2D.Double segment)}] \hfill \\ returns a new \java{Line2D.Double} that is the result of reflecting the line segment across the {\em y}-axis. It does this by returning a new line segment whose {\em x} coordinates are the negative of the original segment's values.  For example, when given the segment (1.2, 3.4) to (7.8, 9.5), the return value would be a new segment (-1.2, 3.4) to (-7.8, 9.5)
+\end{description}
+
+The output will look exactly like the preceding exercise's output, but you might find that the code is much more compact.
+
+\end{exercise}
