@@ -185,6 +185,32 @@ public class GeneralInput2 {
 \section{Exercises}
 
 \begin{exercise}
+In this exercise, we will once again rewrite the ``dew point'' program. Prompt the user for the air temperature in degrees Celsius and the relative humidity as a percent, and calculate the dew point with this formula:
 
+\begin{equation*}
+dewPoint = temperature - {{100 - relHumidity} \over 5}
+\end{equation*}
+
+Generalize the code to use a method to get the temperature. This method should accept only numbers in the range -90 to 60 degrees Celsius, giving an error message if the temperature is out of range. (The range given here includes the lowest and highest recorded temperatures on earth.)
+
+Write a method to get the relative humidity. This method should accept only numbers in the range 0 to 100, giving an error message if the relative humidity is out of range.
+
+Here is what output might look like when the user enters several out-of-range values:
+
+\begin{stdout}
+Enter temperature in degrees C: 85
+Value must be in range -90 to 60.
+Enter temperature in degrees C: -100
+Value must be in range -90 to 60.
+Enter temperature in degrees C: 20
+Enter relative humidity as a percent: -20
+Value must be in range 0 to 100.
+Enter relative humidity as a percent: 105
+Value must be in range 0 to 100.
+Enter relative humidity as a percent: 80
+The dew point is 16.0 degrees C.
+\end{stdout}
+
+Can you generalize further to use only one method to get both values?  Hint: That method would need a \java{Scanner}, a prompt string, a minimum, and a maximum value as its parameters.
 \end{exercise}
 
