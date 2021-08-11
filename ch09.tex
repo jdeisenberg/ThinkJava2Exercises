@@ -1,2 +1,190 @@
 \chapter{Immutable Objects}
 
+\section{What Does Immutability Mean?}
+
+Many people read the statement that ``Java \java{String}s are immutable'', and then write code like this:
+
+\begin{code}
+String metal;
+metal = "lead";
+metal = "gold";
+\end{code}
+
+and ask ``Didn't that just change the string?''  No, that code does not change lead into gold.
+
+Let's take a look at a memory diagram after the first assignment. \java{metal} is a {\em reference} to an area of memory (called the {\bf heap}) where the string \java{"lead"} has been allocated.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale=0.4]{figs/heap1.png}
+\caption{Reference to a String on the heap}
+\label{fig.heap1}
+\end{center}
+\end{figure}
+
+After the second assignment, the {\em reference} has changed to refer to another portion of the heap that contains the string \java{"gold"}. The string \java{"lead"} is still on the heap, unmodified. It's just that nobody is referring to it any longer.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale=0.4]{figs/heap2.png}
+\caption{Reference to a second String on the heap}
+\label{fig.heap2}
+\end{center}
+\end{figure}
+
+What would ``changing the string'' look like? In some languages, a string is treated as if it were an array of characters, and you could write code like this:
+
+\begin{code}
+metal = "gold";
+metal[0] = 's'; // change first letter to 's'
+\end{code}
+
+Java won't let you do that because the string itself, which is out there on the heap, cannot be modified.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale=0.4]{figs/bad_heap.png}
+\caption{Non-Java modified string (illegal in Java)}
+\label{fig.bad.heap}
+\end{center}
+\end{figure}
+
+But there's nothing to stop you from creating a brand new \java{String} on the heap and changing the value of \java{metal} to refer to that new \java{String}, as shown in Figure~\ref{fig.heap3}:
+
+\begin{code}
+metal = "s" + metal.substring(1, 4);
+\end{code}
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale=0.4]{figs/heap3.png}
+\caption{Reference to a newly created String on the heap}
+\label{fig.heap3}
+\end{center}
+\end{figure}
+
+\clearpage
+
+\section{Generalizing and the \java{Scanner} Class}
+
+The {\em Think Java} book's subtitle is ``How to Think Like a Computer Scientist,'' and in that spirit, places more emphasis on the concepts of computer science---developing and analyzing algorithms. In order to do this, the book deliberately avoids going into the minutiae of the Java language. At this point, however, we have to get into a detail of the \java{Scanner} class that comes up when you are generalizing and modularizing your code.
+
+Whenever you generalize a method for doing input, do {\em not} create the \java{Scanner} inside the method. Instead, you must pass a \java{Scanner} object as one of the parameters.
+
+Consider the following program that asks a user for two prices and calculates the percentage change:
+
+\begin{code}
+import java.util.Scanner;
+
+public class RepeatedCode {
+  public static void main(String[] args) {
+    Scanner input = new Scanner(System.in);
+    double originalPrice;
+    do {
+      System.out.print("Enter original price: ");
+      originalPrice = input.nextDouble();
+      if (originalPrice <= 0) {
+        System.out.println("Price must be greater than zero.");
+      }
+    } while (originalPrice <= 0);
+    
+    double newPrice;
+    do {
+      System.out.print("Enter new price: ");
+      newPrice = input.nextDouble();
+      if (newPrice <= 0) {
+        System.out.println("Price must be greater than zero.");
+      }
+    } while (newPrice <= 0);
+    
+    double pctChange = 100.0 *
+      (newPrice - originalPrice) / originalPrice;
+    System.out.printf("Price change: %.1f%%\n", pctChange);
+  }
+}
+\end{code}
+
+The code for the two inputs is identical except for the prompt (and the variable name). Here is a way to generalize that code by creating a method to get the input and having the input prompt as its parameter:
+
+\begin{code}
+import java.util.Scanner;
+
+public class GeneralInput1 {
+  
+  public static double getPrice(String prompt) {
+    Scanner input = new Scanner(System.in);
+    double price;
+    do {
+      System.out.print(prompt);
+      price = input.nextDouble();
+      if (price <= 0) {
+        System.out.println("Price must be greater than zero.");
+      }
+    } while (price <= 0);
+    return price;
+  }
+
+    
+  public static void main(String[] args) {
+    double originalPrice = getPrice("Enter original price: ");
+    double newPrice = getPrice("Enter new price: ");
+    double pctChange = 100.0 *
+      (newPrice - originalPrice) / originalPrice;
+    System.out.printf("Price change: %.1f%%\n", pctChange);
+  }
+}
+\end{code}
+
+This program works, but there's a trap hidden in it. Every time the code calls \java{getPrice}, a new \java{Scanner} is created, opening a new connection to the keyboard. This is inefficient, but not fatal---until someone tells you that you should always close an I/O device and you add the code \java{input.close();} between the end of the loop and the \java{return} statement.
+
+Once the \java{input} is closed, its connection to the keyboard is broken {\em and cannot be re-opened}. Now, when you run the program, you get this result:
+
+\begin{stdout}
+Enter original price: 3.50
+Enter new price: Exception in thread "main"
+  java.util.NoSuchElementException
+        at java.base/java.util.Scanner.throwFor(Scanner.java:937)
+        at java.base/java.util.Scanner.next(Scanner.java:1594)
+        at java.base/java.util.Scanner.nextDouble(Scanner.java:2564)
+        at BadClose.getPrice(BadClose.java:10)
+        at BadClose.main(BadClose.java:22)
+\end{stdout}
+
+In order to avoid the minor problem of creating multiple connections to the keyboard and the major problem of inadvertently closing the connection before you want to, your code must create the \java{Scanner} once, and once only. Here is code that solves the problem. It creates the \java{Scanner} once in \java{main}, closes it only once the end of \java{main}, and passes it as an additional argument to the \java{getPrice} method:
+
+\begin{code}
+import java.util.Scanner;
+
+public class GeneralInput2 {
+  
+  public static double getPrice(Scanner in, String prompt) {
+    double price;
+    do {
+      System.out.print(prompt);
+      price = in.nextDouble();
+      if (price <= 0) {
+        System.out.println("Price must be greater than zero.");
+      }
+    } while (price <= 0);
+    return price;
+  }
+
+    
+  public static void main(String[] args) {
+    Scanner input = new Scanner(System.in);
+    double originalPrice = getPrice(input, "Enter original price: ");
+    double newPrice = getPrice(input, "Enter new price: ");
+    double pctChange = 100.0 *
+      (newPrice - originalPrice) / originalPrice;
+    System.out.printf("Price change: %.1f%%\n", pctChange);
+    input.close();
+  }
+}
+\end{code}
+
+\section{Exercises}
+
+\begin{exercise}
+
+\end{exercise}
+
