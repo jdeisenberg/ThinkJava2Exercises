@@ -214,3 +214,24 @@ The dew point is 16.0 degrees C.
 Can you generalize further to use only one method to get both values?  Hint: That method would need a \java{Scanner}, a prompt string, a minimum, and a maximum value as its parameters.
 \end{exercise}
 
+
+\begin{exercise}
+Write a command-line program that accepts two numbers and a string representing an arithmetic operation: \java{"plus"}, \java{"minus"}, \java{"times"}, and \java{"div"} in either upper or lower case and evaluates the resulting expression.
+
+Examples of running the program (source in {\em Calc.java}) several times:
+
+\begin{stdout}
+> java Calc
+Usage: number plus|minus|times|div number
+> java Calc 3 plus 4.5
+7.5
+> java Calc 7.5 div 2
+3.75
+> java Calc 6 MINUS 1.25
+4.75
+> java Calc 7 blah 5
+Unknown operation blah
+\end{stdout}
+
+The reason this program uses words instead of the symbols \java{+}, \java{-}, \java{*}, and \java{/} is that some of these characters are interpreted by the MacOS, Windows, and Linux command lines as wild card characters or part of a file name.
+\end{exercise}
