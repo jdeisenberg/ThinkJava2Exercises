@@ -64,3 +64,66 @@ In this exercise, you'll rewrite those methods to return a brand new \java{Line2
 The output will look exactly like the preceding exercise's output, but you might find that the code is much more compact.
 
 \end{exercise}
+
+\begin{exercise}
+Some data compression schemes use a technique called {\em run length encoding} to save space. For example, in the string \java{"abbbcdddeffff"} can be encoded as \java{"a3bc3de4f"}, where a digit tells how many times to repeat the following character.
+
+Write a method named \java{compress} that takes a a non-compressed \java{String} as its parameter and returns a run length encoded version of the string.
+
+Write method named \java{expand} that takes a run length encoded \java{String} as its parameter and returns the non-compressed String.
+
+These two methods should follow this pattern:
+
+\begin{enumerate}
+\item Create an empty \java{StringBuilder} object to hold the result.
+\item Iterate through the input \java{String}, updating the \java{StringBuilder} object as you go.
+\item Convert the \java{StringBuilder} to a \java{String} and return it.
+\end{enumerate}
+
+You can also create a \java{StringBuilder} object with the content of the original \java{String} and update it in place, but that makes the algorithms significantly more difficult.
+
+Finally, write a \java{main} method that repeatedly asks the user for a string until they enter the empty string. Use that \java{String} to create a new \java{StringBuilder} object.  Compress the data, print it out, expand it, and print that result. Presume that the repeat count will never be more than one digit; that is, no character is repeated more than nine times.
+
+%Here are some other \java{StringBuilder} methods that are not required to solve this problem:
+
+%\begin{itemize}
+%\item The \java{insert} method takes an integer offset as its first argument and a character or a \java{String} as its second argument. It inserts the given character or \java{String} into the \java{StringBuilder} object at the given offset. For example:
+
+%\begin{code}
+%StringBuilder sb = new StringBuilder("abcde");
+%sb.insert(1, "XYZ");
+%System.out.println(sb.toString()); // "aXYZbcde"
+%\end{code}
+
+%\item The \java{deleteCharAt} method takes an integer index as its parameter and deletes the character at that position in the \java{StringBuilder} object.
+
+%\item The \java{replace} method takes a start index, an end index, and a \java{String} as its parameter. It replaces the section of the \java{StringBuffer} from the start position up to but not including the end position with the given \java{String}. For example:
+
+%\begin{code}
+%StringBuilder sb = new StringBuilder("abcde");
+%sb.replace(1, 3, "XYZ");
+%System.out.println(sb.toString()); // "aXYZde"
+%\end{code}
+%\end{itemize}
+
+The following methods in the \java{Character} class are useful for manipulating characters:
+\begin{itemize}
+\item \java{Character.isDigit} returns \java{true} if its \java{char} argument is a digit, \java{false} otherwise.
+\item \java{Character.digit} takes a character and a number base and returns the corresponding integer value. For example, \java{Character.digit('8', 10)} returns the integer value \java{8}.
+\item \java{Character.forDigit} takes an integer and a number base and returns the corresponding character. For example, \java{Character.forDigit(7, 10)} returns the \java{char} value \java{'7'}.
+\end{itemize}
+
+Here is an example of what the program might look like:
+
+\begin{stdout}
+Type a string or press ENTER to quit: aBBBcDDDDeFFFFFg
+Compressed string: a3Bc4De5Fg
+Expanded string: aBBBcDDDDeFFFFFg
+
+Type a string or press ENTER to quit: nothing to encode
+Compressed string: nothing to encode
+Expanded string: nothing to encode
+
+Type a string or press ENTER to quit: 
+\end{stdout}
+\end{exercise}
