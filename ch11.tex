@@ -1,1 +1,36 @@
 \chapter{Designing Classes}
+
+\begin{exercise}
+
+In an {\em n}-sided regular polygon, all sides have the same length and all angles have the same degree (i.e., the polygon is both equilateral and equiangular). Design a class named \java{RegularPolygon} that contains:
+\begin{itemize}
+    \item A private \java{int} data field named \java{nSides} that defines the number of sides in the polygon with default value 3.
+    \item A private \java{double} data field named \java{sideLength} that stores the length of the side, with default value 1.0
+    \item A private \java{double} data field named \java{x} that defines the {\em x}-coordinate of the polygon's center with default value 0.0
+    \item A private \java{double} data field named \java{y} that defines the {\em y}-coordinate of the polygon's center with default value 0.0
+    \item A no-argument constructor that creates a regular polygon with default values
+    \item A constructor that creates a regular polygon with the specified number of sides and length of side, centered at (0, 0)
+    \item A constructor that creates a regular polygon with the specified number of sides, length of side, and {\em x-}and {\em y-} coordinates
+    \item The accessor and mutator methods (getters and setters) for all data fields
+    \item The method \java{getPerimeter()} that returns the perimeter of the polygon
+    \item The method \java{getArea()} that returns the area of the polygon. The formula for computing the area of a regular polygon is:
+    
+    \begin{equation*}
+    {{n \times s^2} \over {4 \times tan({\pi \over n})}}
+    \end{equation*}
+    
+\end{itemize}
+
+Draw the UML diagram for the class, then implement the class.
+
+Write a test program named {\em PolygonTest.java}. The test program will create three \java{RegularPolygon} objects, created using:
+\begin{itemize}
+    \item The no-argument constructor
+    \item \java{RegularPolygon(6, 4.0)}
+    \item \java{RegularPolygon(10, 4, 5.6, 7.8)}
+\end{itemize}
+
+For each object, display its perimeter and area, properly labeled. Format the values to three decimal places.
+
+Put the \java{RegularPolygon} class in the {\em PolygonTest.java} file rather than creating a separate file for the class. 
+\end{exercise}
