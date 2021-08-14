@@ -34,3 +34,114 @@ For each object, display its perimeter and area, properly labeled. Format the va
 
 Put the \java{RegularPolygon} class in the {\em PolygonTest.java} file rather than creating a separate file for the class. 
 \end{exercise}
+
+
+\begin{exercise}
+This program will implement two classes, and you will draw a UML diagram for first of these classes.
+
+First, implement a class named \java{InventoryItem} that contains these instance variables:
+
+\begin{itemize}
+    \item A private \java{String} data field named \java{itemName} that gives the name of the item. Its default value is \java{"TBD"}.
+    \item A private \java{int} data field named \java{sku}. An SKU (stock keeping unit) is like an ID number for an item. Its default value is zero.
+    \item A private \java{double} data field named \java{price} that stores the price for the item. The default value is 0.0.
+    \item A private \java{int} data field named \java{quantity} that tells how many items are in stock. The default value is 0.
+\end{itemize}
+
+Implement the following methods, all of which must be \java{public}:
+
+\begin{itemize}
+    \item A no-argument constructor that creates an inventory item with default values.
+    \item A three-argument constructor that creates an inventory item with the specified name, SKU, and price (in that order) with the default quantity.
+    \item A four-argument constructor that creates an inventory item with the specified name, SKU, price, and quantity (in that order).
+    \item The accessor and mutator methods (getters and setters) for all the instance fields.
+    \item A method named \java{getTotalValue()} which returns, as a double, the item price times its quantity.
+    \item A method named \java{display()} which prints the item's name, SKU, price, and quantity, properly labeled. It must {\em not} display the total value; that is not an attribute of the object.
+    \item A static method named \java{compare()} which takes as its arguments two \java{InventoryItem} objects. This method returns:
+        \begin{itemize}
+            \item -1 if the total value of the first item is less than the total value of the second item
+            \item 0 if the total value of the first item equals the total value of the second item
+            \item 1 if the total value of the first item is greater than the total value of the second item
+        \end{itemize}
+        
+For example, if \java{item1} has a price of \$2.00 and a quantity of 9, and \java{item2} has a price of \$3.00 and a quantity of 5, \java{InventoryItem.compare(item1, item2)} would return 1 because the total value of \java{item1} (\$18.00) is greater than the total value of \java{item2} (\$15.00).
+        
+This method {\em must} call the \java{getTotalValue()} method.
+    
+\end{itemize}
+
+Note: if the constructors and setters are given a negative price or quantity, they must convert it to a positive number. Hint - use \java{Math.abs()}.
+
+Draw a UML diagram for this class. 
+
+Next, implement the \java{TestInventory} class, which will contain your \java{main()} method and will do the following:
+
+\begin{itemize}
+    \item Create four \java{InventoryItem}s:
+        \begin{itemize}
+            \item \java{emptyItem}, using the no-argument constructor
+            \item \java{staplers}, which has a name of "Stapler, Red", SKU of 91745, and price of \$7.89, using the three-argument constructor
+            \item \java{pencils}, which has a name "Pencil, \#2", SKU of 73105, price of \$0.35, and quantity 210
+            \item \java{notebooks}, which has a name "Notebook, Spiral", SKU of 68332, price of \$2.57, and quantity 38
+        \end{itemize}
+    
+    \item Display each of the items (using the \java{display()} method) and its total value.
+    \item Compare \java{pencils} to \java{notebooks} and prints out which one has greater total value. You must call the \java{compare()} method as part of this step . Output must use the inventory item's \java{itemName} property.
+\end{itemize}
+
+Here is what output from the program might look like. Your output does not have to look exactly like this, but it must reflect the same information.
+
+\begin{stdout}
+TBD [SKU 0]: 0 at $0.00 each
+Total value: $0.00
+
+Stapler, Red [SKU 91745]: 0 at $7.89 each
+Total value: $0.00
+
+Pencil, #2 [SKU 73105]: 210 at $0.35 each
+Total value: $73.50
+
+Notebook, Spiral [SKU 68332]: 38 at $2.57 each
+Total value: $97.66
+
+Notebook, Spiral has greater value than Pencil, #2
+\end{stdout}
+\end{exercise}
+
+\begin{exercise}
+One advantage of making instance variables \java{private} is that they allow you to hide the implementation details from users. You provide an API (application program interface---a set of methods for accessing the data), and users interact with the data through those methods. This frees you to change the underlying implementation at any time.
+
+For example, consider a three-dimensional vector. You might be tempted to create a class with these instance variables \java{x}, \java{y}, and \java{z}, as in the UML diagram of Figure~\ref{fig.vec3d_a}:
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale=0.5]{figs/vec3d_a.png}
+\caption{UML Diagram with three separate instance variables}
+\label{fig.vec3d_a}
+\end{center}
+\end{figure}
+
+The class has a no-argument constructor (which sets all the coordinates to zero) and a three-argument constructor to set the {\em x}, {\em y}, and {\em z} coordinates explicitly.
+
+These are followed by the getters (accessors) and setters (mutators) for each of the dimensions. 
+
+The class specifies an \java{add}, \java{dotProduct}, and \java{distance} instance methods that find the sum, dot product, and distance of the current vector and an ```other'' vector.
+
+For the convenience of users, the class also specifies \java{static} versions of these methods (the convention in UML diagrams is to underline \java{static} elements) where you specify both vectors you want to manipulate.
+
+
+But wait---you already have code for doing addition, dot product, and vector distance from Exercise~\ref{ex:vectors}. Because your instance variables are private, you can replace \java{x}, \java{y}, and \java{z} with a three-element array of \java{double} values, as in Figure~\ref{fig.vec3d_b}, and use the code that you wrote in that exercise.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale=0.5]{figs/vec3d_b.png}
+\caption{UML Diagram with array to hold coordinates}
+\label{fig.vec3d_b}
+\end{center}
+\end{figure}
+
+Notice that the \java{public} methods have not changed; users will never know that the vector is implemented as an array rather than three individual variables.
+
+And that's your job for this exercise: implement the \java{Vec3D} class with a \java{private} array to hold the coordinates. Then, write a \java{main} method that will ask the user to enter two vectors and then display the sum, dot product, and distance between the vectors. To avoid repetitious code, you might want to write a \java{getVector} method that has a prompt and a \java{Scanner} as its parameters. This method will prompt the user for the three vector components and return a \java{Vec3D} object. 
+
+\end{exercise}

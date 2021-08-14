@@ -1,0 +1,39 @@
+@startuml
+skinparam classbackgroundcolor #ffffff
+skinparam classdiamondbackgroundcolor #ffffff
+skinparam classdiamondbordercolor #000000
+skinparam classbordercolor #000000
+skinparam classfontsize 18
+skinparam classfontname "Liberation Mono"
+skinparam classattributefontsize 18
+skinparam classattributefontname "Liberation Mono"
+skinparam classAttributeIconSize 0
+hide circle
+class Vec3D {
+  - x: double
+  - y: double
+  - z: double
+  
+  + Vec3D()
+  + Vec3D(x: double, y: double, z: double)
+  
+  + getX(): double
+  + setX(x: double): void
+  
+  + getY(): double
+  + setY(y: double): void
+  
+  + getZ(): double
+  + setZ(z: double): void
+  
+  + add(other: Vec3D): Vec3D
+  + dotProduct(other: Vec3D): double
+  + distance(other: Vec3D): double
+  
+  {static} + add(a: Vec3D, b: Vec3D): Vec3D
+  {static} + dotProduct(a: Vec3D, b: Vec3D): double
+  {static} + distance(a: Vec3D, b: Vec3D): double
+  
+  + toString(): String
+}
+@enduml
