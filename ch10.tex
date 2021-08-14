@@ -68,7 +68,7 @@ The output will look exactly like the preceding exercise's output, but you might
 \begin{exercise}
 Some data compression schemes use a technique called {\em run length encoding} to save space. For example, in the string \java{"abbbcdddeffff"} can be encoded as \java{"a3bc3de4f"}, where a digit tells how many times to repeat the following character.
 
-Write a method named \java{compress} that takes a a non-compressed \java{String} as its parameter and returns a run length encoded version of the string.
+Write a method named \java{compress} that takes a a non-compressed \java{String} as its parameter and returns a run length encoded version of the string. Don't run length encode any letters repeated less than three times (a non-repeated letter would require two bytes: one for the length and one for the character; a letter repeated twice would not save any space.)
 
 Write method named \java{expand} that takes a run length encoded \java{String} as its parameter and returns the non-compressed String.
 
@@ -120,9 +120,9 @@ Type a string or press ENTER to quit: aBBBcDDDDeFFFFFg
 Compressed string: a3Bc4De5Fg
 Expanded string: aBBBcDDDDeFFFFFg
 
-Type a string or press ENTER to quit: nothing to encode
-Compressed string: nothing to encode
-Expanded string: nothing to encode
+Type a string or press ENTER to quit: no repeated info
+Compressed string: no repeated info
+Expanded string: no repeated info
 
 Type a string or press ENTER to quit: 
 \end{stdout}
