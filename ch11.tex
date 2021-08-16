@@ -35,6 +35,61 @@ For each object, display its perimeter and area, properly labeled. Format the va
 Put the \java{RegularPolygon} class in the {\em PolygonTest.java} file rather than creating a separate file for the class. 
 \end{exercise}
 
+\begin{exercise}
+This program will implement a class to represent the data in a bank account; you will also write a class with a \java{main} method to test this class.
+
+The \java{Account} class has two \java{private} instance variables:  \java{acctNumber}, which is an \java{int}, and  \java{balance}, which is a \java{double}.
+
+Implement the following methods:
+
+\begin{itemize}
+\item A two-argument constructor that specifies the account number and starting balance for the account. (In this program, you won't write a no-argument constructor.) If the starting balance is less than zero, leave it unchanged---its value will be zero, because that is the default value for a \java{double} instance variable.
+
+\item A getter method for the account number. It will be called \java{getAcctNumber}. Do {\em not} write a setter method---once you establish an account number in the constructor, it should never be changed.
+
+\item Both a getter and setter method for the balance. If the setter is given a balance less than zero, leave the current account balance unchanged.
+
+\item A \java{toString} method that returns a \java{String} with the account number and balance, properly labeled. You must display the balance with a currency symbol and exactly two digits to the right of the decimal point.
+
+\item A \java{void} method named \java{deposit} that accepts a \java{double} amount as its single parameter. If the amount is negative, leave the balance untouched. Otherwise, add the amount to the balance.
+
+\item A \java{void} method named \java{withdraw} that accepts a \java{double} amount as its single parameter. If the amount is negative or greater than the balance, leave the balance untouched. Otherwise, subtract the amount from the balance.
+
+\end{itemize}
+
+None of the preceding methods prints anything. If someone gives bad input to \java{deposit} or \java{withdraw}, the caller (in this instance, \java{main}) is responsible for doing appropriate error handling. However, because you can't count on the users to handle errors correctly all the time, it's up to you to make sure that the methods always do something reasonable---in this case, leaving the balance alone rather than changing it to an invalid value.
+
+Draw a UML diagram for the class and implement it.
+
+Finally, write a class named \java{TestAccount} with a \java{main} method that does the following:
+
+\begin{enumerate}
+\item Create an \java{Account} variable for account number 1047217, with an initial balance of \$1732.00. 
+
+\item Display the account variable you created in the previous step. {\em Hint}: use \java{toString}.
+
+\item Deposit \$450.25 to the account and display it.
+
+\item Withdraw \$301.75 from the account and display it.
+
+\item Deposit -\$22.33 to the account and display it. The balance should not be changed.
+
+\item Withdraw -\$44.55 from the account and display it. The balance should not be changed.
+
+\item Withdraw \$2000.00 from the account and display it. The balance should not be changed.
+\end{enumerate}
+
+Here is what the output might look like:
+
+\begin{stdout}
+Account 1047217 has balance $1732.00
+Deposit $450.25: Account 1047217 has balance $2182.25
+Withdraw $301.75: Account 1047217 has balance $1880.50
+Deposit -$22.33: Account 1047217 has balance $1880.50
+Withdraw -$44.55: Account 1047217 has balance $1880.50
+Withdraw $2000: Account 1047217 has balance $1880.50
+\end{stdout}
+\end{exercise}
 
 \begin{exercise}
 This program will implement two classes, and you will draw a UML diagram for first of these classes.
