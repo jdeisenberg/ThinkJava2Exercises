@@ -1,6 +1,51 @@
 \chapter{Designing Classes}
 
 \begin{exercise}
+Define a class named \java{Lens} that represents a camera lens by its focal length (distance from lens to sensor) and aperture (diameter of lens opening), both measured in millimeters. These will be stored in two \java{private double} instance variables. Implement the following:
+
+\begin{enumerate}
+\item A default constructor that sets both attributes to 1.0.
+
+\item A two-argument constructor that sets the attributes as specified by the caller (setting a value to 1.0 if the argument is less than zero).
+
+\item Write getters and setters for both attributes. Again, the mutator sets a value to 1.0 if given an argument less than zero by the caller.
+
+\item Write an instance method named \java{calcFStop} that returns the lens's f-stop value by dividing the focal length by the aperture.
+
+\item Provide a \java{toString} method to display the focal length and aperture, properly labeled, with one digit to the right of the decial point.
+
+\item Implement an \java{equals} instance method that takes another \java{Lens} object as its parameter and returns \java{true} if the two lenses have the same focal length and aperture, \java{false} otherwise.
+
+\item The \java{main} program will ask the user for two sets of focal length and aperture and will create corresponding \java{Lens} object. It will then display the first \java{Lens}'s attributes and f-stop. If the second \java{Lens} is not equal to the first one, it will also display the second \java{Lens}'s attributes and f-stop; otherwise, it will output a message that the two lenses are the same.
+\end{enumerate}
+
+Here is some sample output from running the program twice:
+
+\begin{stdout}
+Enter focal length of first lens in mm: 3.5
+Enter aperture of first lens in mm: 2
+
+Enter focal length of second lens in mm: 4.3
+Enter aperture of second lens in mm: 3
+
+First lens: focal length: 3.5mm, aperture: 2.0mm; f-stop 1.8
+Second lens: focal length: 4.3mm, aperture: 3.0mm; f-stop 1.4
+
+// ===================
+
+Enter focal length of first lens in mm: 3.5
+Enter aperture of first lens in mm: 2
+
+Enter focal length of second lens in mm: 3.5
+Enter aperture of second lens in mm: 2
+
+First lens: focal length: 3.5mm, aperture: 2.0mm; f-stop 1.8
+The second lens is the same as the first one.
+\end{stdout}
+
+\end{exercise}
+
+\begin{exercise}
 
 In an {\em n}-sided regular polygon, all sides have the same length and all angles have the same degree (i.e., the polygon is both equilateral and equiangular). Design a class named \java{RegularPolygon} that contains:
 \begin{itemize}
