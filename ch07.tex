@@ -72,10 +72,9 @@ Your program will ask the user for the number of entries in each array, read the
 Write a method named \java{correlation} that takes two arrays of double and returns the correlation coefficient $r$ according to this formula:
 
 \begin{equation*}
-r = {{\sum x_iy_i - \left(\sum x_i \sum y_i \over n\right)} \over {(n - 1) s_x s_y}}
+%r = {{\sum x_iy_i - \left(\sum x_i \sum y_i \over n\right)} \over {(n - 1) s_x s_y}}
+r = {{n \sum x_iy_i - (\sum x_i)(\sum y_i)} \over {\sqrt {\left[n \sum x_i^2 - (\sum x_i)^2\right]\left[n \sum y_i^2 - (\sum y_i)^2\right]}}}
 \end{equation*}
-
-where $s_x$ and $s_y$ are the standard deviations of the two arrays. You can use the \java{stdev} method that you wrote in Exercise~\ref{ex:standardize} for those calculations.
 
 Here is an example of what the output might look like. The data are people's height in centimeters for the first array and their weight in kilograms for the second array.
 
