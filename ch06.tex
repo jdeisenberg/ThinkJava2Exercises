@@ -205,7 +205,9 @@ Total:     $   15.25
 
 
 \begin{exercise}
-Write a program that repeatedly asks the user to enter a sentence (until they press only ENTER). For each sentence, tell how many vowels, consonants, digits, and ``other'' characters are in the sentence.  For this exercise, presume that the letter ``y'' is a vowel. Continue asking for sentences until the user presses only the ENTER key for input. When that happens, the \java{String} that you read will equal the empty string \java{""}. You can test this condition to end the loop.
+Write a program that repeatedly asks the user to enter a sentence until they press only ENTER. For each sentence, tell how many vowels, consonants, digits, and ``other'' characters (anything that is not a letter or digit) are in the sentence.  For this exercise, presume that the letter ``y'' is a vowel. Continue asking for sentences until the user presses only the ENTER key for input. When that happens, the \java{String} that you read will equal the empty string \java{""}. You can test this condition to end the loop.
+
+After exiting the loop, give grand totals for each category.
 
 Sample output:
 
@@ -223,6 +225,10 @@ Vowels:   5  Consonants: 11
 Digits:   0  Others:      3
 
 Input a sentence (just ENTER to quit):
+----------
+Totals
+Vowels:  12  Consonants: 18
+Digits:   5  Others:     12
 \end{stdout}
 
 {\em Hint}: Make \java{String} variables with contents such as \java{"aeiouy"}, \java{"bcdfghjklmnpqrstvwxz"}, etc. and use \java{indexOf} to determine whether a character belongs to that group of characters.
