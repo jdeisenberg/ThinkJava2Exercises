@@ -1,5 +1,62 @@
 \chapter{Methods and Testing}
 
+\section{Call by Value}
+
+Consider this code:
+
+\begin{code}
+ 1 public static void cube(int n) {
+ 2     n = n * n * n;
+ 3 }
+ 4
+ 5 public static void main() {
+ 6     int n = 3;
+ 7     cube(n);
+ 8     System.out.println("n is now " + n);
+ 9 }
+\end{code}
+
+When you run this code, the output will be \texttt{n is now 3}---\java{n} will not have changed. Why? Because the {\em value} of an argument is assigned to the parameter. Figure~\ref{fig.value1} shows the call stack when the \java{cube} method is entered at line 1.
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics{figs/call_by_value1.pdf}
+\caption{Stack diagram for code fragment at line 1.}
+\label{fig.value1}
+\end{center}
+\end{figure}
+
+The \java{n} on line 6 is local to \java{main}; the \java{n} on line 1 is local to \java{cube} and is a {\em copy} of the argument's value.
+
+After line 2 is done executing, the stack looks like Figure~\ref{fig.value2}.  The variable \java{n} that belongs to \java{cube} has changed, but the \java{n} in \java{main} remains untouched.
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics{figs/call_by_value2.pdf}
+\caption{Stack diagram for code fragment after line 2.}
+\label{fig.value2}
+\end{center}
+\end{figure}
+
+This idea of assigning a copy of the argument's value to the parameter is known as {\em call by value}, and it is {\em always} used in Java.  {\bf Changing the value of a parameter never changes the value of the original argument.}
+
+In order to change the value of \java{n} in \java{main}, the \java{cube} method must \java{return} a value that \java{main} can use to re-assign:
+
+\begin{code}
+ 1 public static double cube(int n) {
+ 2     n = n * n * n;
+ 3     return n;
+ 4 }
+ 5
+ 6 public static void main() {
+ 7     int n = 3;
+ 8     n = cube(n);
+ 9     System.out.println("n is now " + n);
+10 }
+
+\end{code}
+
+\section{Exercises}
 \begin{exercise}
 Presume you are selling a product that has a particular cost to build (say, \$7.50) and a price that you charge the customer (say, \$10.00). There are two ways to calculate your profit: profit off the bottom, which uses this formula:
 
