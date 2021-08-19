@@ -205,7 +205,7 @@ Total:     $   15.25
 
 
 \begin{exercise}
-Write a program that repeatedly asks the user to enter a sentence (until they press only ENTER). For each sentence, tell how many vowels, consonants, digits, and ``other'' characters are in the sentence.  For this exercise, presume that the letter ``y'' is a vowel. Continue asking for sentences the user presses only the ENTER key for input. When that happens, the \java{String} that you read will equal the empty string \java{""}. You can test this condition to end the loop.
+Write a program that repeatedly asks the user to enter a sentence (until they press only ENTER). For each sentence, tell how many vowels, consonants, digits, and ``other'' characters are in the sentence.  For this exercise, presume that the letter ``y'' is a vowel. Continue asking for sentences until the user presses only the ENTER key for input. When that happens, the \java{String} that you read will equal the empty string \java{""}. You can test this condition to end the loop.
 
 Sample output:
 
@@ -233,7 +233,7 @@ Input a sentence (just ENTER to quit):
 Write a method called \java{switchOrder}, which takes a \java{String} parameter with a person's name in the form \java{"first middle last"} and returns the name in the form \java{"last, first middle"}.  Your code should work for people with only a single name, people with no middle name, and people with several middle names.
 Use a \java{while} loop with the \java{indexOf} and \java{substring} methods to do this exercise. (You could do it more easily with the \java{lastIndexOf} method, but we want you to get practice using loops.)
 
-Write a \java{main} method that uses a \java{while} loop to repeatedly ask the user for a name and then calls the \java{switchOrder} method and prints the result. Repeat until the user presses just ENTER. Here is some sample output:
+Write a \java{main} method that uses a \java{while} or \java{do-while} loop to repeatedly ask the user for a name and then calls the \java{switchOrder} method and prints the result. Repeat until the user presses just ENTER. Here is some sample output:
 
 \begin{stdout}
 Input a name (just ENTER to quit): Grace Murray Hopper
