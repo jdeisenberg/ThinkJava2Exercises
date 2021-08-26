@@ -16,7 +16,7 @@ Let's take a look at a memory diagram after the first assignment. \java{metal} i
 
 \begin{figure}[!h]
 \begin{center}
-\includegraphics[scale=0.4]{figs/heap1.png}
+\includegraphics[scale=0.4]{figs/ch09/heap1.png}
 \caption{Reference to a String on the heap}
 \label{fig.heap1}
 \end{center}
@@ -26,7 +26,7 @@ After the second assignment, the {\em reference} has changed to refer to another
 
 \begin{figure}[!h]
 \begin{center}
-\includegraphics[scale=0.4]{figs/heap2.png}
+\includegraphics[scale=0.4]{figs/ch09/heap2.png}
 \caption{Reference to a second String on the heap}
 \label{fig.heap2}
 \end{center}
@@ -43,7 +43,7 @@ Java won't let you do that because the string itself, which is out there on the 
 
 \begin{figure}[!h]
 \begin{center}
-\includegraphics[scale=0.4]{figs/bad_heap.png}
+\includegraphics[scale=0.4]{figs/ch09/bad_heap.png}
 \caption{Non-Java modified string (illegal in Java)}
 \label{fig.bad.heap}
 \end{center}
@@ -57,7 +57,7 @@ metal = "s" + metal.substring(1, 4);
 
 \begin{figure}[!h]
 \begin{center}
-\includegraphics[scale=0.4]{figs/heap3.png}
+\includegraphics[scale=0.4]{figs/ch09/heap3.png}
 \caption{Reference to a newly created String on the heap}
 \label{fig.heap3}
 \end{center}

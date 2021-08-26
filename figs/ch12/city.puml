@@ -1,0 +1,36 @@
+@startuml
+skinparam classbackgroundcolor #ffffff
+skinparam classdiamondbackgroundcolor #ffffff
+skinparam classdiamondbordercolor #000000
+skinparam classbordercolor #000000
+skinparam classfontsize 18
+skinparam classfontname "Liberation Mono"
+skinparam classattributefontsize 18
+skinparam classattributefontname "Liberation Mono"
+skinparam classAttributeIconSize 0
+hide circle
+class City {
+  {static} + RADIUS_KM: double // 6371.009
+  
+  - name: String
+  - region: String
+  - country: String
+  - latitude: double
+  - longitude: double
+  
+  + City(name: String, region: String, country: String,
+     latitude: double, longitude: double)
+  
+  + getName(): String
+  + getRegion(): String
+  + getCountry(): String
+  + getLatitude(): double
+  + getLongitude(): double
+
+  + distance(other: City): String
+  + toString(): String
+  
+  {static} + kmToMiles(km: double): double
+  {static} - clamp(value: double, min: double, max: double)
+}
+@enduml
