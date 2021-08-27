@@ -27,8 +27,8 @@ class City {
   + getLatitude(): double
   + getLongitude(): double
 
-  + distance(other: City): String
   + toString(): String
+  + distance(other: City): double
   
   {static} + kmToMiles(km: double): double
   {static} - clamp(value: double, min: double, max: double)

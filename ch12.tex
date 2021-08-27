@@ -35,11 +35,33 @@ private static double clamp(double value, double min, double max) {
 
 Question: why do you think this method was declared \java{private} instead of \java{public}? Why is it a \java{static} method instead of an instance method?
 
+The \java{toString} method will display the information about the city; it can display the latitude and longitude as positive and negative numbers, or by using N, S, E, and W as abbreviations for north, south, east, and west. Display them to one decimal point. (Hint: \java{"\\u00b0"} is the degree symbol.) For example:
+
+\begin{stdout}
+San Jose, CA, USA: 37.3°, -121.9°
+San Jose, CA, USA: 37.3°N, 121.9°W
+\end{stdout}
+
+
 The \java{distance} method will calculate the great circle distance between one \java{City} object and the \java{other} \java{City} object. Here is the formula where $r$ is the radius of earth in kilometers (6371.009), the first city's latitude and longitude are $lat_1$, $lon_1$ and the second city's latitude and longitude are  $lat_2$, $lon_2$:
 
 \begin{equation*}
 d = r\cdot cos^{-1}(sin(lat_1)\cdot sin(lat_2) + cos(lat_1)\cdot cos(lat_2)\cdot cos(lon_1 - lon_2))
 \end{equation*}
+
+The \java{main} method will set up an array of these \java{City} objects:
+
+\begin{tabular}{|l|l|l|r|r|}
+\hline
+City & Region & Country & Latitude & Longitude \\ \hline
+Antananarivo & Analamanga & MG & -18.93 & 47.52 \\ \hline
+Brasilia & Distrito Federal & BR & -15.79 & -47.88 \\ \hline
+Lima & Lima & PE & -12.05 & -77.03 \\ \hline
+Mumbai & Maharashtra & IN & 19.08 & 72.88 \\ \hline
+San Jose & California & US & 37.34 & -121.89 \\ \hline
+Yokohama & Kanagawa & JP & 35.44 & 139.64 \\ \hline
+
+\end{tabular}
 
 
 \end{exercise}
