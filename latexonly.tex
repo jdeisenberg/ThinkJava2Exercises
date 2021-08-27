@@ -111,9 +111,11 @@
 {\minipage{\linewidth}}
 {\endminipage}
 \lstnewenvironment{stdout}
-{\lstset{commentstyle=,keywordstyle=,stringstyle=}\minipage{\linewidth}}
+{\lstset{commentstyle=,keywordstyle=,stringstyle=,extendedchars=true,
+literate={°}{$^{\circ}$}1 {é}{{\'e}}1}
+\minipage{\linewidth}}
 {\endminipage}
-
+% literate={°}{$^{\circ}$}
 % interactive code listing
 \lstnewenvironment{trinket}[2][400]
 {\minipage{\linewidth}}
