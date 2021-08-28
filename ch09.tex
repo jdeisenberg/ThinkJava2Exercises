@@ -214,6 +214,41 @@ The dew point is 16.0 degrees C.
 Can you generalize further to use only one method to get both values?  Hint: That method would need a \java{Scanner}, a prompt string, a minimum, and a maximum value as its parameters.
 \end{exercise}
 
+\begin{exercise}
+There are two ways to represent latitudes and longitudes. One is as a decimal degree: 35.47°, and the other is as degrees, minutes, and seconds: 35° 28$^\prime$ 12$^{\prime\prime}$ (also called ``DMS'' format).
+
+Write a command-line program named {\em Angle.java} that converts between these formats. The program will get its input from command line arguments.
+
+\begin{itemize}
+\item If there is only one argument, it is presumed to be an angle in decimal format, and your program will convert it to degree-minute-second format.
+\item If there are two arguments, they are presumed to be degrees and minutes, and your program will convert it to decimal format.
+\item If there are three arguments, they are presumed to be degrees, minutes, and seconds; and your program will convert it to decimal format.
+\item For any other number of arguments, print a usage message.
+\end{itemize}
+
+Here is an example of running the program several times:
+
+\begin{stdout}
+> java Angle
+Usage: Angle decimaldegrees|deg min sec
+> java Angle 37.272
+37° 16′ 19″
+> java Angle -20 16
+-20.267°
+> java Angle 10 47 11
+10.786°
+> java Angle 66 10 47 11
+Usage: Angle decimaldegrees|deg min sec
+\end{stdout}
+
+Hints:
+\begin{itemize}
+\item The degree symbol ° is \java{"\\u00b0"}; the minutes symbol ′ is \java{"\\u2032"}, and the seconds symbol ″ is \java{"\\u2033"}.
+\item In order to handle negative angles correctly, you might find the \java{Math.signum} method useful. It takes a \java{double} as an argument and returns -1.0 if the argument is negative, 0.0 if the argument is zero, and 1.0 if the argument is positive.
+\item Generalize by writing a \java{toDMS} method that takes a decimal degree and returns an array of three integers. Write another method named \java{toDecimal} which takes three parameters (degrees, minutes, and seconds) and returns the decimal equivalent as a \java{double}.
+\end{itemize}
+
+\end{exercise}
 
 \begin{exercise}
 Write a command-line program that accepts two numbers and a string representing an arithmetic operation: \java{"plus"}, \java{"minus"}, \java{"times"}, and \java{"div"} in either upper or lower case and evaluates the resulting expression.
@@ -235,3 +270,4 @@ Unknown operation blah
 
 The reason this program uses words instead of the symbols \java{+}, \java{-}, \java{*}, and \java{/} is that some of these characters are interpreted by the MacOS, Windows, and Linux command lines as wild card characters or part of a file name.
 \end{exercise}
+

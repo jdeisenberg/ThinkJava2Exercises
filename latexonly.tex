@@ -106,13 +106,20 @@
     belowskip=\parskip
 }
 
+%\usepackage{newunicodechar}
+%\newunicodechar{′}{${^\prime}$}
+\DeclareUnicodeCharacter{2032}{$^\prime$}
+\DeclareUnicodeCharacter{2033}{$^{\prime\prime}$}
 % code listing environments
 \lstnewenvironment{code}
 {\minipage{\linewidth}}
 {\endminipage}
 \lstnewenvironment{stdout}
 {\lstset{commentstyle=,keywordstyle=,stringstyle=,extendedchars=true,
-literate={°}{$^{\circ}$}1 {é}{{\'e}}1}
+literate={°}{$^{\circ}$}1
+ {′}{$^{\prime}$}1
+ {″}{$^{\prime\prime}$}2
+ }
 \minipage{\linewidth}}
 {\endminipage}
 % literate={°}{$^{\circ}$}
