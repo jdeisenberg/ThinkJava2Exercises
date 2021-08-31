@@ -33,7 +33,7 @@ private static double clamp(double value, double min, double max) {
 \end{code}
 
 
-Question: why do you think this method was declared \java{private} instead of \java{public}? Why is it a \java{static} method instead of an instance method?
+Questions: Why do you think this method was declared \java{private} instead of \java{public}? Why is it a \java{static} method instead of an instance method?
 
 The \java{toString} method will display the information about the city; it can display the latitude and longitude as positive and negative numbers, or by using N, S, E, and W as abbreviations for north, south, east, and west. Display them to one decimal point. (Hint: \java{"\\u00b0"} is the degree symbol.) For example:
 
@@ -60,7 +60,6 @@ Mumbai & Maharashtra & IN & 19.08 & 72.88 \\ \hline
 Munich & Bavaria & DE & 48.08 & 11.57 \\ \hline
 San Jose & California & US & 37.34 & -121.89 \\ \hline
 Yokohama & Kanagawa & JP & 35.44 & 139.64 \\ \hline
-
 \end{tabular}
 
 The \java{main} method then prints a list of the cities and the inter-city distances with output as follows. Hint: use \java{"\%8.0f"} to round the distance to an integer:
@@ -81,6 +80,71 @@ C      5052   13749    ----
 D      8264    9214    6325    ----
 E     17724    9716   13553    9459    ----
 F     11399   17706    6720    9396    8356    ---- 
+\end{stdout}
+
+\end{exercise}
+
+\begin{exercise}
+Figure~\ref{fig.courseuml} is the UML diagram for a \java{Course} object that represents a college course. The \java{day} attribute gives the day on which the course is taught, with 1 representing Monday and 7 representing Sunday. The \java{startTime} and \java{endTime} are given as integers that represent military time (0000 is midnight and 2359 is 11:59 p.m.)
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale=0.5]{figs/ch12/course.png}
+\caption{UML Diagram for a Course object}
+\label{fig.courseuml}
+\end{center}
+\end{figure}
+
+When you write the constructor and the setters, make sure that the day of week is always in the range 1-7 and that the times are in the range 0000-2359. Make sure you handle a time like 2079 in some reasonable fashion---you decide what ``reasonable'' means here, and {\bf use comments to document it}. You may want to rewrite the \java{clamp} method from the preceding exericse to use integers as its parameters and return value. Then you can use it when writing a new \java{clampTime} method to enforce these conditions.
+
+Note: a constructor can call an instance method; that is, the constructor for \java{Course} can call the \java{setDay}, \java{setStartTime}, and \java{setEndTime} methods. This will eliminate a lot of duplicated code.
+
+The \java{compareTo} method uses the following criteria when doing a comparison: First, compare the \java{day} attributes. If they aren't equal, then return 1 or $-1$ (depending on which one is less or greater). If the \java{day} fields are equal, compare the \java{startTime} attributes and return 1, 0, or $-1$ depending on their relationship.
+
+The \java{toString} method will display the course's attributes. Again, you decide what you want it to look like.
+
+In the \java{main} method, create an array of the following courses, in this order. Note that ECON 010A has an invalid time so that you can test to see what your code does:
+
+\begin{tabular}{|l|l|l|l|}
+\hline
+Name & Day & Start Time & End Time \\ \hline
+ACCTG 001A & 1 & 1515 & 1645 \\ \hline
+BIO 020 & 3 & 1235 & 1540 \\ \hline
+COMSC 075 & 2 & 0915 & 1125 \\ \hline
+ECON 010A & 4 & 1515 & 1679 \\ \hline
+MATH 063 & 1 & 0915 & 1035 \\ \hline
+PSYCH 018 & 3 & 1615 & 1750 \\ \hline
+THEAT 034 & 1 & 1215 & 1335\\ \hline
+\end{tabular}
+
+Then, iterate through the array to find the courses with the earliest and latest start times according to the \java{compareTo} method.
+
+\begin{minipage}[t]{0.8\textwidth}
+
+\noindent\rule{\textwidth}{1pt}
+
+{\bf NOTE:} You cannot do this in Java:
+\begin{code}
+int startTime = 0915;
+\end{code}
+
+The reason is that a leading zero indicates to Java that your number is {\em octal} (base 8), and there is no digit 9 in that number base. Instead, leave off the leading zero:
+
+\begin{code}
+int startTime = 915;
+\end{code}
+
+You do not have to worry about this when doing user input; the \java{nextInt} and \java{Integer.parseInt} methods use decimal (base 10) by default, so when a person enters the string \java{0915} it will be converted to integer without an error.
+
+\noindent\rule{\textwidth}{1pt}
+
+\end{minipage}
+
+Sample output:
+
+\begin{stdout}
+Earliest course: MATH 063: M (0915-1035)
+Latest course: ECON 010A: Th (1515-1659)
 \end{stdout}
 
 \end{exercise}
