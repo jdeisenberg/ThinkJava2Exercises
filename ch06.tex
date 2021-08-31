@@ -180,6 +180,36 @@ Year  Balance
 4     $122.95
 \end{stdout}
 
+\begin{exercise}
+When a business buys an asset such as a computer or cell phone, it {\em depreciates}, or loses its vaue over time. In this program, you will calculate the depreciation of an asset. Note: accountants have many different ways to calculate depreciation. This is {\em not} one of them! Your program will ask for:
+
+\begin{itemize}
+\item The original purchase price of the asset.
+\item The {\em salvage price}---how much you will get when you sell the asset after it is of no further use.
+\item The {\em depreciation rate}---the percentage by which the asset's value goes down every year.
+\end{itemize}
+
+The program will then print a table of the asset's current value and amount of value lost until its value drops to or below the salvage price. It will then show the final value of the asset.
+
+For example, let's say you purchase a computer for \$1000 and will sell it for salvage for \$100, and the depreciation rate is 20\%. At the end of the first year,it will have lost \$200 of value: $\$1000 \times 0.20$, so its value is now \$800. At the end of the second year, it will lose $\$800 \times 0.20$, or \$160 dollars of value, and the asset will now be worth \$640, and so on. 
+
+Here is what the output for a purchase price of \$1500, salvage price of \$500, and depreciation rate of 20.5\% might look like:
+
+\begin{stdout}
+Enter asset price: $1500
+Enter salvage price: $500
+Enter depreciation rate as a percent: 20.5
+Year   Value
+   0  $1500.00
+   1  $1192.50
+   2  $948.04
+   3  $753.69
+   4  $599.18
+Final value: $476.35
+\end{stdout}
+
+\end{exercise}
+
 \end{exercise}
 \begin{exercise}
 When you go to the store, the clerk doesn't know in advance how many items you want to buy. Instead, they keep totaling the items until they see one of those plastic dividers to indicate that your order is complete.
@@ -202,7 +232,6 @@ Tax:       $    0.93
 Total:     $   15.25
 \end{stdout}
 \end{exercise}
-
 
 \begin{exercise}
 Write a program that repeatedly asks the user to enter a sentence until they press only ENTER. For each sentence, tell how many vowels, consonants, digits, and ``other'' characters (anything that is not a letter or digit) are in the sentence.  For this exercise, presume that the letter ``y'' is a vowel. Continue asking for sentences until the user presses only the ENTER key for input. When that happens, the \java{String} that you read will equal the empty string \java{""}. You can test this condition to end the loop.
@@ -334,5 +363,5 @@ Enter number of rows: 6
      +
 \end{stdout}
 
-{\em Hint}: Before you start coding this program plan it by writing down a table with the line number (starting at zero or one, but zero is probably better), the number of leading spaces you will need on the line, and the number of plus signs. Then figure out the mathematical relationships between the line number and the other two values. They will be linear relationships.
+{\em Hint}: Before you start coding this program, plan it by writing down a table with the line number (starting at zero or one, but zero is probably better), the number of leading spaces you will need on the line, and the number of plus signs. Then figure out the mathematical relationships between the line number and the other two values. They will be linear relationships.
 \end{exercise}
