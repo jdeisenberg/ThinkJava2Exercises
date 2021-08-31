@@ -90,12 +90,14 @@ div.notice {
         grid-template-columns: 1fr 5fr 200px;
     }
     div#content {
-        max-width: 600px;
+        max-width: 800px; /* was 600 */
     }
+		/*
     div#sidebar {
         max-width: 200px;
         padding: 0px 10px;
     }
+		*/
     img.prevarrow {
         margin-left: 15%;
     }
