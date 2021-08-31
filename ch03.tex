@@ -118,7 +118,11 @@ This is another exercise that uses input and arithmetic operators to calculate t
 \end{itemize}
 
 Calculate and display the stopping distance using this formula:
-$d = v \cdot t + {v^2 \over {2 \mu g}}$
+
+\begin{equation*}
+d = v \cdot t + {v^2 \over {2 \mu g}}
+\end{equation*}
+
 where $t$ is the reaction time, $v$ is the initial velocity in {\bf meters per second}, $\mu$ is the coefficient of friction between the tires and the roadway, and $g$ is the acceleration of gravity in meters per second squared. Make $g$ a constant with the value 9.80665.
 
 Notice that, since you are asking for the velocity in kilometers per hour, you must convert it to meters per second. Define constants \java{METERS_PER_KM} (1000) and \java{SECONDS_PER_HOUR} (3600) to use in this calculation.
@@ -136,6 +140,36 @@ Stopping distance is 103 meters.
 
 In this program, it is better to use three separate prompts for the input because, unlike Exercise~\ref{ex.degrees}, the entries are not closely related to each other.
  
+\end{exercise}
+
+\begin{exercise}
+In business, you often want to find your {\em break-even quantity}: the minimum number of items you must sell before you start making a profit. To calculate the break-even quantity, you must know:
+
+\begin{itemize}
+\item The {\em fixed costs}. These are costs that remain the same, no matter how many items you produce. For example, if you are printing posters, the cost of the printing press is a fixed cost.
+\item The {\em cost per item}. This is how much it costs you to make one item. In our example, the cost of the ink and paper for one poster would be the cost per item. (These are also called {\em variable costs}, as they depend on how many items you produce.)
+\item The {\em unit price}. This is how much you charge the customer for each item.
+\end{itemize}
+
+The formula for determining the break-even quantity is:
+
+\begin{equation*}
+n = {fixed\; costs \over {unit\; price - cost\; per\; item}}
+\end{equation*}
+
+Write a program called {\em BreakEven.java} that prompts the user for the fixed cost, cost per item, and unit price. The program will then calculate and display the minimum quantity required to break even.
+
+Here is what the program might look like when you run it:
+
+\begin{stdout}
+Enter fixed costs: $1000
+Enter cost to produce each item: $.70
+Enter unit price of each item: $1.10
+Break-even quantity is 2500.
+\end{stdout}
+
+
+
 \end{exercise}
 
 \begin{exercise}
