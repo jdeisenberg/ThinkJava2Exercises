@@ -216,7 +216,9 @@ When you go to the store, the clerk doesn't know in advance how many items you w
 
 \index{sentinel value}
 \index{value!sentinel}
-Write a program that repeatedly asks the user for the price of an item until they enter a zero for the price. This is the digital equivalent of the plastic divider. Its technical name is a {\em sentintel value}. As the user enters prices, keep track of the total number of items and sum of the prices.  After encountering the sentinel value, your program will print the number of items purchased, the subtotal, the tax (at a rate of 6.5\%), and the grand total. Here is what the program might look like. Note that it does not allow (or count) negative prices. {\em Hint}: Use a \java{while} loop.
+Write a program that repeatedly asks the user for the price of an item until they enter a zero for the price. This is the digital equivalent of the plastic divider. Its technical name is a {\em sentintel value}. As the user enters prices, keep track of the total number of items and sum of the prices.  After encountering the sentinel value, your program will print the number of items purchased, the subtotal, the tax (at a rate of 6.5\%), and the grand total. Here is what the program might look like. Note that it does not allow (or count) negative prices.
+
+{\em Hint}: Use a \java{while} loop. The exercise says ``until they enter a zero...'' The word ``until'' is the opposite of ``while``, so your loop needs to keep going \java{while} the entry is {\em not} zero.
 
 \begin{stdout}
 Enter price, or 0 when finished: $3.50    
@@ -232,6 +234,31 @@ Tax:       $    0.93
 Total:     $   15.25
 \end{stdout}
 \end{exercise}
+
+\begin{exercise}
+This exercise will give you practice with a more complicated condition for a \java{while} loop. Write a program named {\em ComplexWhile.java} that lets people enter integers until they've entered five numbers or the sum of the entries is greater than 100, whichever comes first. Here's an example of the output from running the program twice:
+
+\begin{stdout}
+Enter integer #1: 30
+Enter integer #2: 49
+Enter integer #3: 24
+The sum of your entries is 103.
+
+Enter integer #1: 13
+Enter integer #2: 17
+Enter integer #3: 20
+Enter integer #4: 14
+Enter integer #5: 18
+You hit the five-entry limit.
+The sum of your entries is 82.
+\end{stdout}
+
+{\em Hint}: You loop until there are five entries or the sum is greater than 100. That means the \java{while} condition must be ``not (five entries or sum greater than 100).'' Use De Morgan's laws to simplify this condition.
+
+
+
+\end{exercise}
+
 
 \begin{exercise}
 Write a program that repeatedly asks the user to enter a sentence until they press only ENTER. For each sentence, tell how many vowels, consonants, digits, and ``other'' characters (anything that is not a letter or digit) are in the sentence.  For this exercise, presume that the letter ``y'' is a vowel. Continue asking for sentences until the user presses only the ENTER key for input. When that happens, the \java{String} that you read will equal the empty string \java{""}. You can test this condition to end the loop.
