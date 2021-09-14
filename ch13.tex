@@ -111,3 +111,69 @@ Then compute and print:
 \end{itemize}
 
 \end{exercise}
+
+\begin{exercise}
+This exercise will familiarize you with \java{ArrayList}s. You will use the \java{Person} class that has been written for you and is available in the code repository that accompanies this book. Figure~\ref{fig.personuml} shows the UML diagram for the class.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale=0.5]{figs/ch13/person.png}
+\caption{UML Diagram for the Person class}
+\label{fig.personuml}
+\end{center}
+\end{figure}
+
+The \java{compareTo} method compares the names; if they are equal, it compares the ages. In this exercise, we won't allow duplicate names, but the code is written to be general enough to work in other applications.
+
+Write a program that creates an \java{ArrayList<Person>} and repeatedly asks users to either:
+
+\begin{itemize}
+\item Add a name and age to the list if it isn't already there.
+\item Remove a name (and its age) from the list if it is in the list.
+\item Change the age for a person if the person is in the list.
+\item Finish
+\end{itemize}
+
+When the user finishes, the program sorts the \java{ArrayList} {\em by age}, which means you will {\em not} use the \java{compareTo} method, which would sort them by name. It then prints the sorted list of users:
+
+\begin{stdout}
+A)dd, R)emove, C)hange age, F)inish: A
+Enter name: Joe
+Enter age: 2r
+Please use digits for your answer.
+Enter age: 24
+A)dd, R)emove, C)hange age, F)inish: A
+Enter name: Marta 
+Enter age: 47
+A)dd, R)emove, C)hange age, F)inish: a
+Enter name: Douglas
+Enter age: 33
+A)dd, R)emove, C)hange age, F)inish: A
+Enter name: Vinh
+Enter age: 18
+A)dd, R)emove, C)hange age, F)inish: a
+Enter name: Vinh
+Vinh is already in the list.
+A)dd, R)emove, C)hange age, F)inish: r
+Enter name: Josephine
+Josephine is not in the list.
+A)dd, R)emove, C)hange age, F)inish: R
+Enter name: Douglas
+Removed Douglas.
+A)dd, R)emove, C)hange age, F)inish: C
+Enter name: Vinh
+Enter age: 19
+Vinh is now 19 years old.
+A)dd, R)emove, C)hange age, F)inish: F
+
+People sorted by age:
+Vinh (19)
+Joe (24)
+Marta (47)
+\end{stdout}
+
+Your program should allow the commands to be input in either upper or lower case. As in the sample output, it should produce appropriate error messages if the user tries to add a duplicate name, remove a non-existent name, or give an invalid command.
+
+\end{exercise}
+
+

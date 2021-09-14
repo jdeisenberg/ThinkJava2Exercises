@@ -1,0 +1,28 @@
+@startuml
+skinparam classbackgroundcolor #ffffff
+skinparam classdiamondbackgroundcolor #ffffff
+skinparam classdiamondbordercolor #000000
+skinparam classbordercolor #000000
+skinparam classfontsize 18
+skinparam classfontname "Liberation Mono"
+skinparam classattributefontsize 18
+skinparam classattributefontname "Liberation Mono"
+skinparam classAttributeIconSize 0
+hide circle
+class Person {
+  
+  - name: String
+  - age: int
+  
+  + Person(name: String, age:int)
+  
+  + getName(): String
+  + setName(name: String): void
+    
+  + getAge(): int
+  + setAge(age: int): void
+  
+  + toString(): String
+  + compareTo(other: Person): boolean
+}
+@enduml
