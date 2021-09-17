@@ -80,7 +80,7 @@ public static int tailFactorial(int n, int result) {
     if (n == 0) {
         return result;
     } else {
-        factorial(n - 1, n * result);
+        tailFactorial(n - 1, n * result);
     }
 }
 \end{code}
