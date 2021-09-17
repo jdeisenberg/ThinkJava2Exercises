@@ -1,5 +1,113 @@
 \chapter{Arrays and References}
 
+\section{Passing Arrays to Methods}
+
+When you pass an array to a method, you are passing a {\em copy of the reference} to the array. Consider this code:
+
+\begin{code}
+import java.util.Arrays;
+
+public static void main(String[] args) {
+    double [] data = {4.0, 7.0, 2.5};
+    squareArray(data);
+    System.out.println(Arrays.toString(data));
+}
+
+public static void squareArray(double[] arr) {
+    for (int i = 0; i < arr.length; i++) {
+        arr[i] = arr[i] * arr[i];
+    }
+}
+\end{code}
+
+Figure~\ref{fig.passArray1} is what memory looks like upon entry to \java{squareArray}. Java does not copy the argument array's contents into the parameter. Instead, Java copies the {\em reference} to the argument \java{data} into the parameter \java{arr}.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale=0.5]{figs/ch07/pass_to_array1.png}
+\caption{Variable \java{arr} is a copy of the reference variable \java{data}}
+\label{fig.passArray1}
+\end{center}
+\end{figure}
+
+When the loop ends, the elements in the array have all changed, as show in Figure~\ref{fig.passArray2}.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale=0.5]{figs/ch07/pass_to_array2.png}
+\caption{\java{arr} refers to updated array contents}
+\label{fig.passArray2}
+\end{center}
+\end{figure}
+
+When method \java{squareArray} ends, its stack frame goes away and we are left with \java{data} referring to the changed array, as shown in Figure~\ref{fig.passArray3}.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale=0.5]{figs/ch07/pass_to_array3.png}
+\caption{Variable \java{data} refers to changed array contents}
+\label{fig.passArray3}
+\end{center}
+\end{figure}
+
+When you pass an array to a method, you get a copy of the {\em reference}. Your methods can modify the contents of the array via the reference.
+
+Why does Java pass a copy of the reference instead of a copy of the contents? Because back when Java was invented, CPUs were slow and memory was limited. Copying the four- or eight-byte memory address of a thousand-element array is much faster than copying all thousand elements. That's the good news.
+
+The bad news is that you can change an array's contents inadvertently. In the preceding example, once you call \java{squareArray}, your original data is gone. If you call \java{squareArray} again, you end up with the elements of the original array to the fourth power!
+
+\section{Returning Arrays from Methods}
+
+We're no longer working in a ``scarcity model,'' where every byte and microsecond is precious. Nowadays, CPUs are fast enough and memory plentiful enough that it makes sense to return a new array from a method, leaving the original untouched.
+
+Consider this revised code, with line numbers for reference:
+
+\begin{code}
+ 1 import java.util.Arrays;
+ 2
+ 3 public static void main(String[] args) {
+ 4     double [] data = {4.0, 7.0, 2.5};
+ 5     double [] squaredData = newSquareArray(data);
+ 6     System.out.println(Arrays.toString(data)); 
+ 7     System.out.println(Arrays.toString(squaredData));
+ 8 }
+ 9
+10 public static double[] newSquareArray(double[] arr) {
+11     double[] result = new double[arr.length];
+12    
+13     for (int i = 0; i < arr.length; i++) {
+14         result[i] = arr[i] * arr[i];
+15     }
+16     return result;
+17 }
+\end{code}
+
+Notice the return type in line 10: the method returns an array of \java{double}---the square brackets indicate an array.
+
+When line 5 calls \java{newSquareArray}, line 11 creates a reference named \java{result} that refers to a new array with the same length as the original array. The loop changes the value in \java{result}, leaving the argument \java{arr} unmodified. Figure~\ref{fig.returnArray1} shows the memory diagram at the end of the loop.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale=0.5]{figs/ch07/return_array1.png}
+\caption{\java{arr} and \java{result} refer to different arrays}
+\label{fig.returnArray1}
+\end{center}
+\end{figure}
+
+In line 16, the method returns \java{result}, which, again, is a reference to the squared values. The return value is stored in \java{squaredData} on the left side of the assignment in line 5.  Figure~\ref{fig.returnArray2} shows the memory diagram after line 5.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale=0.5]{figs/ch07/return_array2.png}
+\caption{\java{data} and \java{squaredData} refer to different arrays}
+\label{fig.returnArray2}
+\end{center}
+\end{figure}
+
+So, which should you do? Update arrays in place (as in the first example) or return new arrays (as in the second example)?  There is a programming paradigm called {\em functional programming} that strongly prefers the second approach. From a functional programming standpoint, the ability to change an array in place is bad style at best and a dangerous source of programming errors at worst. In my opinion, and this is {\em only an opinion}, I agree with that viewpoint. As a guideline (not a rule), I suggest that you write your programs to return new arrays rather than modifying array arguments. However, if you are programming in an environment where memory is at a premium and programs run on slow processors, as can happen when you are programming embedded systems (\url{https://en.wikipedia.org/wiki/Embedded_system}), then saving space and time by modifying the array may be the better approach.
+
+In the following exercises, you will be writing some methods that update an array in place and others that return a new array. This will let you practice both approaches.
+
 \section{Exercises}
 
 \begin{exercise}

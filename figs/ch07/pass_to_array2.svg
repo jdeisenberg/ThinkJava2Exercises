@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="19cm" height="7cm" viewBox="61 58 361 124" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g id="Background">
+    <g>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="240" y="100" width="60" height="41.7556" rx="0" ry="0"/>
+      <text font-size="18.0622" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:middle;font-family:Noto Mono;font-style:normal;font-weight:normal" x="270" y="126.346">
+        <tspan x="270" y="126.346">16.0</tspan>
+      </text>
+    </g>
+    <g>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="300" y="100" width="60" height="41.7556" rx="0" ry="0"/>
+      <text font-size="18.0622" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:middle;font-family:Noto Mono;font-style:normal;font-weight:normal" x="330" y="126.346">
+        <tspan x="330" y="126.346">49.0</tspan>
+      </text>
+    </g>
+    <g>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="360" y="100" width="60" height="41.7556" rx="0" ry="0"/>
+      <text font-size="18.0622" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:middle;font-family:Noto Mono;font-style:normal;font-weight:normal" x="390" y="126.346">
+        <tspan x="390" y="126.346">6.25</tspan>
+      </text>
+    </g>
+    <g>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #888888" x="120" y="60" width="60" height="41.7556" rx="0" ry="0"/>
+      <text font-size="15.8044" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:middle;font-family:Noto Mono;font-style:normal;font-weight:normal" x="150" y="85.6623">
+        <tspan x="150" y="85.6623"></tspan>
+      </text>
+    </g>
+    <text font-size="18.0622" style="fill: #888888; fill-opacity: 1; stroke: none;text-anchor:start;font-family:Noto Mono;font-style:normal;font-weight:normal" x="61" y="85">
+      <tspan x="61" y="85">data</tspan>
+    </text>
+    <g>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="120" y="140" width="60" height="41.7556" rx="0" ry="0"/>
+      <text font-size="15.8044" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:middle;font-family:Noto Mono;font-style:normal;font-weight:normal" x="150" y="165.662">
+        <tspan x="150" y="165.662"></tspan>
+      </text>
+    </g>
+    <text font-size="18.0622" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:Noto Mono;font-style:normal;font-weight:normal" x="72.0556" y="165.353">
+      <tspan x="72.0556" y="165.353">arr</tspan>
+    </text>
+    <g>
+      <line style="fill: none; stroke-opacity: 1; stroke-width: 2; stroke: #888888" x1="160" y1="80" x2="235.82" y2="108.848"/>
+      <polyline style="fill: none; stroke-opacity: 1; stroke-width: 2; stroke: #888888" points="226.786,110.761 237.91,109.644 230.342,101.414 "/>
+    </g>
+    <g>
+      <line style="fill: none; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x1="160" y1="160" x2="235.79" y2="132.826"/>
+      <polyline style="fill: none; stroke-opacity: 1; stroke-width: 2; stroke: #000000" points="230.169,140.153 237.895,132.071 226.794,130.74 "/>
+    </g>
+    <text font-size="15.8044" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:Noto Mono;font-style:normal;font-weight:normal" x="264.976" y="160">
+      <tspan x="264.976" y="160">0</tspan>
+    </text>
+    <text font-size="15.8044" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:Noto Mono;font-style:normal;font-weight:normal" x="324.974" y="160">
+      <tspan x="324.974" y="160">1</tspan>
+    </text>
+    <text font-size="15.8044" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:Noto Mono;font-style:normal;font-weight:normal" x="384.974" y="160">
+      <tspan x="384.974" y="160">2</tspan>
+    </text>
+    <text font-size="12.7998" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="271" y="156">
+      <tspan x="271" y="156"></tspan>
+    </text>
+  </g>
+</svg>
