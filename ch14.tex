@@ -2,3 +2,111 @@
 
 \section{Exercises}
 
+\begin{exercise}
+
+In this exercise, you will implement an \java{Account} class which represents a bank checking account. You will then create two classes that inherit from \java{Account}: \java{SavingsAccount} and \java{CreditCardAccount}.
+
+You will then use composition to create a \java{Customer} class which includes instances of each of these account classes.
+
+Finally, you will write a program with a \java{main} method that tests these classes.
+
+{\bf Part 1:} Create a class named \java{Account}, which has the following private properties:
+
+\begin{itemize}
+    \item \java{number: long}
+    \item \java{balance: double}
+\end{itemize}
+
+\begin{enumerate}
+\item Create a two-parameter constructor that takes an account number and balance. Make sure that the balance is always greater than zero ({\em Hint:} \java{Math.abs})
+
+\item Implement getters and setters: \java{getNumber()}, \java{getBalance()}, \java{setBalance(double newBalance)}. There is no \java{setNumber} method---once an account is created, its account number cannot change.
+
+\item Implement these methods: \java{void deposit(double amount)} and \java{void withdraw(double amount)}. For both these methods, if the amount is less than zero, the account balance remains untouched. For the \java{withdraw} method, if the amount is greater than the balance, it remains untouched. {\em These methods do not print anything.}
+
+\item Implement a \java{toString} method that returns a string with the account number and balance, properly labeled.
+\end{enumerate}
+
+{\bf Part 2:} Next, implement the \java{SavingsAccount} class. It inherits from \java{Account} and adds a private \java{apr} property, which is the annual percentage rate (APR) for interest.
+
+\begin{enumerate}
+\item Write a three-argument constructor that takes an account number, balance, and interest rate as a decimal (thus, a 3.5\% interest rate is given as 0.035). Make sure that the interest rate is never less than zero.
+
+\item add a getter and setter: \java{getApr()} and \java{setApr(double apr)}. The setter must ensure that the APR is never less than zero.
+
+\item Write a \java{calculateInterest} instance method that returns the annual interest, calculated as the current balance times the annual interest rate.
+
+\item Modify \java{toString} to include the interest rate. IMPORTANT: The value returned by the \java{toString} method must {\bf {\em not}} include the calculated annual interest.
+\end{enumerate}
+
+{\bf Part 3:} Next, implement the \java{CreditCardAccount} class, which inherits from \java{Account} and adds these \java{private} properties:
+
+\begin{itemize}
+\item \java{apr}, a \java{double} representing the annual interest rate charged on the balance.
+\item \java{creditLimit}, a \java{double} which gives the credit limit for the card.
+\end{itemize}
+
+Then, implement:
+\begin{enumerate}
+\item A four-argument constructor that takes an account number, balance, interest rate as a decimal (thus, a 3.5\% interest rate is given as 0.035), and credit limit. Make sure that neither the interest rate nor credit limit can be negative.
+
+\item Write getters and setters for the \java{apr} and \java{creditLimit}. The apr setter should leave the APR untouched if given a negative value. The \java{creditLimit} setter should leave the credit limit untouched if given a negative value.
+
+\item Modify \java{toString} to include the interest rate and credit limit. IMPORTANT: the value returned by the \java{toString} method must {\bf {\em not}} include the monthly payment.
+
+\item Override the \java{withdraw} method so that you can have a negative balance. If a withdrawal would push you over the credit limit, leave the balance untouched. Examples:
+
+\begin{itemize}
+\item If your balance is \$300 with a credit limit of \$700, you can withdraw \$900 (leaving a balance of \$-600).
+\item If your balance is \$-300 with a credit limit of \$700, you can withdraw \$350 (leaving a balance of \$-650).
+\item If your balance is \$-300 with a credit limit of \$700, you can not withdraw \$500, because that would then owe \$800, which is more than your \$700 limit.
+\end{itemize}
+
+In short, the maximum amount you can withdraw is your current balance plus the credit limit.
+
+\item Implement a \java{calculatePayment} method that works as follows: If the balance is positive, the minimum amount you have to pay on your card per month is zero. Otherwise, your monthly payment is the minimum of 20 and $(apr/12) \cdot (−balance)$
+
+\end{enumerate}
+
+Here is a UML diagram with the relationships of these classes:
+
+% picture goes here.
+
+{\bf Part 4:} Now, write a \java{Customer} class that will use composition to include the preceding classes.
+
+\begin{enumerate}
+\item The \java{Customer} class has the following private attributes:
+
+\begin{itemize}
+\item \java{name: String}
+\item \java{acct: Account}
+\item \java{savings: SavingsAccount}
+\item \java{credit: CreditAccount}
+\end{itemize}
+
+\item Implement a four-argument constructor for this class.
+
+\item Write getters and setters for all the fields.
+\end{enumerate}
+
+{\bf Part 5:} Finally, write a program named {\em TestCustomer.java} that creates a \java{Customer} named ``Joe Doakes'' with this data:
+
+\begin{itemize}
+\item Regular account number 1037825 with a balance of \$3,723.00
+\item Savings account number 9016632 with a balance of \$4,810.25 and an annual interest rate of 2.05\%
+\item Checking account number 85332162 with a balance of -\$2500.00, an interest rate of 7.125\%, and a credit limit of \$3000.00.
+\end{itemize}
+
+Then, do the following transactions:
+
+\begin{itemize}
+\item Deposit \$257.18 into the regular account, then withdraw \$587.23.
+\item Deposit \$2,466.12 into the savings account, then withdraw \$8,000.00.
+\item Withdraw \$480.00 from the credit card account.
+\item Display the status of the regular account (number and balance).
+\item Display the status of the savings account (number, balance, and annual interest amount).
+\item Display the status of the credit card account (number, balance, interest rate, and monthly payment due).
+\end{itemize}
+
+
+\end{exercise}
