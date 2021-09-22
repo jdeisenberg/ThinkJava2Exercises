@@ -163,6 +163,74 @@ In fact, in any expression where the variable on the left side of the assignment
 You can use compound assignment in more complex expressions:
 \java{n += m * 5;} is equivalent to \java{n = n + (m * 5);} However, you can {\em not} use it if the left-hand variable is part of a parenthesized expression. \java{n = (n + 7) * 3;} cannot be simplifed using compound assignment.
 
+\section{The \java{break} statement}
+
+{\em Some of this material is adapted from material that was in an earlier edition of \textnormal {Think Java}.}
+
+Sometimes neither a pretest nor a posttest loop will provide exactly what you need. Consider this code, which finds the smallest factor of a number {\em n} greater than two:
+
+\begin{code}
+int n = input.nextInt();
+int factor = 2;
+boolean found = false;
+
+while (factor <= n && !found) {
+    if (n % factor == 0) {
+        found = true;
+    } else {
+        factor++;
+    }   
+}
+\end{code}
+
+
+In the preceding code, the ``test'' happens in the middle of the loop.
+As a result, we used a flag variable and an \java{if}-\java{else} statement.
+
+\index{break}
+
+A simpler way to solve this problem is to use a \java{break} statement.
+When a program reaches a \java{break} statement, it exits the current loop.
+
+\begin{code}
+int n = input.nextInt();
+        
+int factor = 2;
+while (factor <= n) {
+    if (n % factor == 0) {
+        break;
+    }
+    factor++;
+}
+\end{code}
+
+Though \java{break} is useful, it should be used sparingly. If you think through the condition for the loop carefully, you can often avoid \java{break} entirely, as in the following code:
+
+\begin{code}
+int n = input.nextInt();
+
+int factor = 2;
+while (factor <= n && (n % factor != 0)) {
+    factor++;
+}
+\end{code}
+
+Whatever you do, avoid this sort of code:
+
+\begin{code}
+while (true) {
+    // process data;
+    if (conditon) {
+        break;
+    }
+    // more processing of data
+}
+\end{code}
+
+This ``infinite loop with a break'' shouts out ``I did not bother to carefully think about the exit condition for my loop!''
+
+
+
 \section{Exercises}
 
 \begin{exercise}
