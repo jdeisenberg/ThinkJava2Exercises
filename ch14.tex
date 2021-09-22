@@ -68,10 +68,6 @@ In short, the maximum amount you can withdraw is your current balance plus the c
 
 \end{enumerate}
 
-Here is a UML diagram with the relationships of these classes:
-
-% picture goes here.
-
 {\bf Part 4:} Now, write a \java{Customer} class that will use composition to include the preceding classes.
 
 \begin{enumerate}
@@ -88,6 +84,26 @@ Here is a UML diagram with the relationships of these classes:
 
 \item Write getters and setters for all the fields.
 \end{enumerate}
+
+Figure~\ref{fig.inheritance1} shows the details of the \java{Account} class and its subclasses. Figure~\ref{fig.inheritance2} shows the relationships of all the classes in this exercise.
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=0.4]{figs/ch14/account_inheritance.png}
+\caption{\java{Account}, \java{SavingsAccount}, and \java{CreditCardAccount} classes}
+\label{fig.inheritance1}
+\end{center}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=0.7]{figs/ch14/account_classes.png}
+\caption{Composition and Inheritance Among All Classes}
+\label{fig.inheritance2}
+\end{center}
+\end{figure}
+
+
 
 {\bf Part 5:} Finally, write a program named {\em TestCustomer.java} that creates a \java{Customer} named ``Joe Doakes'' with this data:
 
