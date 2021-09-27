@@ -65,7 +65,7 @@ metal = "s" + metal.substring(1, 4);
 
 \clearpage
 
-\section{Generalizing and the \java{Scanner} Class}
+\section{Methods and the \java{Scanner} Class}
 
 The {\em Think Java} book's subtitle is ``How to Think Like a Computer Scientist,'' and in that spirit, places more emphasis on the concepts of computer science---developing and analyzing algorithms. In order to do this, the book deliberately avoids going into the minutiae of the Java language. At this point, however, we have to get into a detail of the \java{Scanner} class that comes up when you are generalizing and modularizing your code.
 
@@ -183,6 +183,34 @@ public class GeneralInput2 {
   }
 }
 \end{code}
+
+\section{The Software Development Cycle}
+
+Up to this point, you have been going through a two-step cycle when writing programs:
+
+\begin{enumerate}
+\item Write code
+\item Test code
+\end{enumerate}
+
+You go through this cycle until the testing shows no errors (or at least errors that you have anticipated), and your program is complete. Generalizing the code is part of this write-and-test cycle.
+
+This is only a part of something called the {\em software development cycle}, which has many different definitions. Some have as few as five steps, others as many as ten.
+
+Here is a seven-step definition of the software development cycle, adapted from \url{https://en.wikipedia.org/wiki/Systems_development_life_cycle}:
+
+\begin{enumerate}
+\item {\bf Preliminary Analysis}: What is the problem you (or the customer) are trying to solve? What does the customer want the program to do?
+\item {\bf System Analysis and Design}: Determine what the program needs to do. This step requires you to talk to the end users of the application.
+\item {\bf System Design}: Take the result of the preceding step and develop the data structures and methods needed to accomplish the tasks the application does.
+\item {\bf Development}: This is the stage where the code is written.
+\item {\bf Testing}: Check to see that the program works as per the requirements. This is best done by a group of people who did {\em not} write the code.
+\item {\bf Deployment}: The program is sent out to the end users. 
+\item {\bf Maintenance}: Bug fixes and feature enhancements happen here.
+\end{enumerate}
+
+In each of these stages, it's possible to go back to the preceding stage or further. For example, if a bug is found in the deployment phase, you might need to go back to development. If it turns out that, upon deployment, the program design doesn't adequately meet users' needs, you might need to go all the way back to the System Analysis and Design phase.
+
 
 \section{Exercises}
 
