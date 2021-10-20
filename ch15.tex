@@ -26,7 +26,7 @@ int[ ][ ] array = {
 };
 \end{code}
 
-However, there are times that we need to be able to read two-dimensional arrays from a user. It would be useful to have a small library of code that would allow us to read and print two-dimensional arrays so that we would not have to copy and paste the code into every program that needs it. That is the subject of the next section and the first exercise.
+However, there are times that we need to be able to read two-dimensional arrays from a user. It would be useful to have a small library of code that would allow us to read and print two-dimensional arrays so that we would not have to copy and paste the code into every program that needs it. That is the subject of the next section and the second exercise.
 
 \section{Programs in Multiple Files}
 Up to this point, all of our Java programs have been written in one file. We have used \java{import} to bring in classes and methods from other files.  Now it’s time to learn how to do this ourselves. There are many ways to structure a program so that it can be divided into separate files that are brought together at run time; the method we're using here is the simplest.
@@ -66,6 +66,26 @@ public class TestStats {
 More complex ways of dividing a Java program into separate files involves the concepts of \java{package} and \java{module}. You can see documentation about this at \url{https://docs.oracle.com/javase/specs/jls/se9/html/jls-7.html}. 
 
 \section{Exercises}
+
+\begin{exercise}
+Create a two-dimensional array of \java{int} that represents the following table of sales (in thousands of units), measured quarterly for three years. The first row and the leftmost column won't be part of your table; they are here to label the items properly so you can understand how the table is structured.
+
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+Year & Q1 & Q2 & Q3 & Q4 \\ \hline
+1     & 27 & 24 & 29 & 28 \\ \hline
+2     & 36 & 38 & 34 & 33 \\ \hline
+3     & 34 & 39 & 37 & 36 \\ \hline
+\end{tabular}
+
+Then, have your program calculate and print:
+
+\begin{itemize}
+\item The total sales for each of the three years
+\item The total sales for each quarter (across the three years)
+\item The grand total of sales
+\end{itemize}
+\end{exercise}
 
 \begin{exercise}
 In this exercise, you'll write methods for doing input and output of a two-dimensional array. Put these methods into a file named \java{IO2D.java} (standing for Input/Output 2D). You will use these methods in the subsequent exercises.
@@ -204,6 +224,11 @@ To multiply a matrix $a$ by matrix $b$, the number of columns in $a$ must be the
 \end{pmatrix}
 =
 \end{align*}
+%
+% PDFLatex doesn't seem to like splitting into lines
+% if I add a blank line; it gives errors. Hence
+% I have to start a new equation.
+%
 \begin{align*}
 \begin{pmatrix}
 1\cdot 7+2\cdot 8+3\cdot 9 & 4\cdot 7+5\cdot 8+6\cdot 9\\
