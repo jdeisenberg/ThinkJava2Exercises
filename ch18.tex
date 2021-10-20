@@ -542,7 +542,7 @@ catch (FileNotFoundException ex) {
 The declaration of \java{outWriter} is now in parentheses after \java{try} rather than after the block's opening brace.
 We no longer need to call \java{outWriter.close()}---the JVM will automatically do the call when it exits the \java{try}-\java{catch} block.
 
-You can declare as many input and output classes as you want inside the parentheses:
+You can declare as many input and output objects as you want inside the parentheses:
 
 \begin{code}
 File inFile = new File("input_path.txt");
