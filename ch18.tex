@@ -559,3 +559,195 @@ catch (Exception ex) {
 \end{code}
 
 The \java{File} declarations cannot go inside the parentheses; the compiler won't let you do that.
+
+\section{Exercises}
+
+\begin{exercise}
+Write a program named {\em TestAverages.java} that asks the user for the name of an input file that has people's names and test scores. Each line has the person's name, a colon, and a list of scores separated by commas.
+
+Next, the program asks the user for the name of an output file. The program will then read the input file and write a new output file with the names and their average scores, including the number of tests on which it is based.
+
+Your program has to do the following error handling:
+
+\begin{itemize}
+\item If the input file does not exist or cannot be opened, print an appropriate error message.
+\item If the output file cannot be opened, print an appropriate error message.
+\item If an input line has a non-numeric entry for a score, print an error message to the screen with the bad data and skip that score.
+\item If an input line has no scores, print an appropriate message to the screen.
+\end{itemize}
+
+% For this input file {\em sampleScores.txt}:
+
+\begin{stdout}
+Juan Fulano: 88, 82, 89
+Tran Thi B: 91, 87.5, 92, 89, 88.5
+Jan Kovacs: 91, 93, 8r, 74.5
+Joseph Schmegeggie:
+Erika Mustermann: 79.5, 83.5, 90, 92
+\end{stdout}
+
+Here is the result of running the program several times. First, with a bad input file name:
+
+\begin{stdout}
+Enter input file name with test scores: nosuchfile.txt
+Cannot find input file nosuchfile.txt
+\end{stdout}
+
+With a good input file name but a bad output file name. Notice that the message tells why the output file failed:
+
+\begin{stdout}
+Enter input file name with test scores: sampleScores.txt
+Enter output file name for averages: /usr/output.txt
+IO Error: /usr/output.txt (Permission denied)
+\end{stdout}
+
+With a good input and output file name:
+
+\begin{stdout}
+Enter input file name with test scores: sampleScores.txt
+Enter output file name for averages: output.txt
+Ignoring bad number  8r for Jan Kovacs
+No numbers found on line Joseph Schmegeggie:
+File output.txt written successfully.
+\end{stdout}
+
+After the program finishes successfully, the {\em output.txt} file looks like this:
+
+\begin{stdout}
+Juan Fulano: 86.33 (3 tests)
+Tran Thi B: 89.60 (5 tests)
+Jan Kovacs: 86.17 (3 tests)
+Erika Mustermann: 86.25 (4 tests)
+\end{stdout}
+
+Some hints:
+
+\begin{itemize}
+\item Do not presume that the input file will always be named {\em sampleScores.txt} or the output file will always be named {\em output.txt}---the user gets to decide those names, not you!
+\item  If a person has scores, but none of them are numeric, then they will have no tests to average. Your program needs to handle that situation correctly.
+\item Use the \java{split} method in the \java{String} class to separate the name from the scores, and use it again to separate the individual scores. You will need to convert the resulting strings to \java{double}. Do this by using the \java{Double.parseDouble} method, which throws a \java{NumberFormatException} if given a non-numeric string as its parameter.
+\end{itemize}
+
+\end{exercise}
+
+
+\begin{exercise}
+In this exercise, you will write two classes: a class that represents a bank account and a program that works like an ATM for bank accounts. The code repository has some pseudocode in file {\em ch18/ATM\_Pseudocode.java} that may help you get the program organized and started. 
+
+\subsection*{The \java{Account} class}
+First, create an \java{Account} class. An \java{Account} object has these properties:
+
+\begin{itemize}
+    \item \java{private int acctNumber}: the account number
+    \item \java{private String name}: the account holder's name
+    \item \java{private double balance}: the current balance in the account
+\end{itemize}
+
+Implement these methods:
+
+\begin{description}
+    \item[\texttt{public Account(int acctNumber, String name, double balance)}] \hfill \\ The constructor
+    \item[\texttt{public String toString()}] \hfill \\  Returns a string giving the account ID, name, and balance, separated by colons. Do not use \java{format()} on the balance; you want to keep the number as accurate as possible.
+    \item[\texttt{public void deposit(double amount)}] \hfill \\  Adds the given amount to the current balance. If the amount is negative, the balance must not be changed; otherwise, the \java{balance} property is updated to reflect the deposit.
+    \item[\texttt{public void withdraw(double amount)}] \hfill \\ Withdraws the given amount from the current balance. If the amount is negative or greater than the current balance, the balance must not be changed; otherwise, the \java{balance} is updated to reflect the withdrawal.
+\end{description}
+
+You must also write a getter and setter for the balance, and only a getter for the name and account number; once the account is constructed, the name and account number never change. The getters and setters must be \java{public}.
+
+Note that \java{deposit()} and \java{withdraw()} do not print error messages if they get incorrect input; they simply ignore it. It is up to the program that calls these functions to provide the error messages for the user of the program.
+
+\subsection*{The \java{Customer} class}
+Next, write a program named \java{Customer.java} that has a \java{main()} method. This class provides an ``ATM''grp interface to a set of bank accounts. Use this {\em accounts.dat} file to set up the initial set of accounts. Each line of the text file has an account ID, name, and starting balance, separated by colons. Your program must first read the account data file and build an \java{ArrayList} of \java{Account} objects corresponding to each line. If the file does not exist, your program must output a reasonable error message and then quit.
+
+\begin{stdout}
+15725:Christina Plaka:456.71
+23981:Roz Chast:1853.22
+57012:Georges Remi:3571.85
+46287:Raquel Corcoles:783.00
+31954:Eiichiro Oda:854.02
+84373:Scott McCloud:2733.96
+\end{stdout}
+
+If the file is read successfully, the program will repeatedly ask for an account number (or ENTER to quit). This is equivalent to inserting an ATM card. Repeat until the account number is valid. Hint: write a method like this:
+
+\begin{stdout}
+public static int findIndex(ArrayList<Account> accountList,
+   int accountNumber)
+\end{stdout}
+
+This method will go through the \java{accountList} and return the index of the account with the given \java{accountNumber}, or -1 if the account number does not belong to any of the accounts in the array.
+
+Print a message that greets the customer by name. Then repeatedly ask the customer if they want to deposit, withdraw, or finish the transactions.
+
+\begin{itemize}
+    \item If the customer wishes to deposit, ask for the amount until you get a number greater than or equal to zero; then perform the transaction and display the balance. Print an appropriate message for invalid input. You must handle exceptions here.
+    \item If the customer wishes to withdraw, ask for the amount until you get a number greater than or equal to zero and less than or equal to the current balance; then perform the transaction and display the balance. Print an appropriate message for invalid input. You must handle exceptions here.
+    \item If the customer is finished, print a message to say goodbye to the customer, write the entire account array back to disk, and return to the account number prompt. (This is equivalent to giving the customer their card back).
+\end{itemize}
+
+This program must print all monetary amounts preceded by a dollar sign and with two digits after the decimal point. This is where you {\em do} want to use \java{format} to round to two decimal places.
+
+\subsection*{Handling Exceptions}
+
+Your program must handle exceptions when opening the {\em accounts.dat} file. It must produce a reasonable error message and quit rather than crashing if the file doesn't exist.
+
+Your program must also handle exceptions if the user enters invalid input such as "fifteen" for the account number or amount to deposit/withdraw.
+
+The exceptions you will probably want to use the most are \java{java.IO.IOException} for file errors and \java{NumberFormatException} for invalid numbers.
+
+Here is what you might see as output when you run your program:
+
+\begin{stdout}
+Enter your account number: 12345
+Unknown account number
+Enter your account number: five
+five is not a number
+Enter your account number: 57012
+Hello, Georges Remi!
+Your current balance is $3571.85
+D)eposit, W)ithdraw, or F)inish? D
+Enter amount to deposit: $-20
+You cannot deposit a negative amount.
+D)eposit, W)ithdraw, or F)inish? D
+Enter amount to deposit: $fifty
+fifty is not a valid number.
+D)eposit, W)ithdraw, or F)inish? D
+Enter amount to deposit: $50
+Your current balance is $3621.85
+D)eposit, W)ithdraw, or F)inish? w
+Enter amount to withdraw: $-200
+You cannot withdraw a negative amount.
+D)eposit, W)ithdraw, or F)inish? w
+Enter amount to withdraw: $570.00
+Your current balance is $3051.85
+D)eposit, W)ithdraw, or F)inish? f
+Goodbye, Georges Remi.
+
+Enter your account number: 23981
+Hello, Roz Chast!
+Your current balance is $1853.22
+D)eposit, W)ithdraw, or F)inish? w
+Enter amount to withdraw: $1890
+You cannot withdraw more than you have.
+D)eposit, W)ithdraw, or F)inish? w
+Enter amount to withdraw: $80
+Your current balance is $1773.22
+D)eposit, W)ithdraw, or F)inish? f
+Goodbye, Roz Chast.
+
+Enter your account number:
+ATM program concludes.
+\end{stdout}
+
+After you finish running this program, the {\em accounts.dat} file will have the new balance(s):
+
+\begin{stdout}
+15725:Christina Plaka:456.71
+23981:Roz Chast:1773.22
+57012:Georges Remi:3051.85
+46287:Raquel Corcoles:783.0
+31954:Eiichiro Oda:854.02
+84373:Scott McCloud:2733.96
+\end{stdout}
+
+\end{exercise}
