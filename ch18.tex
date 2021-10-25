@@ -665,7 +665,9 @@ Figure~\ref{fig.ch18.cityUML} shows a UML diagram for the \java{City} class.
 
 \subsection{The \java{CityInfo} class}
 
-Then, write a class named \java{CityInfo} that contains the \java{main()} method.Use the {\em citylist.dat} file to set up the initial list of cities. The file is available from the repository at {\em ch18/citylist.dat} Each line of the text file has a country code, city name, and population, separated by semicolons. Your program must first read the city data file with this method:
+Then, write a class named \java{CityInfo} that contains the \java{main()} method.Use the {\em citylist.dat} file\footnotemark to set up the initial list of cities. The file is available from the repository at {\em ch18/citylist.dat} Each line of the text file has a country code, city name, and population, separated by semicolons. Your program must first read the city data file with this method:
+
+\footnotetext{The data for this exercise came from \url{http://geonames.org/}, licensed under a Creative Commons Attribution 4.0 License (see \url{https://creativecommons.org/licenses/by/4.0/})}
 
 \begin{stdout}
 public static ArrayList<City> readCityFile(String fileName)
@@ -706,7 +708,7 @@ public static void writeCountryFile(String countryCode,
     ArrayList<City> cityList)
 \end{stdout}
 
-to do this. If there is an \java{IOException} while opening the output file or writing the data, print an appropriate error message. You must use the exception's \java{getMessage()} method when constructing your error message. If the file is written successfully, print a message letting the user know that the file has been created. This message <em>must</em> contain the file name.
+to do this. If there is an \java{IOException} while opening the output file or writing the data, print an appropriate error message. You must use the exception's \java{getMessage()} method when constructing your error message. If the file is written successfully, print a message letting the user know that the file has been created. This message {\em must} contain the file name.
 
 \subsection{Handling Exceptions}
 
@@ -761,6 +763,7 @@ Here is an example of the output you might get for an error while writing the fi
 Error writing FR.dat
 FR.dat (Permission denied)
 \end{stdout}
+
 \end{exercise}
 
 \begin{exercise}
