@@ -630,6 +630,138 @@ Some hints:
 
 \end{exercise}
 
+\begin{exercise}
+
+In this exercise, you will write two classes: a class that represents information about a city and a main program that processes that information. You can find some pseudocode for this exercise that may help you get the program organized and started in the repository, file {\em ch18/CityInfo\_Pseudocode.java}.
+
+\subsection{The \java{City} class}
+
+First, write the \java{City} class that defines an object with these properties:
+
+\begin{itemize}
+    \item \java{private String country}: the two-letter country code
+    \item \java{private String name}: the city name
+    \item \java{private int population}: the city's population
+\end{itemize}
+
+Implement these methods:
+
+\begin{description}
+    \item [\texttt{public City(String country, String name, int population)}] \hfill \\ The constructor
+    \item Accessors and mutators \hfill \\ Write an accessor (getter) and mutator (setter) for the population, and only a getter for the country code and city name; once the object is constructed, the country and city name never change. These must be \java{public}.
+    \item [\texttt{public String toString()}] \hfill \\ Returns a string giving the country name, city name, and population, separated by semicolons.
+\end{description}
+
+Figure~\ref{fig.ch18.cityUML} shows a UML diagram for the \java{City} class.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale=0.75]{figs/ch18/city.pdf}
+\caption{UML diagram showing attributes and methods of the City class}
+\label{fig.ch18.cityUML}
+\end{center}
+\end{figure}
+
+
+\subsection{The \java{CityInfo} class}
+
+Then, write a class named \java{CityInfo} that contains the \java{main()} method.Use the {\em citylist.dat} file to set up the initial list of cities. The file is available from the repository at {\em ch18/citylist.dat} Each line of the text file has a country code, city name, and population, separated by semicolons. Your program must first read the city data file with this method:
+
+\begin{stdout}
+public static ArrayList<City> readCityFile(String fileName)
+\end{stdout}
+
+This method will open the given \java{fileName}, read it, and return an \java{ArrayList} of \java{City} objects corresponding to each line of the file.
+
+If a line in the file has bad data (non-numeric population or too many or too few entries), your program will print an error that displays the bad line without entering any new data into the \java{ArrayList}. The \java{citylist.dat} file in the repository purposely contains some lines with bad data so you can test to see if your error-handling code works. Do not write your code for this specific file; another person's file might have bad data on different lines with different data on them.
+
+If the file does not exist, the method prints an appropriate error message and returns an empty \java{ArrayList<City>}.
+
+If the returned \java{ArrayList} is not empty, the program will repeatedly ask for a country code (or ENTER to quit).
+Once the user enters a country code, the \java{main()} method will call this method:
+
+\begin{stdout}
+public static int statistics(String countryCode,
+   ArrayList<City> cityList)
+\end{stdout}
+
+The \java{statistics()} method will go through the city list and
+
+\begin{itemize}
+    \item Calculate the total number of cities in the given country.
+    \item If there are more than zero cities:
+        \begin{itemize}
+            \item Print the total number of cities
+            \item Print the average population for those cities
+        \end{itemize}
+    
+    \item Otherwise, prints an appropriate error message.
+    \item Returns the total number of cities found.
+\end{itemize}
+
+The \java{main()} method will then use this returned value. If it is greater than zero, you will write a new file name {\em CC.dat}, where {\em CC} stands for a country code. This file will have the information for the cities in that country in the same format as \java{citylist.dat}. For example, if the country code is \java{JP}, your program will create a file named {\em JP.dat}. You will use a method named
+
+\begin{stdout}
+public static void writeCountryFile(String countryCode,
+    ArrayList<City> cityList)
+\end{stdout}
+
+to do this. If there is an \java{IOException} while opening the output file or writing the data, print an appropriate error message. You must use the exception's \java{getMessage()} method when constructing your error message. If the file is written successfully, print a message letting the user know that the file has been created. This message <em>must</em> contain the file name.
+
+\subsection{Handling Exceptions}
+
+Your program must handle these exceptions:
+
+\begin{itemize}
+    \item Catch \java{FileNotFoundException}when opening a \java{Scanner} for the input file. You could use the \java{File.exists()} method, but let's use exceptions to get more practice.)
+    \item Catch \java{NumberFormatException} when reading the input file and converting strings to numbers.
+    \item You will probably need nested \java{try}/\java{catch} blocks for file input: one outside the read loop when opening the file, and one inside the read loop to skip badly formatted lines.
+    \item Catch \java{IOException} when writing an output file.
+\end{itemize}
+
+Here are some things to note:
+
+\begin{itemize}
+    \item You must accept input in either upper or lower case.
+    \item You will need to loop through the \java{cityList} twice; once in \java{statistics()} to get the total and average (if applicable), and again in \java{writeCountryFile()} to create the output file. This is a design decision---I decided these are two separate tasks to be done by two methods, rather than combining both tasks into one method.
+\end{itemize}
+
+Here is what the program output might look like. Your output does not have to look exactly like this, but it must reflect the same information.
+
+\begin{stdout}
+Reading city file...
+"AB;Too few" does not have three entries.
+"CD;Too many;1056382;extra" does not have three entries.
+"EF;Bad number;one million" does not have a number on it.
+
+Enter a two-letter country code, or press ENTER to quit: UA
+Number of cities in UA: 5
+Average population is 1,457,504.
+File UA.dat written successfully.<br />Enter a two-letter country code, or press ENTER to quit: LU<br />No cities found in LU.
+Enter a two-letter country code, or press ENTER to quit: MX
+Number of cities in MX: 11
+Average population is 2,427,622.
+File MX.dat written successfully.
+Enter a two-letter country code, or press ENTER to quit: 
+\end{stdout}
+
+Here are the contents of the file {\em UA.dat}
+
+\begin{stdout}
+UA;Kiev;2797553
+UA;Kharkiv;1430885
+UA;Dnipropetrovsk;1032822
+UA;Donets'k;1024700
+UA;Odessa;1001558
+\end{stdout}
+
+Here is an example of the output you might get for an error while writing the file (I deliberately caused this error by changing my directory to be read-only).
+
+\begin{stdout}
+Error writing FR.dat
+FR.dat (Permission denied)
+\end{stdout}
+\end{exercise}
 
 \begin{exercise}
 In this exercise, you will write two classes: a class that represents a bank account and a program that works like an ATM for bank accounts. The code repository has some pseudocode in file {\em ch18/ATM\_Pseudocode.java} that may help you get the program organized and started. 
@@ -657,7 +789,7 @@ You must also write a getter and setter for the balance, and only a getter for t
 Note that \java{deposit()} and \java{withdraw()} do not print error messages if they get incorrect input; they simply ignore it. It is up to the program that calls these functions to provide the error messages for the user of the program.
 
 \subsection*{The \java{Customer} class}
-Next, write a program named \java{Customer.java} that has a \java{main()} method. This class provides an ``ATM''grp interface to a set of bank accounts. Use this {\em accounts.dat} file to set up the initial set of accounts. Each line of the text file has an account ID, name, and starting balance, separated by colons. Your program must first read the account data file and build an \java{ArrayList} of \java{Account} objects corresponding to each line. If the file does not exist, your program must output a reasonable error message and then quit.
+Next, write a program named \java{Customer.java} that has a \java{main()} method. This class provides an ``ATM''-like interface to a set of bank accounts. Use the following {\em accounts.dat} file to set up the initial set of accounts. Each line of the text file has an account ID, name, and starting balance, separated by colons. Your program must first read the account data file and build an \java{ArrayList} of \java{Account} objects corresponding to each line. If the file does not exist, your program must output a reasonable error message and then quit.
 
 \begin{stdout}
 15725:Christina Plaka:456.71
