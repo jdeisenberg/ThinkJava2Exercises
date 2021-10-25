@@ -1,0 +1,687 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Creator: fig2dev Version 3.2.7a -->
+
+<!-- CreationDate: 2021-10-04 10:50:45 -->
+
+<!-- Magnification: 1 -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="160pt"
+   height="144pt"
+   viewBox="723 1295 2664 2395"
+   version="1.1"
+   id="svg117"
+   sodipodi:docname="2D-array.svg"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)">
+  <metadata
+     id="metadata123">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs121" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1257"
+     inkscape:window-height="820"
+     id="namedview119"
+     showgrid="false"
+     inkscape:snap-grids="false"
+     inkscape:zoom="1.2291667"
+     inkscape:cx="2.1242938"
+     inkscape:cy="96"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg117" />
+  <g
+     fill="none"
+     id="g115">
+    <!-- Line -->
+    <defs
+       id="defs5">
+      <clipPath
+         id="cp0">
+        <path
+           clip-rule="evenodd"
+           d="M 723,1295 H 3387 V 3690 H 723 z   M 1888,2670 2008,2700 1888,2730 2032,2707 2032,2693z"
+           id="path2" />
+      </clipPath>
+    </defs>
+    <polyline
+       points=" 1425,2700 2025,2700"
+       clip-path="url(#cp0)"
+       stroke="#000000"
+       stroke-width="8px"
+       id="polyline7" />
+    <!-- Forward arrow to point 2025,2700 -->
+    <polyline
+       points=" 1888,2670 2008,2700 1888,2730"
+       stroke="#000000"
+       stroke-width="8px"
+       stroke-miterlimit="8"
+       id="polyline9" />
+    <!-- Line -->
+    <defs
+       id="defs14">
+      <clipPath
+         id="cp1">
+        <path
+           clip-rule="evenodd"
+           d="M 723,1295 H 3387 V 3690 H 723 z   M 1916,3212 2010,3293 1889,3266 2028,3309 2034,3297z"
+           id="path11" />
+      </clipPath>
+    </defs>
+    <polyline
+       points=" 1425,3000 2025,3300"
+       clip-path="url(#cp1)"
+       stroke="#000000"
+       stroke-width="8px"
+       id="polyline16" />
+    <!-- Forward arrow to point 2025,3300 -->
+    <polyline
+       points=" 1916,3212 2010,3293 1889,3266"
+       stroke="#000000"
+       stroke-width="8px"
+       stroke-miterlimit="8"
+       id="polyline18" />
+    <!-- Line -->
+    <defs
+       id="defs23">
+      <clipPath
+         id="cp2">
+        <path
+           clip-rule="evenodd"
+           d="M 723,1295 H 3387 V 3690 H 723 z   M 1907,1575 2013,1512 1950,1618 2035,1500 2025,1490z"
+           id="path20" />
+      </clipPath>
+    </defs>
+    <polyline
+       points=" 1425,2100 2025,1500"
+       clip-path="url(#cp2)"
+       stroke="#000000"
+       stroke-width="8px"
+       id="polyline25" />
+    <!-- Forward arrow to point 2025,1500 -->
+    <polyline
+       points=" 1907,1575 2013,1512 1950,1618"
+       stroke="#000000"
+       stroke-width="8px"
+       stroke-miterlimit="8"
+       id="polyline27" />
+    <!-- Line -->
+    <defs
+       id="defs32">
+      <clipPath
+         id="cp3">
+        <path
+           clip-rule="evenodd"
+           d="M 723,1295 H 3387 V 3690 H 723 z   M 1889,2134 2010,2107 1916,2188 2034,2103 2028,2091z"
+           id="path29" />
+      </clipPath>
+    </defs>
+    <polyline
+       points=" 1425,2400 2025,2100"
+       clip-path="url(#cp3)"
+       stroke="#000000"
+       stroke-width="8px"
+       id="polyline34" />
+    <!-- Forward arrow to point 2025,2100 -->
+    <polyline
+       points=" 1889,2134 2010,2107 1916,2188"
+       stroke="#000000"
+       stroke-width="8px"
+       stroke-miterlimit="8"
+       id="polyline36" />
+    <!-- Line -->
+    <rect
+       x="2475"
+       y="1950"
+       width="450"
+       height="300"
+       fill="#e5e5e5"
+       stroke="#000000"
+       stroke-width="8px"
+       id="rect38" />
+    <!-- Line -->
+    <rect
+       x="2925"
+       y="1950"
+       width="450"
+       height="300"
+       fill="#e5e5e5"
+       stroke="#000000"
+       stroke-width="8px"
+       id="rect40" />
+    <!-- Line -->
+    <rect
+       x="2025"
+       y="1950"
+       width="450"
+       height="300"
+       fill="#e5e5e5"
+       stroke="#000000"
+       stroke-width="8px"
+       id="rect42" />
+    <!-- Line -->
+    <rect
+       x="2475"
+       y="1307"
+       width="450"
+       height="300"
+       fill="#e5e5e5"
+       stroke="#000000"
+       stroke-width="8px"
+       id="rect44" />
+    <!-- Line -->
+    <rect
+       x="2925"
+       y="1307"
+       width="450"
+       height="300"
+       fill="#e5e5e5"
+       stroke="#000000"
+       stroke-width="8px"
+       id="rect46" />
+    <!-- Line -->
+    <rect
+       x="2025"
+       y="1307"
+       width="450"
+       height="300"
+       fill="#e5e5e5"
+       stroke="#000000"
+       stroke-width="8px"
+       id="rect48" />
+    <!-- Line -->
+    <rect
+       x="2475"
+       y="2582"
+       width="450"
+       height="300"
+       fill="#e5e5e5"
+       stroke="#000000"
+       stroke-width="8px"
+       id="rect50" />
+    <!-- Line -->
+    <rect
+       x="2925"
+       y="2582"
+       width="450"
+       height="300"
+       fill="#e5e5e5"
+       stroke="#000000"
+       stroke-width="8px"
+       id="rect52" />
+    <!-- Line -->
+    <rect
+       x="2025"
+       y="2582"
+       width="450"
+       height="300"
+       fill="#e5e5e5"
+       stroke="#000000"
+       stroke-width="8px"
+       id="rect54" />
+    <!-- Line -->
+    <rect
+       x="2475"
+       y="3182"
+       width="450"
+       height="300"
+       fill="#e5e5e5"
+       stroke="#000000"
+       stroke-width="8px"
+       id="rect56" />
+    <!-- Line -->
+    <rect
+       x="2925"
+       y="3182"
+       width="450"
+       height="300"
+       fill="#e5e5e5"
+       stroke="#000000"
+       stroke-width="8px"
+       id="rect58" />
+    <!-- Line -->
+    <rect
+       x="2025"
+       y="3182"
+       width="450"
+       height="300"
+       fill="#e5e5e5"
+       stroke="#000000"
+       stroke-width="8px"
+       id="rect60" />
+    <!-- Line -->
+    <rect
+       x="1275"
+       y="2250"
+       width="300"
+       height="300"
+       fill="#e5e5e5"
+       stroke="#000000"
+       stroke-width="8px"
+       id="rect62" />
+    <!-- Line -->
+    <rect
+       x="1275"
+       y="2550"
+       width="300"
+       height="300"
+       fill="#e5e5e5"
+       stroke="#000000"
+       stroke-width="8px"
+       id="rect64" />
+    <!-- Line -->
+    <rect
+       x="1275"
+       y="2850"
+       width="300"
+       height="300"
+       fill="#e5e5e5"
+       stroke="#000000"
+       stroke-width="8px"
+       id="rect66" />
+    <!-- Line -->
+    <rect
+       x="1275"
+       y="1950"
+       width="300"
+       height="300"
+       fill="#e5e5e5"
+       stroke="#000000"
+       stroke-width="8px"
+       id="rect68" />
+    <!-- Text -->
+    <text
+       xml:space="preserve"
+       x="2777"
+       y="2443"
+       fill="#000000"
+       font-family="Helvetica"
+       font-style="normal"
+       font-weight="normal"
+       font-size="132"
+       text-anchor="end"
+       id="text70">1</text>
+    <!-- Text -->
+    <text
+       xml:space="preserve"
+       x="3227"
+       y="2443"
+       fill="#000000"
+       font-family="Helvetica"
+       font-style="normal"
+       font-weight="normal"
+       font-size="132"
+       text-anchor="end"
+       id="text72">2</text>
+    <!-- Text -->
+    <text
+       xml:space="preserve"
+       x="2327"
+       y="2443"
+       fill="#000000"
+       font-family="Helvetica"
+       font-style="normal"
+       font-weight="normal"
+       font-size="132"
+       text-anchor="end"
+       id="text74">0</text>
+    <!-- Text -->
+    <text
+       xml:space="preserve"
+       x="2777"
+       y="1800"
+       fill="#000000"
+       font-family="Helvetica"
+       font-style="normal"
+       font-weight="normal"
+       font-size="132"
+       text-anchor="end"
+       id="text76">1</text>
+    <!-- Text -->
+    <text
+       xml:space="preserve"
+       x="3227"
+       y="1800"
+       fill="#000000"
+       font-family="Helvetica"
+       font-style="normal"
+       font-weight="normal"
+       font-size="132"
+       text-anchor="end"
+       id="text78">2</text>
+    <!-- Text -->
+    <text
+       xml:space="preserve"
+       x="2327"
+       y="1800"
+       fill="#000000"
+       font-family="Helvetica"
+       font-style="normal"
+       font-weight="normal"
+       font-size="132"
+       text-anchor="end"
+       id="text80">0</text>
+    <!-- Text -->
+    <text
+       xml:space="preserve"
+       x="2777"
+       y="3075"
+       fill="#000000"
+       font-family="Helvetica"
+       font-style="normal"
+       font-weight="normal"
+       font-size="132"
+       text-anchor="end"
+       id="text82">1</text>
+    <!-- Text -->
+    <text
+       xml:space="preserve"
+       x="3227"
+       y="3075"
+       fill="#000000"
+       font-family="Helvetica"
+       font-style="normal"
+       font-weight="normal"
+       font-size="132"
+       text-anchor="end"
+       id="text84">2</text>
+    <!-- Text -->
+    <text
+       xml:space="preserve"
+       x="2327"
+       y="3075"
+       fill="#000000"
+       font-family="Helvetica"
+       font-style="normal"
+       font-weight="normal"
+       font-size="132"
+       text-anchor="end"
+       id="text86">0</text>
+    <!-- Text -->
+    <text
+       xml:space="preserve"
+       x="2777"
+       y="3675"
+       fill="#000000"
+       font-family="Helvetica"
+       font-style="normal"
+       font-weight="normal"
+       font-size="132"
+       text-anchor="end"
+       id="text88">1</text>
+    <!-- Text -->
+    <text
+       xml:space="preserve"
+       x="3227"
+       y="3675"
+       fill="#000000"
+       font-family="Helvetica"
+       font-style="normal"
+       font-weight="normal"
+       font-size="132"
+       text-anchor="end"
+       id="text90">2</text>
+    <!-- Text -->
+    <text
+       xml:space="preserve"
+       x="2327"
+       y="3675"
+       fill="#000000"
+       font-family="Helvetica"
+       font-style="normal"
+       font-weight="normal"
+       font-size="132"
+       text-anchor="end"
+       id="text92">0</text>
+    <!-- Text -->
+    <text
+       xml:space="preserve"
+       x="1275"
+       y="1500"
+       fill="#000000"
+       font-family="Helvetica"
+       font-style="normal"
+       font-weight="normal"
+       font-size="144"
+       text-anchor="end"
+       id="text94">array</text>
+    <!-- Text -->
+    <text
+       xml:space="preserve"
+       x="1200"
+       y="2175"
+       fill="#000000"
+       font-family="Helvetica"
+       font-style="normal"
+       font-weight="normal"
+       font-size="132"
+       text-anchor="end"
+       id="text96">row 0</text>
+    <!-- Text -->
+    <text
+       xml:space="preserve"
+       x="1200"
+       y="2475"
+       fill="#000000"
+       font-family="Helvetica"
+       font-style="normal"
+       font-weight="normal"
+       font-size="132"
+       text-anchor="end"
+       id="text98">row 1</text>
+    <!-- Text -->
+    <text
+       xml:space="preserve"
+       x="1200"
+       y="2775"
+       fill="#000000"
+       font-family="Helvetica"
+       font-style="normal"
+       font-weight="normal"
+       font-size="132"
+       text-anchor="end"
+       id="text100">row 2</text>
+    <!-- Text -->
+    <text
+       xml:space="preserve"
+       x="1200"
+       y="3075"
+       fill="#000000"
+       font-family="Helvetica"
+       font-style="normal"
+       font-weight="normal"
+       font-size="132"
+       text-anchor="end"
+       id="text102">row 3</text>
+    <!-- Line -->
+    <defs
+       id="defs107">
+      <clipPath
+         id="cp4">
+        <path
+           clip-rule="evenodd"
+           d="M 723,1295 H 3387 V 3690 H 723 z   M 1455,1813 1425,1933 1395,1813 1418,1957 1432,1957z"
+           id="path104" />
+      </clipPath>
+    </defs>
+    <polyline
+       points=" 1425,1425 1425,1950"
+       clip-path="url(#cp4)"
+       stroke="#000000"
+       stroke-width="8px"
+       id="polyline109" />
+    <!-- Forward arrow to point 1425,1950 -->
+    <polyline
+       points=" 1455,1813 1425,1933 1395,1813"
+       stroke="#000000"
+       stroke-width="8px"
+       stroke-miterlimit="8"
+       id="polyline111" />
+    <!-- Line -->
+    <rect
+       x="1350"
+       y="1350"
+       width="150"
+       height="150"
+       fill="#e5e5e5"
+       stroke="#000000"
+       stroke-width="8px"
+       id="rect113" />
+  </g>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:499.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:12.48750019"
+     x="2175.783"
+     y="1517.5198"
+     id="text127"><tspan
+       sodipodi:role="line"
+       id="tspan125"
+       x="2175.783"
+       y="1517.5198"
+       style="font-size:166.5px;stroke-width:12.48750019">11</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:499.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:12.48750019"
+     x="2614.8296"
+     y="1518.3522"
+     id="text127-3"><tspan
+       sodipodi:role="line"
+       id="tspan125-6"
+       x="2614.8296"
+       y="1518.3522"
+       style="font-size:166.5px;stroke-width:12.48750019">42</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:499.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:12.48750019"
+     x="3027.9429"
+     y="1516.5222"
+     id="text127-3-7"><tspan
+       sodipodi:role="line"
+       id="tspan125-6-5"
+       x="3027.9429"
+       y="1516.5222"
+       style="font-size:166.5px;stroke-width:12.48750019">57</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:499.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:12.48750019"
+     x="2169.2607"
+     y="2155.8096"
+     id="text127-35"><tspan
+       sodipodi:role="line"
+       id="tspan125-62"
+       x="2169.2607"
+       y="2155.8096"
+       style="font-size:166.5px;stroke-width:12.48750019">96</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:499.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:12.48750019"
+     x="2608.3074"
+     y="2156.6418"
+     id="text127-3-9"><tspan
+       sodipodi:role="line"
+       id="tspan125-6-1"
+       x="2608.3074"
+       y="2156.6418"
+       style="font-size:166.5px;stroke-width:12.48750019">32</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:499.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:12.48750019"
+     x="3021.4207"
+     y="2154.812"
+     id="text127-3-7-2"><tspan
+       sodipodi:role="line"
+       id="tspan125-6-5-7"
+       x="3021.4207"
+       y="2154.812"
+       style="font-size:166.5px;stroke-width:12.48750019">81</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:499.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:12.48750019"
+     x="2189.5793"
+     y="2785.6875"
+     id="text127-0"><tspan
+       sodipodi:role="line"
+       id="tspan125-9"
+       x="2189.5793"
+       y="2785.6875"
+       style="font-size:166.5px;stroke-width:12.48750019">6</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:499.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:12.48750019"
+     x="2628.626"
+     y="2786.5198"
+     id="text127-3-3"><tspan
+       sodipodi:role="line"
+       id="tspan125-6-6"
+       x="2628.626"
+       y="2786.5198"
+       style="font-size:166.5px;stroke-width:12.48750019">25</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:499.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:12.48750019"
+     x="3041.7393"
+     y="2784.6899"
+     id="text127-3-7-0"><tspan
+       sodipodi:role="line"
+       id="tspan125-6-5-6"
+       x="3041.7393"
+       y="2784.6899"
+       style="font-size:166.5px;stroke-width:12.48750019">73</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:499.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:12.48750019"
+     x="2189.5793"
+     y="3385.0874"
+     id="text127-2"><tspan
+       sodipodi:role="line"
+       id="tspan125-61"
+       x="2189.5793"
+       y="3385.0874"
+       style="font-size:166.5px;stroke-width:12.48750019">48</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:499.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:12.48750019"
+     x="2628.626"
+     y="3385.9197"
+     id="text127-3-8"><tspan
+       sodipodi:role="line"
+       id="tspan125-6-7"
+       x="2628.626"
+       y="3385.9197"
+       style="font-size:166.5px;stroke-width:12.48750019">37</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:499.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:12.48750019"
+     x="3041.7393"
+     y="3384.0898"
+     id="text127-3-7-9"><tspan
+       sodipodi:role="line"
+       id="tspan125-6-5-2"
+       x="3041.7393"
+       y="3384.0898"
+       style="font-size:166.5px;stroke-width:12.48750019">64</tspan></text>
+</svg>
