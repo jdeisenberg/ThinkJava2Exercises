@@ -3,6 +3,100 @@
 \section{Exercises}
 
 \begin{exercise}
+In this exercise, we will explore {\em has-a} and {\em is-a} relationships.
+
+A {\em Has-A} relationship is known as {\em composition}. For example, a \java{Deck} (aggregating class) has a \java{Card} class (aggregated class). So you will expect to see:
+
+\begin{code}
+public class Deck {
+    private Card[] cards; 
+    ...
+}
+\end{code}
+
+In the UML diagram shown in Figure~\ref{fig.aggregation}, we use an arrow with a diamond head to indicate aggregation, and we can also add notation here that shows that one \java{Deck} contains many \java{Card} objects.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale=0.75]{figs/ch14/aggregation.pdf}
+\caption{UML Diagram Showing Aggregation - a Deck has Card(s)}
+\label{fig.aggregation}
+\end{center}
+\end{figure}
+
+An {\em Is\-A} relationship is known as {\em inheritance}. For example, a \java{Hand} class (subclass) is also a \java{CardCollection} class (superclass). In Java, we use \java{extends} to indicate inheritance:
+
+\begin{code}
+public class Hand extends CardCollection {
+   ...
+}
+\end{code}
+
+Figure~\ref{fig.simpleInheritance} shows the UML for inheritance, using an open arrowhead:
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale=0.75]{figs/ch14/inheritance.pdf}
+\caption{UML Diagram Showing Inheritance - a Hand is a CardCollection}
+\label{fig.simpleInheritance}
+\end{center}
+\end{figure}
+
+First, state whether the relationship of the following classes is composition or inheritance, and draw the UML diagram showing that relationship.
+
+\begin{itemize}
+    \item \java{Address} and \java{Student}
+    \item \java{Car} and \java{Vehicle}
+    \item \java{Account} and \java{SavingsAccount}
+    \item \java{State}, \java{Capital}, and \java{Country}
+    \item \java{Instructor}, \java{Course}, and \java{Textbook}
+    \item \java{Dog}, \java{Cat}, and \java{Animal}
+    \item \java{Rectangle}, \java{Circle}, \java{Square}, and \java{Shape}
+\end{itemize}
+
+
+For classes that exhibit the inheritance relationship, could you name a few data fields/attributes for the superclass? Could you name a few for the subclass only?
+
+For example, \java{Teacher} (subclass) is also a \java{Person} (superclass). 
+Data fields for \java{Person} are: name, age, address, etc.
+Data fields for \java{Teacher} are: school, hire date etc.
+
+\end{exercise}
+
+\begin{exercise}
+Design a class named \java{Person} with two subclasses: \java{Employee} and \java{Customer}. The attributes for these classes are described in italics. A \java{Person} has a {\em name}, {\em address}, {\em phone number}, and  {\em email address}.
+
+An \java{Employee} has an {\em employee number}, {\em hire date}, and {\em salary}.
+
+The \java{Employee} class, in turn, has three subclasses: \java{Programmer}, \java{Tester}, and \java{Manager}. 
+\begin{itemize}
+\item A \java{Programmer} and a \java{Tester} have a {\em cubicle number}. Both will receive a {\em fixed bonus} at the end of the year.
+\item A \java{Manager} has an {\em office number} and has a variable bonus based on the performance of their team. This means that a \java{Manager} should have attributes for the {\em target bonus amount} and the {\em performance percentage}.
+\end{itemize}
+
+Finally, the \java{Customer} should have a {\em customer number} and {\em company} they work for.
+
+Draw the UML diagram showing the relationship of these classes, then code all these classes showing the data fields and attributes. Make meaningful names for the attributes and give them an appropriate data type. (You do not need to create constructors or other methods for the classes.)
+\end{exercise}
+
+\begin{exercise}
+The XYZZY Corporation wants to retain their most loyal customers. They launch a customer retention program and offer discount to customers who have been purchasing from the company for at least one year.
+Write a subclass \java{PrefCust} that extends the \java{Customer} class from the preceding exercise. The \java{PrefCust} class should have two data fields: {\em purchase amount} and {\em customer history} (number of years they have been a customer), and {\em discount level}. The discount level should depend on the customer history and purchase amount. All of these attributes are private.
+
+There are three levels of Preferred Customers: bronze, silver and gold.
+\begin{itemize}
+\item Bronze: history $\geq$ 1 year and average purchase amount $\geq$ \$5000 per year.  5%% off
+\item Silver:  history $\geq$ 2 years and average purchase amount $\geq$ \$10000 per year. 7.5%% off
+\item Gold:  history $\geq$ 3 years and average purchase amount $\geq$ \$15000 per year. 10%% off
+\end{itemize}
+
+
+Write the \java{PrefCust} class with all its data fields. Please write all the getter and setter methods. 
+\end{exercise}
+
+%=========================================
+
+\begin{exercise}
 
 In this exercise, you will implement an \java{Account} class which represents a bank checking account. You will then create two classes that inherit from \java{Account}: \java{SavingsAccount} and \java{CreditCardAccount}.
 
@@ -64,7 +158,7 @@ Then, implement:
 
 In short, the maximum amount you can withdraw is your current balance plus the credit limit.
 
-\item Implement a \java{calculatePayment} method that works as follows: If the balance is positive, the minimum amount you have to pay on your card per month is zero. Otherwise, your monthly payment is the minimum of 20 and $(apr/12) \cdot (−balance)$
+%\item Implement a \java{calculatePayment} method that works as follows: If the balance is positive, the minimum amount you have to pay on your card per month is zero. Otherwise, your monthly payment is the minimum of 20 and $(apr/12) \cdot (−balance)$
 
 \end{enumerate}
 
@@ -102,8 +196,6 @@ Figure~\ref{fig.inheritance1} shows the details of the \java{Account} class and 
 \label{fig.inheritance2}
 \end{center}
 \end{figure}
-
-
 
 {\bf Part 5}: Finally, write a program named {\em TestCustomer.java} that creates a \java{Customer} named ``Joe Doakes'' with this data:
 
