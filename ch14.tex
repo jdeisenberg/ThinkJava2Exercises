@@ -81,17 +81,18 @@ Draw the UML diagram showing the relationship of these classes, then code all th
 
 \begin{exercise}
 The XYZZY Corporation wants to retain their most loyal customers. They launch a customer retention program and offer discount to customers who have been purchasing from the company for at least one year.
-Write a subclass \java{PrefCust} that extends the \java{Customer} class from the preceding exercise. The \java{PrefCust} class should have two data fields: {\em purchase amount} and {\em customer history} (number of years they have been a customer), and {\em discount level}. The discount level should depend on the customer history and purchase amount. All of these attributes are private.
+Write a subclass \java{PrefCust} that extends the \java{Customer} class from the preceding exercise. The \java{PrefCust} class should have two data fields: {\em purchase amount} and {\em customer history} (number of years they have been a customer), and {\em discount level}. These are both private variables.
 
-There are three levels of Preferred Customers: bronze, silver and gold.
+Customers get a discount percentage based on their history and purchase amount. There are three levels of Preferred Customers: bronze, silver and gold.
 \begin{itemize}
 \item Bronze: history $\geq$ 1 year and average purchase amount $\geq$ \$5000 per year.  5%% off
 \item Silver:  history $\geq$ 2 years and average purchase amount $\geq$ \$10000 per year. 7.5%% off
 \item Gold:  history $\geq$ 3 years and average purchase amount $\geq$ \$15000 per year. 10%% off
 \end{itemize}
 
+The discount percentage is a {\em derived attribute}---it is never set directly, but instead is computed based on other attributes.
 
-Write the \java{PrefCust} class with all its data fields. Please write all the getter and setter methods. 
+Write the \java{PrefCust} class with all its data fields. Please write all the getter and setter methods.  Write a method named \java{getDiscountPercent} that uses the purchase amount and customer history to return the discount percent (as a percentage).
 \end{exercise}
 
 %=========================================
