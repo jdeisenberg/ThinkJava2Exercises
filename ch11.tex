@@ -59,12 +59,13 @@ In an {\em n}-sided regular polygon, all sides have the same length and all angl
     \item A constructor that creates a regular polygon with the specified number of sides and length of side, centered at (0, 0)
     \item A constructor that creates a regular polygon with the specified number of sides, length of side, and {\em x-}and {\em y-} coordinates
     \item The accessor and mutator methods (getters and setters) for all data fields
-    \item The method \java{getPerimeter()} that returns the perimeter of the polygon
-    \item The method \java{getArea()} that returns the area of the polygon. The formula for computing the area of a regular polygon is:
+    \item The method \java{getPerimeter} that returns the perimeter of the polygon
+    \item The method \java{getArea} that returns the area of the polygon. The formula for computing the area of a regular polygon is:
     
     \begin{equation*}
     {{n \times s^2} \over {4 \times tan({\pi \over n})}}
     \end{equation*}
+    \item An \java{equals} instance method that takes another \java{RegularPolygon} object as its parameter and returns \java{true} if the two polygons have the same number of sides and side length, \java{false} otherwise.
     
 \end{itemize}
 
@@ -158,7 +159,7 @@ Implement the following methods, all of which must be \java{public}:
     \item A four-argument constructor that creates an inventory item with the specified name, SKU, price, and quantity (in that order).
     \item The accessor and mutator methods (getters and setters) for all the instance fields.
     \item A method named \java{getTotalValue()} which returns, as a double, the item price times its quantity.
-    \item A method named \java{display()} which prints the item's name, SKU, price, and quantity, properly labeled. It must {\em not} display the total value; that is not an attribute of the object.
+    \item A \java{toString()} method that returns a \java{String} with the item's name, SKU, price, and quantity, properly labeled. It must {\em not} include the total value; that is not an attribute of the object.
     \item A static method named \java{compare()} which takes as its arguments two \java{InventoryItem} objects. This method returns:
         \begin{itemize}
             \item -1 if the total value of the first item is less than the total value of the second item
