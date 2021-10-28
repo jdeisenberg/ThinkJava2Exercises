@@ -24,12 +24,12 @@ class PowerSupply {
 }
 
 class Dial {
-    - currentValue: double
+    - dialValue: double
     - minValue: int
     - maxValue: int
     
     + Dial(minValue: int, maxValue: int)
-    + setCurrentValue(currentValue: double): void
+    + setDialValue(dialValue: double): void
 }
 
 class Toaster {

@@ -1,7 +1,5 @@
 \chapter{Extending Classes}
 
-\section{Composition and Inheritance}
-
 Two important concepts in object-oriented programming are {\em composition} and {\em inheritance}. In {\em Think Java, 2nd Edition}, you have seen composition in Chapter 13 and inheritance in Chapter 14, but mostly by example. We're going to go into more detail on both of these concepts here.
 
 \section{Composition}
@@ -35,13 +33,13 @@ When we draw a UML diagram involving composition, as in Figure~\ref{fig.aggregat
 Let's use composition to build a Java simulation of a toaster. What things is a toaster built from?
 
 \begin{itemize}
-\item A chassis with a number of slots
+\item A chassis with a number of slots (at least one, at most four)
 \item A lever to push bread down or pop it out
 \item A power supply to turn the toaster on and off
 \item A dial to control the darkness (1=light, 10=dark)
 \end{itemize}
 
-The first two of these are built by the toaster company. But the company that makes toasters doesn't build the power supply or the dial (which has circuitry to control the current built into it). Instead, those are parts they order from some other companies and use those to put into the chassis.
+The first two of these are built by the toaster company. But the company that makes toasters doesn't build the power supply or the dial (which has circuitry to control the current flow). Instead, those are parts they order from some other companies and put into the chassis.
 
 That means that our \java{Toaster} {\em has-a} \java{PowerSupply} object and {\em has-a} \java{Dial} object. Figure~\ref{fig.toasterComposition} shows the UML diagram. You can see the full code in the file {\em ch14/ToasterTest.java} in the repository.
 
@@ -53,7 +51,7 @@ That means that our \java{Toaster} {\em has-a} \java{PowerSupply} object and {\e
 \end{center}
 \end{figure}
 
-Before we see how composition affects the way we construct and manipulate objects, let's give a few more instances of composition ({\em has-a}) relationships. Using composition reflects the way objects are built out of other objects (parts). Each of the sub-parts has its own attributes and things that it can do (its ``methods''). Notice that we sometimes need multiple sub-parts when constructing the larger object.
+Before we see how composition affects the way we construct and manipulate objects, let's give a few more instances of composition ({\em has-a}) relationships. Using composition reflects the way objects are built out of other objects (parts). Each of the sub-parts has its own attributes and things that it can do (its ``methods''). Notice that we sometimes need multiple instances of a sub-part when constructing the larger object.
 
 \begin{itemize}
 \item A printer has a power supply, printer drum, and toner cartridge.
@@ -66,8 +64,13 @@ Back to the toaster. Here are constructors for the \java{PowerSupply} and \java{
 
 \begin{code}
 public PowerSupply(int voltage) {
-    this.voltage = voltage;
-    // new power supplies are always shipped in the "off" position
+    if (voltage == 220) {
+        this.voltage = voltage;
+    } else {
+        this.voltage = 110;
+    }
+
+    // new power supplies are always turned off
     this.turnedOn = false;
 }
 
@@ -75,7 +78,7 @@ public Dial(int minValue, int maxValue) {
     this.minValue = minValue;
     this.maxValue = maxValue;
     // new dials are always set to lowest value
-    this.currValue = minValue;
+    this.dialValue = minValue;
 }
 \end{code}
 
@@ -89,7 +92,7 @@ Now, look at how the \java{Toaster} class starts, with line numbers for referenc
  5     private Dial darkness;
  6  
  7     public Toaster(int nSlots, int voltage) {
- 8         this.nSlots = nSlots;
+ 8         this.nSlots = Math.max(1, Math.min(4, nSlots));
  9         this.nSlices = 0;
 10         this.power = new PowerSupply(voltage);
 11         this.darkness = new Dial(1, 10);
@@ -104,40 +107,47 @@ The power supply is an object, which is why line 10 has to call the \java{PowerS
 
 Similarly, line 11 has to call the \java{Dial} constructor to build a dial with a range of 1-10.
 
-When we start using a newly created \java{Toaster} object, we have to remember that it is composed of other objects:
+Although a real-life toaster is composed of parts, all of the controls are on the toaster's exterior. We don't expect---or want---the customer to have to directly access the power supply to turn the toaster on! Similarly, we want to provide methods in the \java{Toaster} class that will give programs that use the class access to the private methods and attributes of \java{power} and \java{darkness}:
 
 \begin{code}
- 1 public class ToasterTest {
- 2     public static void main(String[] args) {
- 3         Toaster northAmTwo = new Toaster(2, 110);
- 4         Toaster euroFour = new Toaster(4, 220);
- 5        
- 6         northAmTwo.getPower().setTurnedOn(true);
- 7         northAmTwo.getDarkness().setCurrentValue(4);
- 8         northAmTwo.insertBread(1);
- 9         
-10         System.out.println(northAmTwo);
-11         System.out.println(euroFour);
-12     }
-13 }
+public boolean isTurnedOn() {
+    return this.power.isTurnedOn();
+}
+
+public void setTurnedOn(boolean turnedOn) {
+    this.power.setTurnedOn(turnedOn);
+}
+
+public double getDialValue() {
+    return this.darkness.getDialValue();
+}
+
+public void setDialValue(double dialValue) {
+    this.darkness.setDialValue(dialValue);
+}
 \end{code}
 
-Line 3 creates a two-slot, 110-volt toaster for North America; line 4 creates a four-slot, 220 volt toaster for Europe.
-Things get interesting on line 6 when we turn on the North America toaster. Read from right to left, line 6 says “call the \java{setTurnedOn} method belonging to the power supply belonging to the \java{northAmTwo} toaster.
-
-We can {\em not} say this:
+Now we can write a program that creates a \java{Toaster} object and makes it do things:
 
 \begin{code}
-northAmTwo.setTurnedOn(true);
+public class ToasterTest {
+    public static void main(String[] args) {
+        Toaster euroFour = new Toaster(4, 220);
+       
+        euroFour.setTurnedOn(true);
+        euroFour.setDialValue(4.5);
+        euroFour.insertBread(1);
+        
+        System.out.println(euroFour);
+    }
+}
 \end{code}
-
-because the \java{setTurnedOn} method belongs to the \java{PowerSupply} class, not the \java{Toaster} class.  (We need to use \java{getPower} because the \java{power} attribute in the \java{Toaster} class is \java{private}.)
 
 To summarize this discussion of composition:
 
 \begin{itemize}
 \item Use composition when you have objects that are built up from other objects.
-\item When you need to access an attribute or a method of a sub-part of an object, use notation like \java{object.getSubPart().method()} or \java{object.getSubPart().getAttribute()}. (This presumes that the sub-parts and their attributes are \java{private})
+\item Provide methods in an object to give users access to \java{private} attributes and methods of the sub-objects.
 \end{itemize}
 
 \section{Exercises}
