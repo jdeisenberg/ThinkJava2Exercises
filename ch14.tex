@@ -150,13 +150,8 @@ To summarize this discussion of composition:
 \item Provide methods in an object to give users access to \java{private} attributes and methods of the sub-objects.
 \end{itemize}
 
-\section{Exercises}
-
-\begin{exercise}
-In this exercise, we will explore {\em has-a} and {\em is-a} relationships.
-
-
-An {\em Is\-A} relationship is known as {\em inheritance}. For example, a \java{Hand} class (subclass) is also a \java{CardCollection} class (superclass). In Java, we use \java{extends} to indicate inheritance:
+\section{Inheritance}
+An {\em Is\-A} relationship is known as {\em inheritance}. For example, a \java{Hand} class (subclass) also {\em is-a} \java{CardCollection} class (superclass). In Java, we use \java{extends} to indicate inheritance:
 
 \begin{code}
 public class Hand extends CardCollection {
@@ -174,7 +169,44 @@ Figure~\ref{fig.simpleInheritance} shows the UML for inheritance, using an open 
 \end{center}
 \end{figure}
 
-First, state whether the relationship of the following classes is composition or inheritance, and draw the UML diagram showing that relationship.
+Other examples of this sort of relationship:
+
+\begin{itemize}
+\item An electric bicycle {\em is a} bicycle (with extra attributes and capabilities)
+\item A trumpet {\em is a} bugle with valves (keys) that give the ability to play more notes
+\item An alarm clock {\em is a} desk clock with extra attributes and capabilities
+\item In a computer application, a ``combo box'' {\em is a} drop-down menu with extra capabilities (you can type the value as well as select it from the list)
+\end{itemize}
+
+Without inheritance, we would have to represent the \java{Bicycle} and \java{ElectricBicycle} classes as shown in Figure~\ref{fig.nonInheritedBikes}
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale=0.3]{figs/ch14/non_inherited_bikes.pdf}
+\caption{UML Diagram of Two Separate Classes for Bicycle and ElectricBicycle}
+\label{fig.nonInheritedBikes}
+\end{center}
+\end{figure}
+
+That's a lot of duplicated code when we translate it to Java. If we say that
+\java{ElectricBicycle extends Bicycle}, that means that \java{ElectricBicycle} {\em inherits} all of \java{Bicycle}'s methods and attributes. All we have to include now in \java{ElectricBicycle} are the attributes and methods that add extra capabilities to an electric bicycle, as shown in Figure~\ref{fig.inheritedBikes}
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale=0.5]{figs/ch14/inherited_bikes.pdf}
+\caption{UML Diagram of ElectricBicycle Extending the Bicycle Class}
+\label{fig.inheritedBikes}
+\end{center}
+\end{figure}
+
+
+
+{\em This section is currently being written. More to come; watch this space.}
+
+\section{Exercises}
+
+\begin{exercise}
+In this exercise, we will explore {\em has-a} and {\em is-a} relationships. First, state whether the relationship of the following classes is composition or inheritance, and draw the UML diagram showing that relationship.
 
 \begin{itemize}
     \item \java{Address} and \java{Student}
