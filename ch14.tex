@@ -22,7 +22,7 @@ Composition is also known as a {\em Has-A} relationship.  (A \java{Deck} {\em ha
 
 When we draw a UML diagram involving composition, as in Figure~\ref{fig.aggregation}, we use an arrow with a diamond head to indicate aggregation, and we can also add notation here that shows that one \java{Deck} contains many \java{Card} objects.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 \begin{center}
 \includegraphics[scale=0.75]{figs/ch14/aggregation.pdf}
 \caption{UML Diagram Showing Aggregation - a Deck has Card(s)}
@@ -43,7 +43,7 @@ The first two of these are built by the toaster company. But the company that ma
 
 That means that our \java{Toaster} {\em has-a} \java{PowerSupply} object and {\em has-a} \java{Dial} object. Figure~\ref{fig.toasterComposition} shows the UML diagram. You can see the full code in the file {\em ch14/ToasterTest.java} in the repository.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 \begin{center}
 \includegraphics[scale=0.5]{figs/ch14/toaster.pdf}
 \caption{UML Diagram Showing a Toaster composed of a PowerSupply and Dial}
@@ -161,7 +161,7 @@ public class Hand extends CardCollection {
 
 Figure~\ref{fig.simpleInheritance} shows the UML for inheritance, using an open arrowhead:
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 \begin{center}
 \includegraphics[scale=0.75]{figs/ch14/inheritance.pdf}
 \caption{UML Diagram Showing Inheritance - a Hand is a CardCollection}
@@ -180,7 +180,7 @@ Other examples of this sort of relationship:
 
 Without inheritance, we would have to represent the \java{Bicycle} and \java{ElectricBicycle} classes as shown in Figure~\ref{fig.nonInheritedBikes}
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 \begin{center}
 \includegraphics[scale=0.3]{figs/ch14/non_inherited_bikes.pdf}
 \caption{UML Diagram of Two Separate Classes for Bicycle and ElectricBicycle}
@@ -191,7 +191,11 @@ Without inheritance, we would have to represent the \java{Bicycle} and \java{Ele
 That's a lot of duplicated code when we translate it to Java. If we say that
 \java{ElectricBicycle extends Bicycle}, that means that \java{ElectricBicycle} {\em inherits} all of \java{Bicycle}'s methods and attributes. All we have to include now in \java{ElectricBicycle} are the attributes and methods that add extra capabilities to an electric bicycle, as shown in Figure~\ref{fig.inheritedBikes}
 
-\begin{figure}[!h]
+In this example, \java{Bicycle} is called the {\em superclass} or {\em parent class}, and \java{ElectricBicycle} is called the {\em subclass} or {\em child class}.  As in the real world, the child inherits things from the parent.\footnotemark
+
+\footnotetext{With one exception: as the joke says, ``Parents inherit their gray hair from their children.''}
+
+\begin{figure}[!ht]
 \begin{center}
 \includegraphics[scale=0.5]{figs/ch14/inherited_bikes.pdf}
 \caption{UML Diagram of ElectricBicycle Extending the Bicycle Class}
@@ -199,11 +203,9 @@ That's a lot of duplicated code when we translate it to Java. If we say that
 \end{center}
 \end{figure}
 
+Before we go into details about how to use inheritance in Java, let's take a break for a short exercise:
 
-
-{\em This section is currently being written. More to come; watch this space.}
-
-\section{Exercises}
+\section{Exercise: Composition vs. Inheritance}
 
 \begin{exercise}
 In this exercise, we will explore {\em has-a} and {\em is-a} relationships. First, state whether the relationship of the following classes is composition or inheritance, and draw the UML diagram showing that relationship.
@@ -218,7 +220,6 @@ In this exercise, we will explore {\em has-a} and {\em is-a} relationships. Firs
     \item \java{Rectangle}, \java{Circle}, \java{Square}, and \java{Shape}
 \end{itemize}
 
-
 For classes that exhibit the inheritance relationship, could you name a few data fields/attributes for the superclass? Could you name a few for the subclass only?
 
 For example, \java{Teacher} (subclass) is also a \java{Person} (superclass). 
@@ -226,6 +227,199 @@ Data fields for \java{Person} are: name, age, address, etc.
 Data fields for \java{Teacher} are: school, hire date etc.
 
 \end{exercise}
+
+\section{Inheritance (continued)}
+
+Let's use a smaller example for our continued discussion of inheritance.  We'll have an \java{Item} class, which represents an item in a store. An \java{Item} instance has a name, a SKU (stock keeping unit), and a price. This is the parent class. We also have a \java{SaleItem} class, which is a child class. In addition to a name, SKU, and price (which it inherits from the parent class), a \java{SaleItem} has a discount percentage (expressed as a decimal). Figure~\ref{fig.itemObject} shows the UML diagram for these two classes:
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=0.5]{figs/ch14/item.pdf}
+\caption{UML Diagram of Item and SaleItem classes}
+\label{fig.itemObject}
+\end{center}
+\end{figure}
+
+There are no setters for the \java{name} and \java{sku} attributes; once an item is created, those attributes should never change.
+
+Here is the code for \java{Item}, which you will find in the repository in file {\em ch14/Item.java}:
+
+\begin{code}
+public class Item {
+    private String name;
+    private String sku;
+    private double price;
+    
+    public Item(String name, String sku, double price)  {
+        this.name = name;
+        this.sku = sku;
+        this.price = Math.abs(price);
+    }
+    
+    public String getName() {
+        return this.name;
+    }
+    
+    public String getSku() {
+        return this.sku;
+    }
+    
+    public double getPrice() {
+        return this.price;
+    }
+    
+    public void setPrice(double price) {
+        this.price = Math.abs(price);
+    }
+    
+    public double purchase(int quantity) {
+        return this.price * quantity;
+    }
+    
+    public String toString() {
+        return String.format("%s (%s): $%.2f", this.name,
+            this.sku, this.price);
+    }
+    
+    public boolean equals(Item other) {
+        return (this.name.equals(other.name) &&
+            this.sku.equals(other.sku) &&
+            this.price == other.price);
+    }
+}
+\end{code}
+
+Let's start on the code for \java{SaleItem}, in file {\em ch14/SaleItem.java}. You might be tempted to write this:
+
+\begin{code}
+public class SaleItem extends Item {
+    private double discount; // as a decimal
+   
+    public SaleItem(String name, String sku, double price,
+       double discount)  {
+       this.name = name;
+       this.sku = sku;
+       this.price = Math.abs(price);
+       this.discount = Math.max(0,
+           Math.min(discount, 1.00));
+    }
+}
+\end{code}
+
+But that won't work, because \java{name}, \java{price}, and \java{sku} are \java{private}.  We can't call the setter methods for \java{name} and \java{sku} because there aren't any. What we need to do is call the superclass constructor, which {\em can} set those attributes.  To call a superclass constructor, you use the keyword \java{super}:
+
+\begin{code}
+public class SaleItem extends Item {
+    private double discount; // as a decimal
+   
+    public SaleItem(String name, String sku, double price,
+       double discount)  {
+       super(name, sku, price);
+       this.discount = Math.max(0,
+           Math.min(discount, 1.00));
+    }
+}
+\end{code}
+
+Important: When calling a superclass constructor, the call to \java{super} {\bf \em must} be the first non-comment line in the subclass's constructor.
+
+Here's the rest of the \java{SaleItem} code:
+
+\begin{code}
+    public double getDiscount() {
+        return this.discount;
+    }
+    
+    public void setDiscount(double discount) {
+        this.discount =
+            Math.max(0, Math.min(discount, 1.00));
+    }
+    
+    public double purchase(int quantity) {
+        return (this.getPrice() * quantity) *
+            (1 - discount);
+    }
+
+    public String toString() {
+        return String.format("%s (%s): $%.2f - %.1f%% discount",
+            this.getName(), this.getSku(), this.getPrice(),
+            this.discount * 100.0);
+    }
+    
+    public boolean equals(SaleItem other) {
+        return (this.getName().equals(other.getName()) &&
+            this.getSku().equals(other.getSku()) &&
+            this.getPrice() == other.getPrice() &&
+            this.discount == other.discount);
+    }
+}
+\end{code}
+
+Again, because \java{name}, \java{sku}, and \java{price} are \java{private} to the \java{Item} class, the \java{purchase}, \java{toString} and \java{equals} methods must use the getter methods to access those private values.
+
+Here's a program in file {\em ch14/ItemTest.java} that creates an \java{Item} and a \java{SaleItem}, prints them, and then purchases ten of each:
+
+\begin{code}
+public class ItemTest {
+    
+    public static void main(String[] args) {
+        Item envelopes = new Item(
+            "Letter Size Envelopes - 100 count",
+            "LSE-0100", 5.75);
+        SaleItem marker = new SaleItem(
+            "Erasable marker - black", "EMB-913",
+            2.15, 0.10);
+
+        System.out.println(envelopes);
+        double envelopeTotal = envelopes.purchase(10);
+        System.out.printf("Ten boxes of envelopes cost $%.2f\n",
+            envelopeTotal);
+        
+        System.out.println(marker);
+        double markerTotal = marker.purchase(10);
+        System.out.printf("Ten markers cost $%.2f\n",
+            markerTotal);
+    }
+}
+\end{code}
+
+When we run the program, we get the correct output:
+
+\begin{stdout}
+Letter Size Envelopes - 100 count (LSE-0100): $5.75
+Ten boxes of envelopes cost $57.50
+Erasable marker - black (EMB-913): $2.15 - 10.0% discount
+Ten markers cost $19.35
+\end{stdout}
+
+Congratulations! We've used inheritance, and our program works. Now it's time to do what Joe Armstrong\footnotemark said in his book {\em Erlang and OTP in Action}: ``Make it work, then make it beautiful, then if you really, really have to, make it fast. 90 percent of the time, if you make it beautiful, it will already be fast. So really, just make it beautiful!”
+
+\footnotetext{Joe Armstrong was the co-inventor of the Erlang programming language. It's totally different from Java, and it's  an incredibly interesting language.}
+
+Part of making a program beautiful is getting rid of unnecessary duplication. In that spirit, let's take a closer look at the \java{SaleItem} class's \java{purchase}, \java{toString} and \java{equals} methods. The calculation of the base price in \java{purchase} is the same as in \java{Item}. The part of \java{toString}'s format string for the name, sku, and price is the same as in \java{Item}. Similarly, the first three lines of \java{equals} are the same as in \java{Item}.
+
+We can once again use the \java{super} keyword to call methods in a parent class. Here's a rewrite that eliminates unnecessary duplication:
+
+\begin{code}
+public double purchase(int quantity) {
+    return super.purchase(quantity) *
+        (1 - discount / 100.0);
+}
+
+public String toString() {
+    return String.format("%s - %.1f%% discount",
+        super.toString(),
+        this.discount * 100.0);
+}
+
+public boolean equals(SaleItem other) {
+    return (super.equals(other) &&
+        this.discount == other.discount);
+}
+\end{code}
+
+
+\section{Exercises (continued)}
 
 \begin{exercise}
 Design a class named \java{Person} with two subclasses: \java{Employee} and \java{Customer}. The attributes for these classes are described in italics. A \java{Person} has a {\em name}, {\em address}, {\em phone number}, and  {\em email address}.
@@ -258,10 +452,10 @@ Customers get a discount percentage based on their history and purchase amount. 
 
 The discount percentage is a {\em derived attribute}---it is never set directly, but instead is computed based on other attributes.
 
-Write the \java{PrefCust} class with all its data fields. Please write all the getter and setter methods.  Write a method named \java{getDiscountPercent} that uses the purchase amount and customer history to return the discount percent (as a percentage).
+Write the \java{PrefCust} class with all its data fields. Please write all the getter and setter methods.  Write a method named \java{getDiscount} that uses the purchase amount and customer history to return the discount percent (as a percentage).
 \end{exercise}
 
-%=========================================
+
 
 \begin{exercise}
 
@@ -269,7 +463,7 @@ In this exercise, you will implement an \java{Account} class which represents a 
 
 You will then use composition to create a \java{Customer} class which includes instances of each of these account classes.
 
-Finally, you will write a program with a \java{main} method that tests these classes.
+Finally, you will write a program with a \java{main} method that works with these classes.
 
 {\bf Part 1}: Create a class named \java{Account}, which has the following private properties:
 
@@ -385,3 +579,157 @@ Then, do the following transactions:
 
 
 \end{exercise}
+
+\section{Polymorphism and Dynamic Binding}
+
+Let's return to the \java{Item} and \java{SaleItem} classes.  Try the following program (in the repository in file {\em ch14/Polymorphism.java}) and see what happens:
+
+\begin{code}
+public class Polymorphism {
+    public static void main(String[] args) {
+        Item item1 = new Item("Cat Food", "CF-909", 7.85);
+        Item item2 = new SaleItem("Lima Beans", "LB-104",
+            5.95, 7.5);
+            
+        System.out.println("item 1: " + item1.toString());
+        System.out.println("item 2: " + item2.toString());
+    }
+}
+\end{code}
+
+The first assignment statement for \java{item1} is no surprise; it assigns an \java{Item} object to an \java{Item} variable. But that second assignment statement---assigning a \java{SaleItem} object to an \java{Item} variable? How can that possibly work? What mad sorcery is this?
+
+\index{polymorphism}
+Remember, we're talking about an {\em is-a} relationship. A \java{SaleItem} {\em is an} \java{Item}. That's why it's legal to make the assignment. That is called {\em polyorphism}---the ability to assign a child class object to a parent class variable.
+
+Note that you can't assign a parent object to a child variable. Every \java{SaleItem} is an \java{Item}, but not every \java{Item} is a \java{SaleItem}. If you try this:
+
+\begin{code}
+SaleItem badNews = new Item("Oops", "X-000", 6.66);
+\end{code}
+
+The compiler will (correctly) complain:
+
+\begin{stdout}
+Polymorphism.java:7: error: incompatible types:
+  Item cannot be converted to SaleItem
+        SaleItem badNews = new Item("Oops", "X-001", 6.66);
+\end{stdout}
+
+If you compile and run this program (without the bad line in it), you get this output:
+
+\begin{stdout}
+item 1: Cat Food (CF-909): $7.85
+item 2: Lima Beans (LB-104): $5.95 - 7.5% discount
+\end{stdout}
+
+Take a look at the \java{System.out.println} statements that produced that output. The first one uses \java{Item}'s \java{toString} method to print \java{item1} with its name, SKU, and price.  The second one uses \java{SaleItem}'s \java{toString} method to print \java{item2}'s name, SKU, price {\em and} discount rate.
+
+But both \java{item1} and \java{item2} are \java{Item} objects, so how did the second \java{println} know to call the \java{toString} method from \java{SaleItem}?
+
+\index{dynamic binding}
+\index{binding!dynamic}
+
+The answer is {\em dynamic binding}. At compile time, both \java{item1} and \java{item2} have the \java{Item} data type. But at  run time, the JVM looks at the actual object that \java{item2} refers to and finds that it has the \java{SaleItem} data type, and it uses \java{SaleItem}'s \java{toString} method.
+
+This difference between what the compiler sees and what the runtime looks at has very important consequences.
+
+Consider this code, which sets up an array of \java{Item}. Polymorphism allows some of them to be \java{Item} instances and others to be \java{SaleItem} instances:
+
+\begin{code}
+public class PolyArray {
+    public static void main(String[] args) {
+        Item [] foods = {
+            new Item("Rye Bread", "RB-010", 3.95),
+            new SaleItem("Tomato Soup", "TS-882", 1.29, 0.05),
+            new SaleItem("Canned Lima Beans", "CLB-104",
+                2.98, 0.155),
+            new SaleItem("Frozen Pizza", "FP-326",
+                5.90, 0.12),
+            new Item("Organic Salsa", "OS-245", 3.79)
+        };
+// ...
+    }
+}
+\end{code}
+
+We want the program to go through the array and print each item's name and price, and, if it's a sale item, say how much the customer saves:
+
+\begin{stdout}
+Rye Bread: $3.95
+Tomato Soup: $1.23 - you save $0.06
+Canned Lima Beans: $2.52 - you save $0.46
+Frozen Pizza: $5.19 - you save $0.71
+Organic Salsa: $3.79
+\end{stdout}
+
+Here's the pseudo-code for what we want to do:
+
+\begin{code}
+for (Item food: foods) {
+    System.out.printf("%s: ", food.getName());
+    if (food is a sale item) {
+        discounted price is getPrice() * (1 - getDiscount());
+        amount saved is getPrice() * getDiscount();
+        display discounted price and amount saved;
+    } else {
+        display getPrice();
+    }
+}
+\end{code}
+
+Note that the \java{for} loop variable is an \java{Item}, because we have told the compiler that \java{foods} is an array of \java{Item}.  Here's the big question: how do we determine---at run time---if an array element is a \java{SaleItem} or an \java{Item}? We use the \java{instanceof} operator, which takes the form:
+
+\begin{code}
+variable instanceof Class
+\end{code}
+
+and returns \java{true} if the given \java{variable} is an instance of \java{Class}; \java{false} otherwise.
+
+A first try at the code looks like this:
+
+\begin{code}
+for (Item food: foods) {
+    System.out.printf("%s: ", food.getName());
+    if (food instanceof SaleItem) {
+        double amountSaved = food.getPrice() *
+            food.getDiscount();
+        System.out.printf("$%.2f - you saved $%.2f\n",
+            food.getPrice() - amountSaved, amountSaved);
+    } else {
+        System.out.printf("$%.2f\n",
+            food.getPrice());
+    }
+}
+\end{code}
+
+But when we compile, the compiler tells us:
+
+\begin{stdout}
+PolyArray.java:17: error: cannot find symbol
+            food.getDiscount();
+                ^
+  symbol:   method getDiscount()
+  location: variable food of type Item
+\end{stdout}
+
+Why can't the compiler find \java{getDiscount}? The answer is in {\texttt variable food {\bf of type Item}}. As far as the compiler is concerned, \java{food} is an \java{Item}, and that class does not have a \java{getDiscount} method in it.
+
+What we have to do is use a {\em cast} to tell the compiler, ``yes, we declared it as an \java{Item}, but please treat it as a \java{SaleItem}'':
+
+\begin{code}
+for (Item food: foods) {
+    System.out.printf("%s: ", food.getName());
+    if (food instanceof SaleItem) {
+        // tell the compiler to treat food as a SaleItem
+        SaleItem saleFood = (SaleItem) food;
+        double amountSaved = saleFood.getPrice() *
+            saleFood.getDiscount();
+        System.out.printf("$%.2f - you saved $%.2f\n",
+            saleFood.getPrice() - amountSaved, amountSaved);
+    } else {
+        System.out.printf("$%.2f\n",
+            food.getPrice());
+    }
+}
+\end{code}
