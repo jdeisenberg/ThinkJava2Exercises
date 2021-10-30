@@ -458,7 +458,7 @@ Write the \java{PrefCust} class with all its data fields. Please write all the g
 
 
 \begin{exercise}
-
+\label{ex.AccountInheritance}
 In this exercise, you will implement an \java{Account} class which represents a bank checking account. You will then create two classes that inherit from \java{Account}: \java{SavingsAccount} and \java{CreditCardAccount}.
 
 You will then use composition to create a \java{Customer} class which includes instances of each of these account classes.
@@ -519,7 +519,7 @@ Then, implement:
 
 In short, the maximum amount you can withdraw is your current balance plus the credit limit.
 
-%\item Implement a \java{calculatePayment} method that works as follows: If the balance is positive, the minimum amount you have to pay on your card per month is zero. Otherwise, your monthly payment is the minimum of 20 and $(apr/12) \cdot (−balance)$
+\item Implement a \java{calculatePayment} method that works as follows: If the balance is positive, the minimum amount you have to pay on your card per month is zero. Otherwise, your monthly payment is the minimum of 20 and $(apr/12) \cdot (−balance)$
 
 \end{enumerate}
 
@@ -733,3 +733,111 @@ for (Item food: foods) {
     }
 }
 \end{code}
+
+Here's a quick summary of inheritance, polymorphism, and dynamic binding.
+
+\begin{itemize}
+\item A subclass (the child class) extends the superclass (the parent class).
+\item A subclass constructor can call the superclass constructor by invoking the \java{super} method.
+\item If you use a \java{super} constructor, it {\em must} be the first non-comment line.
+\item Subclass methods can invoke the superclass methods by using \java{super.method} anywhere in the subclass method body.
+\item Polymorphism allows you to assign a subclass object to a superclass variable. For example,
+
+\begin{code}
+Item myItem = new SaleItem("Tomato Soup", "TS-882",
+   1.29, 0.05);
+\end{code}
+
+\item At compile time, the compiler sees the superclass variable as having the superclass data type. In the preceding code, the compiler says that \java{myItem} has data type \java{Item}.
+
+\item At run time, the compiler uses the actual data type of the object. When you say:
+
+\begin{code}
+System.out.println(myItem.toString());
+\end{code}
+    
+the JVM will see that \java{myItem} contains a reference to a \java{SaleItem} object and will invoke \java{SaleItem}'s \java{toString} method.
+\item The compiler won't let you call a method that exists only in the subclass on a superclass variable. This won't work:
+
+\begin{code}
+double saving = myItem.getPrice() * myItem.getDiscount();
+\end{code}
+    
+\java{getPrice} is fine; that method belongs to \java{Item}, but \java{getDiscount} belongs only to the subclass.
+\item You can determine if a variable belongs to a class at run time by using the \java{instanceof} operator:
+
+\begin{code}
+if (myItem instanceof SaleItem) {
+    ...
+}
+\end{code}
+    
+\item Once you have established that you have a variable of the subclass data type, you can convince the compiler to treat it as a subclass by using a cast:
+
+\begin{code}
+if (myItem instanceof SaleItem) {
+    double saving = myItem.getPrice() *
+        ((SaleItem) myItem).getDiscount();
+}
+\end{code}
+    
+The extra parentheses around the cast are required to get everything evaluated in the correct priority.
+\end{itemize}
+
+\section{Exercises (concluded)}
+
+\begin{exercise}
+This exercise will let you practice polymorphism and dynamic binding. It uses the \java{Account}, \java{SavingsAccount}, and \java{CreditCardAccount} classes you developed in Exercise~\ref{ex.AccountInheritance}. Instead of creating a customer with multiple accounts, create an array of these accounts:
+
+\begin{itemize}
+
+\item An \java{Account} number 1066 with a balance of \$7,500.
+\item A \java{SavingsAccount} number 30507 with a balance of \$4,500 and an APR of 1.5\%
+\item A \java{CreditCardAccount} number 51782737 with a balance of \$7,000.00, APR of 8\%, and credit limit of \$1000.00
+\item A \java{CreditCardAccount} number 629553328 with a balance of \$1,500.00, an APR of 7.5\%, and a credit limit of \$5,000
+\item A \java{CreditCardAccount} number 4977201043L with a balance of -\$5,000.00, an APR of 7\%, and a credit limit of \$10,000 (The \java{L} after the account number lets the compiler know that the account number is a \java{long} integer.)
+\end{itemize}
+
+Your program will use a loop to do the following for each account:
+
+\begin{itemize}
+\item Deposit \$2,134.00
+\item Withdraw \$4,782.00
+\item Print the account status using \java{toString()}.
+    \begin{itemize}
+        \item For savings accounts, also display the annual interest
+        \item For credit card accounts, also display the monthly payment
+    \end{itemize}
+\end{itemize}
+
+Here's what the output might look like:
+
+\begin{stdout}
+Account: 1066
+Balance: $4852.00
+
+Account: 30507
+Balance: $1852.00
+Interest Rate: 1.50%
+Annual Interest: $27.78
+
+Account: 51782737
+Balance: $4352.00
+Interest Rate: 8.00%
+Credit Limit: $1000.00
+Monthly Payment: $0.00
+
+Account: 629553328
+Balance: $-1148.00
+Interest Rate: 7.50%
+Credit Limit: $5000.00
+Monthly Payment: $7.18
+
+Account: 4977201043
+Balance: $-7648.00
+Interest Rate: 7.00%
+Credit Limit: $10000.00
+Monthly Payment: $20.00
+\end{stdout}
+
+\end{exercise}
