@@ -631,6 +631,62 @@ Some hints:
 \end{exercise}
 
 \begin{exercise}
+Are you tired of having to write all the getter and setter methods when you create a new \java{class}? In this exercise, your program will ask for the name of a file that contains Java declarations, like this:
+
+\begin{stdout}
+public int age;
+private double[] weights;
+\end{stdout}
+
+It will then ask for an output file name and create that file with the getters and setters:
+
+\begin{stdout}
+public int getAge() {
+    return age;
+}
+
+public void setAge(int age) {
+    this.age = age;
+}
+
+public double[] getWeights() {
+    return weights;
+}
+
+public void setWeights(double[] weights) {
+    this.weights = weights;
+}
+\end{stdout}
+
+You may presume that the input file is formatted as follows:
+
+\begin{enumerate}
+\item Each line will begin with either \java{public} or \java{private}, without leading blanks.
+\item The data type does not contain any blanks.
+\item There is only one blank between the items on a line, and the data type does not contain any blanks. (These three items allow you to do \java{string.split(" ")} to get the individual parts of the declaration.)
+\item Each line always ends with a semicolon.
+\end{enumerate}
+
+If the input file has blank lines, ignore them.
+
+As in the preceding exercise, use exception handling to make sure that:
+
+\begin{itemize}
+\item If the input file does not exist or cannot be opened, print an appropriate error message.
+\item If the output file cannot be opened, print an appropriate error message.
+\end{itemize}
+
+Hint: You can use the \java{replaceAll} method in the \java{String} class to get rid of the semicolon. The \java{replaceAll} method takes two parameters: a pattern to look for and a replacement string. For example, to replace all occurrences of \java{"ab"} with the empty string \java{""}:
+
+\begin{code}
+String original = "abracadabra";
+String result = original.replaceAll("ab", "");
+// result will be "racadra"
+\end{code}
+
+\end{exercise}
+
+\begin{exercise}
 In this exercise, you will consolidate data from one file to create another file in a program named {\em Consolidate.java}. The original data is in file {\em ch18/wildfires\_jan\_2015.txt} and was extracted from a database of 1.8 million wildfires from 1992 to 2015.\footnotemark
 
 \footnotetext{Short, Karen C. 2017. Spatial wildfire occurrence data for the United States, 1992-2015 [FPA\_FOD\_20170508]. 4th Edition. Fort Collins, CO: Forest Service Research Data Archive. \url{https://doi.org/10.2737/RDS-2013-0009.4}}
