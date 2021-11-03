@@ -306,7 +306,7 @@ public class SaleItem extends Item {
 }
 \end{code}
 
-But that won't work, because \java{name}, \java{price}, and \java{sku} are \java{private}.  We can't call the setter methods for \java{name} and \java{sku} because there aren't any. What we need to do is call the superclass constructor, which {\em can} set those attributes.  To call a superclass constructor, you use the keyword \java{super}:
+But that won't work, because \java{name}, \java{price}, and \java{sku} are \java{private} to the \java{Item} class.  We can't call the setter methods for \java{name} and \java{sku} because there aren't any. What we need to do is call the superclass constructor, which {\em can} set those attributes.  To call a superclass constructor, you use the keyword \java{super}:
 
 \begin{code}
 public class SaleItem extends Item {
@@ -734,10 +734,15 @@ for (Item food: foods) {
 }
 \end{code}
 
+Now the compiler is happy---\java{saleFood} is a \java{SaleItem}, and that class has a \java{getDiscount} method.
+
+\section{Summary}
+
+
 Here's a quick summary of inheritance, polymorphism, and dynamic binding.
 
 \begin{itemize}
-\item A subclass (the child class) extends the superclass (the parent class).
+\item A subclass (the child class) extends a superclass (the parent class).
 \item A subclass constructor can call the superclass constructor by invoking the \java{super} method.
 \item If you use a \java{super} constructor, it {\em must} be the first non-comment line.
 \item Subclass methods can invoke the superclass methods by using \java{super.method} anywhere in the subclass method body.
@@ -781,7 +786,7 @@ if (myItem instanceof SaleItem) {
 }
 \end{code}
     
-The extra parentheses around the cast are required to get everything evaluated in the correct priority.
+The extra parentheses around the cast are required to get everything evaluated in the correct order.
 \end{itemize}
 
 \section{Exercises (concluded)}
