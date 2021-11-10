@@ -203,6 +203,35 @@ This method returns a new array the same size as the input array, with each elem
 \end{exercise}
 
 \begin{exercise}
+Add a method to the \java{MatrixMath} class that returns the {\em transpose} of an array. When you transpose an array, the first row becomes the first column, the second row becomes the second column, etc. For example:
+
+\begin{equation*}
+\begin{pmatrix}
+1 & 2 & 3 & 4 \\
+5 & 6 & 7 & 8 \\
+9 & 10 & 11 & 12
+\end{pmatrix}
+\rightarrow
+\begin{pmatrix}
+1 & 5 & 9 \\
+2 & 6 & 10 \\
+3 & 7 & 11 \\
+4 & 8 & 12
+\end{pmatrix}
+\end{equation*}
+
+The header of the method is:
+
+\begin{code}
+public static double[][] transpose(double[][] arr)
+\end{code}
+
+
+Write a test program in a separate file that asks the user for the dimensions of an array, reads it in, transposes it, and prints the result.
+
+\end{exercise}
+
+\begin{exercise}
 Adding matrices is fairly straightforward. Multiplying them is anything but! In this exercise, you will write a method to multiply two matrices. The header of the method is:
 
 \begin{code}
@@ -267,6 +296,57 @@ Enter contents by rows: 7 10 8 11 9 12
 Matrix C is
 50.0 68.0 
 122.0 167.0
+\end{stdout}
+
+\end{exercise}
+
+\begin{exercise}
+Write a program named {\em Dice.java} that will do the following:
+
+\begin{enumerate}
+
+\item Ask the user how many times they wish to roll a pair of dice, from 1-999. Validate the input---keep asking until the number is in range. Write a method named \java{getNRolls} to do this step. The method takes a \java{Scanner} object as its parameter and returns the number of rolls the user desires.
+
+\item Create a $6 \times 6$ array named \java{rolls} to hold the result of the rolls.
+
+\item Simulate randomly rolling a pair of dice as many times as the user requested. As you roll the dice, count how many times each combination of dice was rolled. For example, if the first die is a 3 and the second die is 5, you will add one to the entry at \java{rolls[2][4]}. (If you generate numbers in the range 1-6, you will have to subtract one at appropriate places. If you generate numbers in the range 0-5, you don't need to do any subtraction). Write a method named \java{rollDice} to do this step. It takes the number of rolls as its parameter and returns the two-dimensional array of \java{rolls}.
+
+\item Print out the array, properly labeled, so that the numbers all line up. You can do this in \java{main} or write a method to do it.
+
+\item Go through the array you created in step 3 and figure out how many times the dice totaled 2, 3, 4, \textellipsis 12. Write a method called \java{calcFrequencies} to do this. It will take the \java{rolls} array as its parameter and return a single-dimensional array of length 11, which your \java{main} method will store in an array named \java{totals}.
+
+\item Print the frequency array from step 5, properly labeled. You may do this in \java{main} or write a method to do it.
+
+\end{enumerate}
+
+Yes; I know this is ``inefficient.'' It is possible to construct the \java{totals} array at the same time that you create the \java{rolls} array. You could do everything in \java{main} without any other methods. However, I want you to practice passing and returning arrays to and from methods, so I decided to write the exercise this way.
+
+Sample output:
+
+\begin{stdout}
+How many times do you want to roll the dice (1-999)? 200
+Frequencies for individual dice
+      1   2   3   4   5   6
+    ------------------------
+1|    3   7   2   3   8   4
+2|    4   7   2   5  10   5
+3|    9  10   7   4   6   5
+4|    6   4   5   7   4   8
+5|    3   3   3   8   6   6
+6|    5   5   8   7   3   8
+
+Frequencies of totals
+ 2:   3
+ 3:  11
+ 4:  18
+ 5:  21
+ 6:  27
+ 7:  31
+ 8:  26
+ 9:  25
+10:  21
+11:   9
+12:   8
 \end{stdout}
 
 \end{exercise}
