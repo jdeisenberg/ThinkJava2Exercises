@@ -792,6 +792,67 @@ The extra parentheses around the cast are required to get everything evaluated i
 \section{Exercises (concluded)}
 
 \begin{exercise}
+This exercise will let you practice polymorphism and dynamic binding. Implement the \java{Bicycle}, \java{ElectricBicycle}, and \java{CargoBicycle} classes. (These are not defined in the same way as in the preceding text.) The parent \java{Bicycle} class has these attributes and methods: 
+
+\begin{itemize}
+\item \java{frameSize}, (in centimeters) a double, with a getter (but not a setter).
+\item \java{nGears}, an integer, with a getter (but not a setter).
+\item \java{currentGear}, an integer, with both a getter and setter.
+\item A constructor with two parameters for the frame size and number of gears.
+\item A \java{toString} method that includes frame size, number of gears, and current gear, properly labeled.
+\end{itemize}
+
+The \java{ElectricBicycle} class is a child of \java{Bicycle} and adds these attributes and methods:
+
+\begin{itemize}
+\item \java{batteryCapacity} (in watt-hours), an integer, with a getter (but not a setter).
+\item \java{currentCharge} (in watt-hours), a double, with a getter and setter.
+\item A constructor with three parameters for frame size, number of gears, and battery capacity.
+\item \java{chargePercent}, a method that returns the percentage charge in the battery as a decimal, by dividing current charge by battery capacity.
+\item A \java{toString} method that includes frame size, number of gears, current gear, battery capacity, and current charge, properly labeled.
+\end{itemize}
+
+The \java{CargoBicycle} class is also a child of \java{Bicycle} and adds these attributes and methods:
+
+\begin{itemize}
+\item \java{maxLoad} (in kilograms), a double, with a getter (but not a setter). This is the maximum load that the bicycle can carry.
+\item \java{currentLoad} (in kilograms), a double, with a getter and setter.
+\item A constructor with three parameters for frame size, number of gears, and maximum cargo load.
+\item \java{loadFactor}, a method that returns the percentage of load on the bicycle as a decimal, by dividing the current load by the maximum load.
+\item A \java{toString} method that includes frame size, number of gears, current gear, maximum load, and current load, properly labeled.
+\end{itemize}
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=0.5]{figs/ch14/polymorphism_bikes.pdf}
+\caption{UML Diagram of Bicycle, ElectricBicycle, and CargoBicycle}
+\label{fig.polyBicycles}
+\end{center}
+\end{figure}
+
+Figure~\ref{fig.polyBicycles} is the UML diagram for the three classes.
+
+Once you have implemented these classes, write a class named \java{BicycleTest} with a \java{main} method that does the following:
+
+\begin{itemize}
+\item Create an array of \java{Bicycle} with these bicycles:
+    \begin{itemize}
+    \item A bicycle with a 55cm frame, one gear.
+    \item An electric bicycle with a 57cm frame, five gears, and a battery capacity of 500 wH (watt-hours).
+    \item A cargo bicycle with a 60cm frame, ten gears, and a maximum load of 35kg.
+    \end{itemize}
+\item Set the electric bicycle's current charge to 312.5 wH.
+\item Set the cargo bicycle's current load to 27.5 kg.
+\item Iterate through the array. For each bicycle, call the \java{toString} method and print the information it returns.
+    \begin{itemize}
+    \item If the entry is an electric bicycle, also print out what percentage charge it has by calling the \java{chargePercent} method and printing its result.
+    \item If the entry is a cargo bicycle, also print out what percentage of the maximum load it is carrying by calling the \java{loadFactor} method and printing its result.
+    \end{itemize}
+\end{itemize}
+
+\end{exercise}
+
+\begin{exercise}
 This exercise will let you practice polymorphism and dynamic binding. It uses the \java{Account}, \java{SavingsAccount}, and \java{CreditCardAccount} classes you developed in Exercise~\ref{ex.AccountInheritance}. Instead of creating a customer with multiple accounts, create an array of these accounts:
 
 \begin{itemize}
