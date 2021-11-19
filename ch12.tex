@@ -51,6 +51,15 @@ The \java{distance} method will calculate the great circle distance between one 
 d = r\cdot cos^{-1}(sin(lat_1)\cdot sin(lat_2) + cos(lat_1)\cdot cos(lat_2)\cdot cos(lon_1 - lon_2))
 \end{equation*}
 
+{\bf Important}: The trigonometric functions all take their arguments as {\em radians}, not degrees. You can use the \java{Math.toRadians} method to convert degrees to radians:
+
+\begin{code}
+double degrees = 30.0;
+double radians = Math.toRadians(degrees);
+// Following line gives correct result (0.5)
+System.out.println(Math.sin(radians));
+\end{code}
+
 The \java{main} method will set up an array of these \java{City} objects:
 
 \begin{tabular}{|l|l|l|r|r|}
