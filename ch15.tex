@@ -102,7 +102,7 @@ In this exercise, you'll write methods for doing input and output of a two-dimen
 The method returns a two-dimensional array of \java{double}. For example, you might call it as:
 
 \begin{code}
-double [ ][ ] temps = getIntArray2D(input,
+double [ ][ ] temps = getDoubleArray2D(input,
   "Enter temperature data one row at a time", 7, 3);
 \end{code}
 
@@ -116,7 +116,7 @@ This method will print out the arrays, using the given format for each element i
 like this:
 
 \begin{code}
-printDoubleArray2d(temps, "%.1f");
+printDoubleArray2D("%.1f", temps);
 \end{code}
 
 Then, in a class named \java{TestInputOutput}, write a \java{main} method that creates a 3 row, 4 column array of \java{double} and calls \java{getDoubleArray2D} and \java{printDoubleArray2D} to read an array and print it out. 
@@ -124,11 +124,11 @@ Then, in a class named \java{TestInputOutput}, write a \java{main} method that c
 Here is sample output from this code:
 
 \begin{code}
-double[ ][ ] values = IO2D.getArray2d(input,
+double[ ][ ] values = IO2D.getDoubleArray2D(input,
     "Enter three rows of data, one row at a time.", 3, 4);
 System.out.println();
 System.out.println("Here is your data:");
-IO2D.printArray2d("%7.1f", values);
+IO2D.printDoubleArray2D("%7.1f", values);
 \end{code}
 
 \begin{stdout}
