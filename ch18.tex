@@ -449,7 +449,7 @@ The \java{parts} array will be \java{\{"sister", "in", "law"\}}.
 
 Similarly, the program uses \java{oneLine.split(";")} to separate the items on each line. If there aren't four items on a line, it's incomplete, and the program does nothing (effectively skipping over the line).
 
-We now have a problem: the first line doesn't have any numbers on it, and trying to use \java{parseDouble} on the titles will throw a \java{NumberFormatException}. To solve this problem (which could also occur if the file we were given had bad data in it), we use another \java{try}-\java{catch}:
+We now have a problem: the first line doesn't have any numbers on it, and trying to use \java{parseDouble} on the titles will throw a \java{NumberFormatException}. One way to solve the problem is to read in the first line before entering the \java{while} loop and discarding the result. Another way to solve this problem (which could also occur if the file we were given had bad data in it), is to use another \java{try}-\java{catch}:
 
 \begin{code}
 try {
