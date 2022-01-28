@@ -203,14 +203,16 @@ Consider a staircase as shown in Figure~\ref{fig.staircase}.
 \end{center}
 \end{figure}
 
-Your job is to write a program that prompts the user for the number of steps in the staircase. It will then prompt for and read the width, rise, and run of a step in centimeters. The program will then calculate the number of cubic centimeters of concrete necessary to build the staircase. Round the number of cubic centimeters by adding 0.5 to the calculated volume and then casting that result to an integer.  In general,
+Your job is to write a program that prompts the user for the number of steps in the staircase. It will then prompt for and read the width, rise, and run of a step in centimeters. The program will then calculate the number of cubic centimeters of concrete necessary to build the staircase. Round the number of cubic centimeters up by using the \java{Math.ceil} method\footnotemark on the calculated volume and then casting that result to an integer.  In general,
+
+\footnotetext{You will find out more about the \java{Math} class in chapter 4 of the main book.}
 
 \begin{code}
 double x;
-int xRounded = (int) (x + 0.5);
+int xRounded = (int) (Math.ceil(x));
 \end{code}
 
-Calculate by hand what the result of this code would be when \java{x} is 3.4 and again when \java{x} is 3.6 to understand why this code works.
+The \java{Math.ceil} method returns the {\em ceiling} of a number: the smallest value that is greater than or equal to the argument that is equal to an integer value.  Thus, \java{Math.ceil(3.0)} is 3.0; \java{Math.ceil(3.001)} is 4.0, as is \java{Math.ceil(3.999)}.
 
 {\em Hints}: How many ``blocks'' the size of the bottom step do you need to build the staircase? Drawing a diagram {\em really} helps. If you have {\em n} steps, the total number of blocks you need is the sum of the numbers 1 through {\em n}, which you can calculate with this formula: 
 
