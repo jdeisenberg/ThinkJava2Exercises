@@ -102,7 +102,16 @@ Month number 2 has 28 days in a normal year
 and 29 days in a leap year.
 \end{stdout}
 
-{\em Hint}: Use a \java{switch} statement to set a variable with the number of days in the month. Then, use an \java{if} statement to determine whether the month is February or not and print the appropriate output. Do {\em not} put the \java{System.out.println} inside the \java{switch} statement---that would lead to unnecessarily duplicated code.
+A year is a leap year when either:
+
+\begin{itemize}
+\item The year is divisible by 4, but {\em not} by 100. The year 2020 is a leap
+year, but 1900 is not, because it {\em is} divisible by 100.
+\item The year is divisible by 400.  The year 2000 is a leap year because it is
+divisible by 400.
+\end{itemize}
+
+{\em Hint}: Use a \java{switch} statement to set a variable with the number of days in the month. Use an \java{if} statement in the case for February to determine whether the year is a leap year or not and set the variable accordingly. Do {\em not} put the \java{System.out.println} inside the \java{switch} statement---that would lead to unnecessarily duplicated code.
 
 \end{exercise}
 
