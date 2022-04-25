@@ -79,8 +79,8 @@ class Toaster {
         this.nSlices = 0;
     }
     
-    // Provide only setters for power, darkness, and nSlots;
-    // once sets, they will never change.
+    // Provide only getters for power, darkness, and nSlots;
+    // once set, they will never change.
     
     public PowerSupply getPower() {
         return power;
