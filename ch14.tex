@@ -445,9 +445,9 @@ Write a subclass \java{PreferredCustomer} that extends the \java{Customer} class
 Customers get a discount percentage based on their years as a customer and average purchase amount. There are three levels of Preferred Customers: bronze, silver, and gold.
 
 \begin{itemize}
-\item Bronze: $\geq$ 1 year and average purchase amount $\geq$ \$5000 per year.  5\% off
-\item Silver: $\geq$ 2 years and average purchase amount $\geq$ \$10000 per year. 7.5\% off
-\item Gold: $\geq$ 3 years and average purchase amount $\geq$ \$15000 per year. 10\% off
+\item Bronze: $\geq$ 1 year and average purchase amount $\geq$ \$5000 per year---5\% discount
+\item Silver: $\geq$ 2 years and average purchase amount $\geq$ \$10000 per year---7.5\% discount
+\item Gold: $\geq$ 3 years and average purchase amount $\geq$ \$15000 per year---10\% discount
 \end{itemize}
 
 The discount percentage is a {\em derived attribute}---it is never set directly, but instead is computed based on other attributes.
@@ -475,9 +475,9 @@ Finally, you will write a program with a \java{main} method that works with thes
 \begin{enumerate}
 \item Create a two-parameter constructor that takes an account number and balance. Make sure that the balance is always greater than zero ({\em Hint}: \java{Math.abs})
 
-\item Implement getters and setters: \java{getNumber()}, \java{getBalance()}, \java{setBalance(double newBalance)}. There is no \java{setNumber} method---once an account is created, its account number cannot change.
+\item Implement getters and setters: \java{getNumber()}, \java{getBalance()}, and \newline \java{setBalance(double newBalance)}. There is no \java{setNumber} method---once an account is created, its account number cannot change.
 
-\item Implement these methods: \java{void deposit(double amount)} and \java{void withdraw(double amount)}. For both these methods, if the amount is less than zero, the account balance remains untouched. For the \java{withdraw} method, if the amount is greater than the balance, it remains untouched. {\em These methods do not print anything.}
+\item Implement these methods: \java{void deposit(double amount)} and \newline \java{void withdraw(double amount)}. For both these methods, if the amount is less than zero, the account balance remains untouched. For the \java{withdraw} method, if the amount is greater than the balance, it remains untouched. {\em These methods do not print anything.}
 
 \item Implement a \java{toString} method that returns a string with the account number and balance, properly labeled.
 \end{enumerate}
