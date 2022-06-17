@@ -88,18 +88,25 @@ Using nested if-else statements is probably your best approach to this exercise.
 \end{exercise}
 
 \begin{exercise}
-Write a program that prompts the user for a number in the range 1-12 and returns the number of days of that month. If the month is 2 (February) print that the month has 28 days in a normal year and 29 in a leap year. Be sure to validate the input.  Here is what the output from running the program several times might look like:
+Write a program that prompts the user for a year and a month number in the range 1-12 and returns the number of days of that month. If the month is 2 (February) print that the month has 28 days in a normal year and 29 in a leap year. Be sure to validate the input for the month.  Here is what the output from running the program several times might look like:
 
 \begin{stdout}
+Enter a year: 2022
 Enter a month number (1-12): 3
-Month number 3 has 31 days.
+Month number 3 has 31 days in 2022.
 
+Enter a year: 2022
 Enter a month number (1-12): 14
 Invalid month; must be from 1 to 12.
 
+Enter a year: 2022
 Enter a month number (1-12): 2
-Month number 2 has 28 days in a normal year
-and 29 days in a leap year.
+Month 2 has 28 days in 2022.
+
+Enter a year: 2024
+Enter a month number (1-12): 2
+Month 2 has 29 days in 2024.
+
 \end{stdout}
 
 A year is a leap year when either:
@@ -110,6 +117,14 @@ year, but 1900 is not, because it {\em is} divisible by 100.
 \item The year is divisible by 400.  The year 2000 is a leap year because it is
 divisible by 400.
 \end{itemize}
+
+Here is the logic for deciding if a year is a leap year, translated to Java:
+
+\begin{code}
+((year % 4 == 0)  /* (divisible by four */
+&& (year % 100 != 0)) /* and not by 100) */
+|| (year % 400 == 0) /* or divisible by 400 */
+\end{code}
 
 {\em Hint}: Use a \java{switch} statement to set a variable with the number of days in the month. Use an \java{if} statement in the case for February to determine whether the year is a leap year or not and set the variable accordingly. Do {\em not} put the \java{System.out.println} inside the \java{switch} statement---that would lead to unnecessarily duplicated code.
 
