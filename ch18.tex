@@ -268,7 +268,7 @@ Exception in thread "main"
 If your method can throw more than one exception, you list them separated by commas in the \java{throws} clause:
 
 \begin{code}
-public static void example() throws IllegalArgumentException,
+public static void example(int n) throws IllegalArgumentException,
   ArithmeticException, NumberFormatException {
     // ...code
 }
@@ -335,7 +335,7 @@ The variable \java{f} is what, in other programming languages, is called a {\em 
 \begin{code}
         System.out.println("File exists: " + f.exists());
         System.out.println("File size:   " + f.length());
-        System.out.println("Readble:     " + f.canRead());
+        System.out.println("Readable:    " + f.canRead());
         System.out.println("Writeable:   " + f.canWrite());
         System.out.println("Executable:  " + f.canExecute());
         System.out.println("Directory:   " + f.isDirectory());
