@@ -23,9 +23,9 @@ class Item {
     + getName(): String 
     + getSku(): String
     + getPrice(): double
-    + setPrice(double price): void
+    + setPrice(price: double): void
     
-    + purchase(int quantity): double
+    + purchase(quantity: int): double
     
     + toString(): String
     + equals(other: Item): boolean
@@ -40,7 +40,7 @@ class SaleItem {
     + getDiscount(): double
     + setDiscount(discount: double): void
     
-    + purchase(int quantity): double
+    + purchase(quantity: int): double
     
     + toString(): String
     + equals(other: SaleItem): boolean
